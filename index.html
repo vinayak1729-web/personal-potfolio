@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>potfolio website -Vinayak shinde</title>
+  <link rel="stylesheet" href="style.css">
+  <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
+<body>
+
+  <body>
+    <!-- header -->
+    <header>
+      <nav class="nav">
+        <h3><span style="color: #0298fc; font-size: 40px;">V</span><span style="font-size: 40px;">INAYAK S.</span></h3>
+        <div class="menu"><i class="fa-solid fa-bars"></i></div>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+    <!-- hero section -->
+    <section class="hero-container">
+      <!-- content -->
+      <div class="content">
+        <p style="font-size: 28px; color: rgb(1, 2, 39); font-weight: bold;">A <span
+            style="color: #0298fc;font-size: 40px; font-weight: 20000;">Software</span> Developer</p>
+        <h1 style="font-size: 40px;">Hi , I'm <span
+            style="color: #0298fc;font-size: 40px; font-weight: 20000;">Vinayak</span> Shinde ,<br> From Mumbai</h1>
+        </p><br>
+        <a href="https://github.com/vinayak1729-web"><i class="fa fa-github" style="font-size:36px"></i></a>
+        <a href="https://www.linkedin.com/in/vinayak-shinde-1aa968223/"><i class="fa fa-linkedin"
+            style="font-size:36px"></i></a>
+        <div>
+
+
+
+        </div>
+      </div>
+
+      <!-- animated blob -->
+      <div>
+        <div class="blob"></div>
+      </div>
+    </section>
+    <!-- ------about----- -->
+    <div id="about">
+      <div class="container">
+        <div class="row">
+          <div class="about-col-1">
+            <img src="images/223.jpeg" alt="">
+          </div>
+          <div class="about-col-2">
+            <h1 class="sub-title">About me</h1>
+            <p>I'm Vinayak Shinde, a computer engineering graduate and tech enthusiast. With a knack for web and app
+              development,
+              I thrive on crafting elegant solutions. Beyond coding, I'm deeply passionate about artificial intelligence
+              and machine learning.
+              Join me as I navigate the digital frontier, fusing creativity with technology to shape the future.</p>
+            <div class="tab-titles">
+              <p class="tab-links active-links" onclick="opentab('skills')">Skills</p>
+              <p class="tab-links" onclick="opentab('exp')">Experience</p>
+              <p class="tab-links" onclick="opentab('edu')">Education</p>
+            </div>
+            <div class="tab-contents active-tab" id="skills">
+              <ul>
+                <li><span>Web Development</span><br>Building Responsive Web-Apps / Websites</li>
+                <li><span>App Development</span><br>Building Android Apps </li>
+                <li><span>Desktop App Development </span><br>Building Desktop App</li>
+              </ul>
+            </div>
+            <div class="tab-contents" id="exp">
+              <ul>
+                <li><span>2024 (july) -Present</span><br>Robotics Intern at Enovators-HUB</li>
+              </ul>
+            </div>
+            <div class="tab-contents" id="edu">
+              <ul>
+                <li><span>2021- current</span><br>B.E in Computer From MUMBAI UNIVERSITY</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Service section -->
+    <!-- Updated Service section with categories -->
+    <section id="services">
+      <div class="about">
+        <h2 style="font-size: 40px;">My <span style="color: #0298fc;font-size: 40px;">Projects</span></h2>
+        <p>Explore my diverse projects categorized by technology domains.</p>
+      </div>
+
+      <div class="services">
+        <!-- AI Category -->
+        <div class="service-card">
+          <div class="number">01</div>
+          <div class="service-text">
+            <h3>AI Projects</h3>
+            <p>Explore my AI-powered applications and solutions, including mental health chatbots and LLM-powered
+              assistants.</p>
+            <a href="pages/ai_projects.html">See AI Projects</a>
+          </div>
+        </div>
+
+        <!-- IoT Category -->
+        <div class="service-card">
+          <div class="number">02</div>
+          <div class="service-text">
+            <h3>IoT Projects</h3>
+            <p>Delve into my IoT-based innovations, such as smart navigation devices and sensor-based solutions.</p>
+            <a href="iot_projects.html">See IoT Projects</a>
+          </div>
+        </div>
+
+        <!-- Web Development Category -->
+        <div class="service-card">
+          <div class="number">03</div>
+          <div class="service-text">
+            <h3>Web Development Projects</h3>
+            <p>Check out the responsive web applications and landing pages I've designed.</p>
+            <a href="web_projects.html">See Web Projects</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      var tablinks = document.getElementsByClassName("tab-links");
+      var tabcontents = document.getElementsByClassName("tab-contents");
+      function opentab(tabname) {
+        for (tablink of tablinks) {
+          tablink.classList.remove("active-links");
+        }
+        for (tabcontent of tabcontents) {
+          tabcontent.classList.remove("active-tab");
+        }
+        event.currentTarget.classList.add("active-links");
+        document.getElementById(tabname).classList.add("active-tab");
+
+      }
+    </script>
+  </body>
+
+</html>

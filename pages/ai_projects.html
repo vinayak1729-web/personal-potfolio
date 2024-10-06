@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Projects - Vinayak Shinde</title>
+    <link rel="stylesheet" href="/style.css">
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <header>
+        <nav class="nav">
+            <h3><span style="color: #0298fc; font-size: 40px;">V</span><span style="font-size: 40px;">INAYAK S.</span>
+            </h3>
+            <ul>
+                <li><a href="/index.html">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="ai_projects.html">AI Projects</a></li>
+                <li><a href="iot_projects.html">IoT Projects</a></li>
+            </ul>
+        </nav>
+    </header>
+    <br><br>
+    <br><br>
+    <section class="project-category">
+        <h1>AI Projects</h1>
+        <div class="projects-grid">
+            <!-- Project 1: Chikitsa AI -->
+            <div class="project-card">
+                <img src="/images/chikitsa.png" alt="Chikitsa AI Screenshot">
+                <div class="project-info">
+                    <h3>Chikitsa AI</h3>
+                    <p>AI-powered mental health chatbot leveraging NLP and medical image analysis.</p>
+                    <a href="chikitsa.html">view more?</a>
+                    <a href="https://github.com/vinayak1729-web/Chikitsa_ai" target="_blank">View on GitHub</a>
+                </div>
+            </div>
+
+            <!-- Project 2: MAG-AI -->
+            <div class="project-card">
+                <img src="/images/mag.png" alt="MAG-AI Screenshot">
+                <div class="project-info">
+                    <h3>MAG-AI</h3>
+                    <p>Chatbot project using large language models (LLMs) to assist with conversational AI tasks.</p>
+                    <a href="https://github.com/your_repo/mag-ai" target="_blank">View on GitHub</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <style>
+        /* Grid for Projects */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .project-card {
+            background-color: #f4f4f4;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .project-info {
+            margin-top: 10px;
+        }
+
+        .project-info h3 {
+            color: #0298fc;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .project-card {
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</body>
+
+</html>
