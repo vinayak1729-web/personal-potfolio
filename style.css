@@ -398,3 +398,41 @@ button i {
       font-size: 18px;
     }
   }
+  .project-grid, .awards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+}
+
+.project-card, .award-card {
+    background: #ffffff;
+    border: 4px solid #000000;
+    padding: 2rem;
+    box-shadow: 8px 8px #000000;
+    transition: transform 0.2s;
+}
+
+.project-card:hover, .award-card:hover {
+    transform: translate(-4px, -4px);
+    box-shadow: 12px 12px #000000;
+}
+
+.tech {
+    display: inline-block;
+    background: #f0f0f0;
+    padding: 0.5rem;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    font-family: 'Space Mono', monospace;
+}
+
+.tab-contents ul li {
+    margin: 10px 0;
+}
+
+.tab-contents ul li span {
+    color: #0298fc;
+    font-size: 1.1rem;
+    font-weight: bold;
+}

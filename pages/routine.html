@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Daily Routine - To-Do List</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Bungee', cursive;
+            background-color: #000;
+            color: #fff;
+            margin: 0;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+        h1 {
+            text-align: center;
+            font-size: 2.5em;
+            color: #ff0; /* Neon pink */
+            text-shadow: 4px 4px 0 #ff00ff, 8px 8px 0 #000;
+            margin-bottom: 30px;
+        }
+        #schedule {
+            background-color: #fff;
+            color: #000;
+            padding: 20px;
+            border: 6px solid #000;
+            box-shadow: 10px 10px 0 #ff0; /* Neon yellow shadow */
+            max-width: 600px;
+            margin: 0 auto;
+            border-radius: 0;
+        }
+        h2 {
+            font-size: 1.8em;
+            color: #000;
+            text-shadow: 2px 2px 0 #ff00ff;
+            margin-bottom: 20px;
+        }
+        .activity {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 4px solid #000;
+            background-color: #fff;
+            transition: transform 0.2s;
+        }
+        .activity:hover {
+            transform: translateX(10px);
+            background-color: #f0f0f0;
+        }
+        .activity input[type="checkbox"] {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #000;
+            background-color: #fff;
+            margin-right: 15px;
+            cursor: pointer;
+        }
+        .activity input[type="checkbox"]:checked {
+            background-color: #ff00ff;
+            border-color: #fff;
+            position: relative;
+        }
+        .activity input[type="checkbox"]:checked::after {
+            content: '✔';
+            color: #fff;
+            position: absolute;
+            top: -2px;
+            left: 3px;
+            font-size: 16px;
+        }
+        .activity label {
+            font-size: 1.2em;
+            color: #000;
+        }
+        .activity.completed label {
+            text-decoration: line-through;
+            color: #666;
+            text-shadow: 1px 1px 0 #ff0;
+        }
+        button {
+            display: block;
+            margin: 20px auto;
+            padding: 15px 30px;
+            font-family: 'Bungee', cursive;
+            font-size: 1.2em;
+            background-color: #ff0; /* Neon yellow */
+            color: #000;
+            border: 4px solid #000;
+            box-shadow: 6px 6px 0 #ff00ff;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        button:hover {
+            background-color: #ff00ff;
+            color: #fff;
+            box-shadow: 6px 6px 0 #ff0;
+            transform: translate(-2px, -2px);
+        }
+        button:active {
+            transform: translate(2px, 2px);
+            box-shadow: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>My Daily Routine - To-Do List</h1>
+    <button onclick="showSchedule()">Show Today's Schedule</button>
+    <div id="schedule"></div>
+
+    <script>
+        // Request notification permission on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            if (Notification.permission !== "granted" && Notification.permission !== "denied") {
+                Notification.requestPermission().then(permission => {
+                    if (permission === "granted") {
+                        console.log("Notifications enabled");
+                    }
+                });
+            }
+            showSchedule(); // Load schedule on start
+            checkNotifications(); // Start checking for notifications
+            resetDailyTasks(); // Reset tasks if it's a new day
+        });
+
+        // Define the weekly schedule
+        const schedule = {
+            "Monday": [
+                { time: "05:00", activity: "Wake up & Meditation/Prayers" },
+                { time: "05:15", activity: "Bath" },
+                { time: "05:35", activity: "Oiling the Body" },
+                { time: "05:45", activity: "Exercise" },
+                { time: "06:30", activity: "Breakfast" },
+                { time: "07:00", activity: "Get Ready" },
+                { time: "09:00", activity: "Travel to Office" },
+                { time: "10:00", activity: "Internship Work" },
+                { time: "19:00", activity: "Travel Back Home" },
+                { time: "20:00", activity: "Dinner" },
+                { time: "21:00", activity: "Reading Book 1" },
+                { time: "22:00", activity: "Reading Book 2" },
+                { time: "23:00", activity: "Sleep" }
+            ],
+            "Tuesday": [
+                { time: "05:00", activity: "Wake up & Meditation/Prayers" },
+                { time: "05:15", activity: "Bath" },
+                { time: "05:35", activity: "Oiling the Body" },
+                { time: "05:45", activity: "Exercise" },
+                { time: "06:30", activity: "Breakfast" },
+                { time: "07:00", activity: "Get Ready" },
+                { time: "08:00", activity: "Reading Book 1" },
+                { time: "09:00", activity: "DSA Practice" },
+                { time: "10:00", activity: "Internship Work" },
+                { time: "14:30", activity: "Travel to College" },
+                { time: "15:00", activity: "Major Project Update" },
+                { time: "17:00", activity: "Travel Back Home" },
+                { time: "17:30", activity: "Internship Work (Resume)" },
+                { time: "19:00", activity: "Dinner" },
+                { time: "20:00", activity: "Reading Book 2" },
+                { time: "21:00", activity: "Hackathon Prep/Assignments" },
+                { time: "22:00", activity: "Relaxation/Walk" },
+                { time: "23:00", activity: "Sleep" }
+            ],
+            "Wednesday": [
+                { time: "05:00", activity: "Wake up & Meditation/Prayers" },
+                { time: "05:15", activity: "Bath" },
+                { time: "05:35", activity: "Oiling the Body" },
+                { time: "05:45", activity: "Exercise" },
+                { time: "06:30", activity: "Breakfast" },
+                { time: "07:00", activity: "Get Ready" },
+                { time: "09:00", activity: "Travel to Office" },
+                { time: "10:00", activity: "Internship Work" },
+                { time: "19:00", activity: "Travel Back Home" },
+                { time: "20:00", activity: "Dinner" },
+                { time: "21:00", activity: "Reading Book 1" },
+                { time: "22:00", activity: "Reading Book 2" },
+                { time: "23:00", activity: "Sleep" }
+            ],
+            "Thursday": [
+                { time: "05:00", activity: "Wake up & Meditation/Prayers" },
+                { time: "05:15", activity: "Bath" },
+                { time: "05:35", activity: "Oiling the Body" },
+                { time: "05:45", activity: "Exercise" },
+                { time: "06:30", activity: "Breakfast" },
+                { time: "07:00", activity: "Get Ready" },
+                { time: "08:00", activity: "Reading Book 1" },
+                { time: "09:00", activity: "DSA Practice" },
+                { time: "10:00", activity: "Internship Work" },
+                { time: "19:00", activity: "Dinner" },
+                { time: "20:00", activity: "Reading Book 2" },
+                { time: "21:00", activity: "Hackathon Prep/Assignments" },
+                { time: "22:00", activity: "Relaxation/Walk" },
+                { time: "23:00", activity: "Sleep" }
+            ],
+            "Friday": [
+                { time: "05:00", activity: "Wake up & Meditation/Prayers" },
+                { time: "05:15", activity: "Bath" },
+                { time: "05:35", activity: "Oiling the Body" },
+                { time: "05:45", activity: "Exercise" },
+                { time: "06:30", activity: "Breakfast" },
+                { time: "07:00", activity: "Get Ready" },
+                { time: "08:00", activity: "Reading Book 1" },
+                { time: "09:00", activity: "DSA Practice" },
+                { time: "10:00", activity: "Internship Work" },
+                { time: "19:00", activity: "Dinner" },
+                { time: "20:00", activity: "Reading Book 2" },
+                { time: "21:00", activity: "Hackathon Prep/Assignments" },
+                { time: "22:00", activity: "Relaxation/Walk" },
+                { time: "23:00", activity: "Sleep" }
+            ],
+            "Saturday": [
+                { time: "05:00", activity: "Wake up & Meditation/Prayers" },
+                { time: "05:15", activity: "Bath" },
+                { time: "05:35", activity: "Oiling the Body" },
+                { time: "05:45", activity: "Exercise" },
+                { time: "06:30", activity: "Breakfast" },
+                { time: "07:00", activity: "Get Ready" },
+                { time: "08:00", activity: "Reading Books" },
+                { time: "10:00", activity: "Internship Work" },
+                { time: "12:00", activity: "Lunch" },
+                { time: "13:00", activity: "DSA Practice/Hackathon Prep" },
+                { time: "15:00", activity: "College Assignments" },
+                { time: "16:00", activity: "Additional Exercise" },
+                { time: "17:00", activity: "Relaxation/Hobbies" },
+                { time: "19:00", activity: "Dinner" },
+                { time: "20:00", activity: "Reading Books" },
+                { time: "22:00", activity: "Sleep" }
+            ],
+            "Sunday": [
+                { time: "05:00", activity: "Wake up & Meditation/Prayers" },
+                { time: "05:15", activity: "Bath" },
+                { time: "05:35", activity: "Oiling the Body" },
+                { time: "05:45", activity: "Exercise" },
+                { time: "06:30", activity: "Breakfast" },
+                { time: "07:00", activity: "Get Ready" },
+                { time: "08:00", activity: "Reading Books" },
+                { time: "10:00", activity: "Internship Work" },
+                { time: "12:00", activity: "Lunch" },
+                { time: "13:00", activity: "DSA Practice/Hackathon Prep" },
+                { time: "15:00", activity: "College Assignments" },
+                { time: "16:00", activity: "Additional Exercise" },
+                { time: "17:00", activity: "Relaxation/Hobbies" },
+                { time: "19:00", activity: "Dinner" },
+                { time: "20:00", activity: "Reading Books" },
+                { time: "22:00", activity: "Sleep" }
+            ]
+        };
+
+        // Function to display the schedule with checkboxes
+        function showSchedule() {
+            const today = new Date();
+            const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+            const currentDay = days[today.getDay()];
+            const daySchedule = schedule[currentDay];
+            const storedData = JSON.parse(localStorage.getItem('taskStatus') || '{}');
+            const currentDate = today.toDateString();
+
+            const scheduleDiv = document.getElementById("schedule");
+            scheduleDiv.innerHTML = `<h2>${currentDay} Schedule - ${currentDate}</h2>`;
+
+            daySchedule.forEach((item, index) => {
+                const taskId = `${currentDate}-${currentDay}-${index}`;
+                const isCompleted = storedData[taskId] || false;
+                scheduleDiv.innerHTML += `
+                    <div class="activity ${isCompleted ? 'completed' : ''}">
+                        <input type="checkbox" id="${taskId}" ${isCompleted ? 'checked' : ''}>
+                        <label for="${taskId}">${item.time} - ${item.activity}</label>
+                    </div>
+                `;
+            });
+
+            // Add event listeners to checkboxes
+            document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+                checkbox.addEventListener('change', () => {
+                    const taskId = checkbox.id;
+                    const isChecked = checkbox.checked;
+                    const storedData = JSON.parse(localStorage.getItem('taskStatus') || '{}');
+                    storedData[taskId] = isChecked;
+                    localStorage.setItem('taskStatus', JSON.stringify(storedData));
+                    checkbox.parentElement.classList.toggle('completed', isChecked);
+                });
+            });
+        }
+
+        // Function to reset tasks daily
+        function resetDailyTasks() {
+            const today = new Date();
+            const currentDate = today.toDateString();
+            const lastReset = localStorage.getItem('lastResetDate');
+
+            if (lastReset !== currentDate) {
+                const storedData = JSON.parse(localStorage.getItem('taskStatus') || '{}');
+                Object.keys(storedData).forEach(key => {
+                    if (!key.startsWith(currentDate)) {
+                        delete storedData[key];
+                    }
+                });
+                localStorage.setItem('taskStatus', JSON.stringify(storedData));
+                localStorage.setItem('lastResetDate', currentDate);
+                showSchedule();
+            }
+        }
+
+        // Function to check and send notifications
+        function checkNotifications() {
+            const now = new Date();
+            const currentMinutes = now.getHours() * 60 + now.getMinutes();
+            const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+            const currentDay = days[now.getDay()];
+            const daySchedule = schedule[currentDay];
+
+            daySchedule.forEach(item => {
+                const [hours, minutes] = item.time.split(":").map(Number);
+                const activityMinutes = hours * 60 + minutes;
+                const notifyTime = activityMinutes - 5;
+
+                if (currentMinutes === notifyTime && Notification.permission === "granted") {
+                    new Notification(`Upcoming: ${item.activity}`, {
+                        body: `Starting at ${item.time}`,
+                        icon: "https://via.placeholder.com/32"
+                    });
+                }
+            });
+
+            setTimeout(checkNotifications, 60000);
+        }
+    </script>
+</body>
+</html>

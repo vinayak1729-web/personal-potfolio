@@ -4,150 +4,1138 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>potfolio website -Vinayak shinde</title>
-  <link rel="stylesheet" href="style.css">
-  <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <title>Vinayak Shinde | Software Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Outfit:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary-color: #0298fc;
+      --text-color: #121212;
+      --bg-color: #f8f9fa;
+      --card-bg: #ffffff;
+      --card-border: #000000;
+      --card-shadow: #000000;
+      --header-bg: #ffffff;
+      --nav-text: rgba(0, 0, 0, 0.8);
+      --tab-active: #0298fc;
+    }
 
+    .dark-mode {
+      --primary-color: #00a8ff;
+      --text-color: #f8f9fa;
+      --bg-color: #121212;
+      --card-bg: #1e1e1e;
+      --card-border: #00a8ff;
+      --card-shadow: #00a8ff;
+      --header-bg: #1a1a1a;
+      --nav-text: rgba(255, 255, 255, 0.8);
+      --tab-active: #00a8ff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      transition: background-color 0.3s, color 0.3s, border-color 0.3s, box-shadow 0.3s;
+    }
+
+    body {
+      width: 100%;
+      max-width: 1280px;
+      background: var(--bg-color);
+      margin: 0 auto;
+      font-family: 'Outfit', sans-serif;
+      padding: 0 25px;
+      color: var(--text-color);
+    }
+
+    /* header */
+    header {
+      padding: 15px 25px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: var(--header-bg);
+      box-shadow: 0px 4px 0px var(--card-border);
+      z-index: 100;
+    }
+
+    
+    .logo {
+      font-family: 'Bungee', sans-serif;
+      letter-spacing: 1px;
+    }
+
+
+    .menu {
+      display: none;
+    }
+
+    .theme-toggle {
+      cursor: pointer;
+      font-size: 24px;
+      margin-left: 20px;
+    }
+
+    /* hero section */
+    .hero-container {
+      margin-top: 55px;
+      display: flex;
+      gap: 20px;
+      justify-content: space-between;
+      align-items: center;
+      height: 90vh;
+      padding-top: 80px;
+    }
+
+    .content {
+      width: 50%;
+    }
+
+    .title-text {
+      font-family: 'Bungee', sans-serif;
+      line-height: 1.4;
+    }
+
+    .content a {
+      color: var(--text-color);
+      transition: all 0.2s ease;
+    }
+
+    .content a:hover {
+      color: var(--primary-color);
+    }
+
+    .content .social-icon {
+      margin-right: 16px;
+      font-size: 36px;
+      padding: 8px;
+      border: 3px solid var(--card-border);
+      border-radius: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .content .social-icon:hover {
+      transform: translate(-4px, -4px);
+      box-shadow: 4px 4px 0px var(--card-border);
+      color: var(--primary-color);
+    }
+
+    .content h1 {
+      font-size: 2.5rem;
+      font-family: 'Bungee', sans-serif;
+      margin-bottom: 20px;
+      line-height: 1.4;
+    }
+
+    .content p {
+      margin: 20px 0;
+      font-size: 1.5em;
+      color: var(--text-color);
+      line-height: 2.18rem;
+    }
+
+    /* blob */
+    .blob-container {
+      position: relative;
+      width: 400px;
+      height: 400px;
+    }
+
+    .blob {
+      background-image: url('https://github.com/vinayak1729-web.png');
+      width: 380px;
+      height: 380px;
+      background-size: cover;
+      background-position: center center;
+      margin: 20px;
+      box-shadow: 12px 12px 0px var(--card-border);
+      border: 4px solid var(--card-border);
+      animation: animate 8s ease-in-out infinite;
+      transition: all 1s ease-in-out;
+    }
+
+    @keyframes animate {
+
+      0%,
+      100% {
+        border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+      }
+
+      50% {
+        border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+      }
+    }
+
+    /* About section */
+    #about {
+      padding: 100px 0;
+      color: var(--text-color);
+    }
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 30px;
+    }
+
+    .about-col-1 {
+      flex-basis: 35%;
+    }
+
+    .about-col-1 img {
+      width: 100%;
+      border: 4px solid var(--card-border);
+      box-shadow: 12px 12px 0px var(--card-border);
+      transition: all 0.3s ease;
+    }
+
+    .about-col-1 img:hover {
+      transform: translate(-4px, -4px);
+      box-shadow: 16px 16px 0px var(--card-border);
+    }
+
+    .about-col-2 {
+      flex-basis: 60%;
+    }
+
+    .sub-title {
+      font-size: 3rem;
+      font-weight: 600;
+      color: var(--text-color);
+      font-family: 'Bungee', sans-serif;
+      margin-bottom: 20px;
+    }
+
+    .tab-titles {
+      display: flex;
+      margin: 30px 0 40px;
+      color: var(--text-color);
+    }
+
+    .tab-links {
+      margin-right: 50px;
+      font-size: 1.2rem;
+      font-weight: 700;
+      cursor: pointer;
+      position: relative;
+      font-family: 'Bungee', sans-serif;
+    }
+
+    .tab-links::after {
+      content: '';
+      width: 0;
+      height: 4px;
+      background: var(--primary-color);
+      position: absolute;
+      left: 0;
+      bottom: -8px;
+      transition: 0.5s;
+    }
+
+    .tab-links.active-links::after {
+      width: 100%;
+    }
+
+    .tab-contents ul li {
+      list-style: none;
+      margin: 15px 0;
+      font-size: 1.1rem;
+    }
+
+    .tab-contents ul li span {
+      color: var(--primary-color);
+      font-size: 1.2rem;
+      font-weight: 600;
+      font-family: 'Bungee', sans-serif;
+    }
+
+    .tab-contents {
+      display: none;
+    }
+
+    .tab-contents.active-tab {
+      display: block;
+      animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Section styles */
+    section {
+      padding: 60px 0;
+    }
+
+    section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 40px;
+      font-family: 'Bungee', sans-serif;
+      color: var(--text-color);
+    }
+
+    /* Projects and Github sections */
+    .project-grid,
+    .github-grid,
+    .awards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .project-card,
+    .github-card,
+    .award-card {
+      background: var(--card-bg);
+      border: 4px solid var(--card-border);
+      padding: 2rem;
+      box-shadow: 8px 8px 0px var(--card-shadow);
+      transition: transform 0.3s, box-shadow 0.3s;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .project-card:hover,
+    .github-card:hover,
+    .award-card:hover {
+      transform: translate(-4px, -4px);
+      box-shadow: 12px 12px 0px var(--card-shadow);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+    }
+
+    .card-header h3 {
+      font-family: 'Bungee', sans-serif;
+      font-size: 1.4rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .card-links {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .card-links a {
+      color: var(--text-color);
+      font-size: 1.2rem;
+      transition: transform 0.2s, color 0.2s;
+    }
+
+    .card-links a:hover {
+      color: var(--primary-color);
+      transform: translateY(-2px);
+    }
+
+    .tech {
+      display: inline-block;
+      background: var(--header-bg);
+      padding: 0.5rem;
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      border: 2px solid var(--card-border);
+    }
+
+    /* Contact section */
+    .contact-info {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .contact-card {
+      background: var(--card-bg);
+      border: 4px solid var(--card-border);
+      padding: 2rem;
+      box-shadow: 8px 8px 0px var(--card-shadow);
+      transition: transform 0.3s, box-shadow 0.3s;
+      text-align: center;
+    }
+
+    .contact-card:hover {
+      transform: translate(-4px, -4px);
+      box-shadow: 12px 12px 0px var(--card-shadow);
+    }
+
+    .contact-card i {
+      font-size: 2.5rem;
+      color: var(--primary-color);
+      margin-bottom: 1rem;
+    }
+
+    .contact-card h3 {
+      font-family: 'Bungee', sans-serif;
+      margin-bottom: 0.5rem;
+    }
+
+    .contact-card a {
+      color: var(--text-color);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .contact-card a:hover {
+      color: var(--primary-color);
+    }
+
+    /* Footer */
+    footer {
+      background: var(--header-bg);
+      border-top: 4px solid var(--card-border);
+      padding: 2rem 0;
+      text-align: center;
+      margin-top: 4rem;
+    }
+
+    footer p {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1rem;
+    }
+
+    footer a {
+      color: var(--primary-color);
+      text-decoration: none;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 1024px) {
+      .hero-container {
+        flex-direction: column-reverse;
+        height: auto;
+        padding-top: 120px;
+        gap: 40px;
+      }
+
+      .content {
+        width: 100%;
+        text-align: center;
+      }
+
+      .row {
+        flex-direction: column;
+      }
+
+      .about-col-1,
+      .about-col-2 {
+        flex-basis: 100%;
+      }
+
+      .about-col-1 {
+        margin-bottom: 30px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav ul {
+        display: none;
+      }
+
+      .menu {
+        display: block;
+        font-size: 24px;
+        cursor: pointer;
+      }
+
+      .content h1 {
+        font-size: 2rem;
+      }
+
+      .content p {
+        font-size: 1.2rem;
+      }
+
+      .tab-links {
+        margin-right: 20px;
+        font-size: 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .blob {
+        width: 280px;
+        height: 280px;
+      }
+
+      .blob-container {
+        width: 300px;
+        height: 300px;
+      }
+
+      .sub-title {
+        font-size: 2.2rem;
+      }
+
+      section h2 {
+        font-size: 2rem;
+      }
+    }
+
+    .status {
+      background: var(--primary-color);
+      color: var(--card-bg);
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 2px 2px 0px var(--card-border);
+    }
+
+    .github-card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .github-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: var(--primary-color);
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+      transform-origin: left;
+    }
+
+    .github-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .tech i {
+      margin-right: 6px;
+      color: var(--primary-color);
+    }
+
+    .card-header h3 i {
+      margin-right: 8px;
+      color: var(--primary-color);
+    }
+    .project-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border: 3px solid var(--card-border);
+  margin-bottom: 1rem;
+  box-shadow: 4px 4px 0px var(--card-shadow);
+}
+
+.project-card:hover .project-image {
+  transform: scale(1.02);
+  transition: transform 0.3s ease;
+}
+
+/* Enhanced Awards Section Styles */
+.awards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.award-card {
+  background: var(--card-bg);
+  border: 4px solid var(--card-border);
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 8px 8px 0px var(--card-shadow);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.award-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--primary-color);
+  transition: all 0.3s ease;
+}
+
+.award-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 12px 12px 0px var(--card-shadow);
+}
+
+.award-card:hover::before {
+  width: 100%;
+  opacity: 0.1;
+}
+
+.award-card h3 {
+  font-family: 'Bungee', sans-serif;
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.award-card h3::before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+}
+
+/* Award-specific icons */
+.award-card:nth-child(1) h3::before { content: '\f5fc'; } /* Google AI */
+.award-card:nth-child(2) h3::before { content: '\f559'; } /* Guinness */
+.award-card:nth-child(3) h3::before { content: '\f197'; } /* NASA */
+.award-card:nth-child(4) h3::before { content: '\f5fd'; } /* University */
+.award-card:nth-child(5) h3::before { content: '\f521'; } /* Leadership */
+.award-card:nth-child(6) h3::before { content: '\f126'; } /* Hackathon */
+
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--header-bg);
+    flex-direction: column;
+    padding: 1rem;
+    border-top: 4px solid var(--card-border);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .nav-links li {
+    margin: 10px 0;
+  }
+
+  .menu {
+    display: block;
+  }
+}
+
+.nav {
+  max-width: 1280px;
+  margin: 0 auto;
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.nav-links li {
+  list-style-type: none;
+  font-family: 'Bungee', sans-serif;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 18px;
+  color: var(--nav-text);
+  text-decoration: none;
+  padding: 8px 16px;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.nav-item i {
+  font-size: 16px;
+  transition: transform 0.3s ease;
+}
+
+.nav-item:hover {
+  color: var(--card-bg);
+  background-color: var(--primary-color);
+  border-color: var(--card-border);
+  box-shadow: 4px 4px 0px var(--card-border);
+  transform: translate(-2px, -2px);
+}
+
+.nav-item:hover i {
+  transform: scale(1.1);
+}
+
+.menu {
+  display: none;
+  cursor: pointer;
+  font-size: 24px;
+  padding: 8px;
+  border: 2px solid var(--card-border);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.menu:hover {
+  background: var(--primary-color);
+  color: var(--card-bg);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .menu {
+    display: block;
+  }
+
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    background: var(--header-bg);
+    padding: 20px;
+    border: 4px solid var(--card-border);
+    box-shadow: 8px 8px 0px var(--card-shadow);
+    z-index: 1000;
+  }
+
+  .nav-links.active {
+    display: flex;
+    animation: slideDown 0.3s ease forwards;
+  }
+
+  .nav-item {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+  </style>
 </head>
 
 <body>
+  <!-- header -->
+  <header>
+    <nav class="nav">
+      <h3 class="logo"><span style="color: var(--primary-color);">V</span>INAYAK S.</h3>
+      <div class="menu" id="menuToggle"><i class="fas fa-bars"></i></div>
+      <ul class="nav-links">
+        <li><a href="#" class="nav-item"><i class="fas fa-home"></i> HOME</a></li>
+        <li><a href="#about" class="nav-item"><i class="fas fa-user"></i> ABOUT</a></li>
+        <li><a href="#projects" class="nav-item"><i class="fas fa-code"></i> PROJECTS</a></li>
+        <li><a href="#github" class="nav-item"><i class="fab fa-github"></i> GITHUB</a></li>
+        <li><a href="#contact" class="nav-item"><i class="fas fa-envelope"></i> CONTACT</a></li>
+        <li><a href="/pages/routine.html" class="nav-item"><i class="fas fa-calendar"></i> My-Routine</a></li>
+        <li class="theme-toggle"><i class="fas fa-moon"></i></li>
+      </ul>
+    </nav>
+  </header>
 
-  <body>
-    <!-- header -->
-    <header>
-      <nav class="nav">
-        <h3><span style="color: #0298fc; font-size: 40px;">V</span><span style="font-size: 40px;">INAYAK S.</span></h3>
-        <div class="menu"><i class="fa-solid fa-bars"></i></div>
-        <ul>
-          <li><a href="#">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </nav>
-    </header>
-    <!-- hero section -->
-    <section class="hero-container">
-      <!-- content -->
-      <div class="content">
-        <p style="font-size: 28px; color: rgb(1, 2, 39); font-weight: bold;">A <span
-            style="color: #0298fc;font-size: 40px; font-weight: 20000;">Software</span> Developer</p>
-        <h1 style="font-size: 40px;">Hi , I'm <span
-            style="color: #0298fc;font-size: 40px; font-weight: 20000;">Vinayak</span> Shinde ,<br> From Mumbai</h1>
-        </p><br>
-        <a href="https://github.com/vinayak1729-web"><i class="fa fa-github" style="font-size:36px"></i></a>
-        <a href="https://www.linkedin.com/in/vinayak-shinde-1aa968223/"><i class="fa fa-linkedin"
-            style="font-size:36px"></i></a>
-        <div>
-
-
-
-        </div>
-      </div>
-
-      <!-- animated blob -->
+  <!-- hero section -->
+  <section class="hero-container">
+    <!-- content -->
+    <div class="content">
+      <p class="title-text">A <span style="color: var(--primary-color);">SOFTWARE</span> DEVELOPER</p>
+      <h1>HI, I'M <span style="color: var(--primary-color);">VINAYAK</span> SHINDE<br>FROM MUMBAI</h1>
+      <p>Computer Engineering Graduate | AI/ML Enthusiast | Hackathon Champion</p>
       <div>
-        <div class="blob"></div>
+        <a href="https://github.com/vinayak1729-web" class="social-icon"><i class="fab fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/vinayak-shinde-1aa968223/" class="social-icon"><i
+            class="fab fa-linkedin"></i></a>
+        <a href="mailto:shindevinayak233@gmail.com" class="social-icon"><i class="fas fa-envelope"></i></a>
       </div>
-    </section>
-    <!-- ------about----- -->
-    <div id="about">
-      <div class="container">
-        <div class="row">
-          <div class="about-col-1">
-            <img src="images/223.jpeg" alt="">
+    </div>
+
+    <!-- animated blob -->
+    <div class="blob-container">
+      <div class="blob"></div>
+    </div>
+  </section>
+
+  <!-- About section -->
+  <section id="about">
+    <div class="container">
+      <div class="row">
+        <div class="about-col-1">
+          <img src="images/223.jpeg" alt="Vinayak Shinde">
+        </div>
+        <div class="about-col-2">
+         
+            <h2><i class="fas fa-user"></i> ABOUT ME</h2>
+          <p>I'm Vinayak Shinde, a computer engineering graduate and tech enthusiast. With a knack for web and app
+            development, I thrive on crafting elegant solutions. Beyond coding, I'm deeply passionate about artificial
+            intelligence and machine learning. Join me as I navigate the digital frontier, fusing creativity with
+            technology to shape the future.</p>
+
+          <div class="tab-titles">
+            <p class="tab-links active-links" onclick="opentab('skills')">SKILLS</p>
+            <p class="tab-links" onclick="opentab('exp')">EXPERIENCE</p>
+            <p class="tab-links" onclick="opentab('edu')">EDUCATION</p>
           </div>
-          <div class="about-col-2">
-            <h1 class="sub-title">About me</h1>
-            <p>I'm Vinayak Shinde, a computer engineering graduate and tech enthusiast. With a knack for web and app
-              development,
-              I thrive on crafting elegant solutions. Beyond coding, I'm deeply passionate about artificial intelligence
-              and machine learning.
-              Join me as I navigate the digital frontier, fusing creativity with technology to shape the future.</p>
-            <div class="tab-titles">
-              <p class="tab-links active-links" onclick="opentab('skills')">Skills</p>
-              <p class="tab-links" onclick="opentab('exp')">Experience</p>
-              <p class="tab-links" onclick="opentab('edu')">Education</p>
-            </div>
-            <div class="tab-contents active-tab" id="skills">
-              <ul>
-                <li><span>Web Development</span><br>Building Responsive Web-Apps / Websites</li>
-                <li><span>App Development</span><br>Building Android Apps </li>
-                <li><span>Desktop App Development </span><br>Building Desktop App</li>
-              </ul>
-            </div>
-            <div class="tab-contents" id="exp">
-              <ul>
-                <li><span>2024 (july) -Present</span><br>Robotics Intern at Enovators-HUB</li>
-              </ul>
-            </div>
-            <div class="tab-contents" id="edu">
-              <ul>
-                <li><span>2021- current</span><br>B.E in Computer From MUMBAI UNIVERSITY</li>
-              </ul>
-            </div>
+
+          <div class="tab-contents active-tab" id="skills">
+            <ul>
+              <li><span><i class="fas fa-code"></i> LANGUAGES</span><br><br>Python (Advanced), Java (Advanced), C/C++, JavaScript, Solidity, HTML, CSS
+              </li>
+              <li><span><i class="fas fa-brain"></i> AI/ML</span>NLP, Machine Learning, Computer Vision, Big Data (Hadoop), Gemini 2.0</li>
+              <li><span><i class="fas fa-tools"></i> FRAMEWORKS & TOOLS</span><br>Flask, Git, Google Cloud, OpenCV, Databricks, Raspberry Pi, Arduino
+              </li>
+              <li><span><i class="fas fa-book"></i> LIBRARIES</span><br>pandas, NumPy, Matplotlib</li>
+            </ul>
+          </div>
+
+          <div class="tab-contents" id="exp">
+            <ul>
+              <li><span>JAN 2025 - PRESENT</span><br>Implementation Engineer Intern at Engagely.ai<br>- Developed
+                WhatsApp bot with Flask, interfacing with Databricks DB<br>- Achieved 90% customer satisfaction across
+                multiple channels<br>- Improved system performance by 85% through database optimization</li>
+              <li><span>JAN 2025 - FEB 2025</span><br>Team Lead at Google Cloud x MLB Hackathon<br>- Led AI-driven
+                content personalization for Pitcher Perfect across 7 languages<br>- Achieved 99.9% platform uptime with
+                Google Cloud infrastructure</li>
+              <li><span>JUNE 2024 - NOV 2024</span><br>Robotics Tutor & Intern at Enovators-Hub<br>- Developed
+                AI-integrated STEM curriculum with 10+ microcontroller projects<br>- Mentored 50+ students in robotics
+                and embedded systems<br>- Increased workshop engagement by 75% with biomimetic robot prototypes</li>
+              <li><span>JULY 2023 - OCT 2023</span><br>NASA Space Apps Challenge Participant<br>- Developed a VR web app
+                for space education<br>- Achieved semi-final win status</li>
+            </ul>
+          </div>
+
+          <div class="tab-contents" id="edu">
+            <ul>
+              <li><span>2021 - 2025</span><br>Bachelor of Engineering in Computer Engineering<br>Mumbai
+                University<br>CGPA: 8.41/10<br>Advanced coursework in AI, ML, and embedded systems</li>
+            </ul>
           </div>
         </div>
       </div>
     </div>
-    <!-- Service section -->
-    <!-- Updated Service section with categories -->
-    <section id="services">
-      <div class="about">
-        <h2 style="font-size: 40px;">My <span style="color: #0298fc;font-size: 40px;">Projects</span></h2>
-        <p>Explore my diverse projects categorized by technology domains.</p>
+  </section>
+
+  <!-- Featured Projects Section -->
+  <section id="projects">
+    <h2><i class="fas fa-project-diagram"></i> FEATURED PROJECTS</h2>
+    <div class="project-grid">
+      <div class="project-card">
+        <img src="images/chikitsa.png" alt="Chikitsa v2.0" class="project-image">
+        <div class="card-header">
+          <h3><i class="fas fa-brain"></i> Chikitsa v2.0</h3>
+          <div class="card-links">
+            <a href="https://github.com/vinayak1729-web/Chikitsa" target="_blank"><i class="fab fa-github"></i></a>
+          </div>
+        </div>
+        <p>Digital Psychiatrist AI with 95% emotion detection accuracy. Won Top 3 rank among 38,000+ participants in
+          Google Gen-AI Exchange 2024.</p>
+        <p>Reduced response latency by 40% with optimized prompt engineering and custom ML models.</p>
+        <div class="tech">Python • Flask • Gemini 2.0 • OpenCV • NLP</div>
       </div>
 
-      <div class="services">
-        <!-- AI Category -->
-        <div class="service-card">
-          <div class="number">01</div>
-          <div class="service-text">
-            <h3>AI Projects</h3>
-            <p>Explore my AI-powered applications and solutions, including mental health chatbots and LLM-powered
-              assistants.</p>
-            <a href="pages/ai_projects.html">See AI Projects</a>
+      <div class="project-card">
+        <img src="images/daan-chain.png" alt="DaanChain" class="project-image">
+        <div class="card-header">
+          <h3><i class="fas fa-link"></i> DaanChain</h3>
+          <div class="card-links">
+            <a href="https://github.com/vinayak1729-web/Daan-Chain" target="_blank"><i class="fab fa-github"></i></a>
           </div>
         </div>
+        <p>Blockchain Emergency Relief System with 100% OTP verification. Smart contract implementation for secure aid
+          distribution.</p>
+        <p>Integrated Flask-based API with Ethereum network for real-time tracking.</p>
+        <div class="tech">Python • Flask • Solidity</div>
+      </div>
 
-        <!-- IoT Category -->
-        <div class="service-card">
-          <div class="number">02</div>
-          <div class="service-text">
-            <h3>IoT Projects</h3>
-            <p>Delve into my IoT-based innovations, such as smart navigation devices and sensor-based solutions.</p>
-            <a href="iot_projects.html">See IoT Projects</a>
+      <div class="project-card">
+        <div class="card-header">
+          <h3><i class="fas fa-eye"></i> Dristhi</h3>
+          <div class="card-links">
+            <a href="https://github.com/vinayak1729-web/Drishti" target="_blank"><i class="fab fa-github"></i></a>
           </div>
         </div>
+        <p>Blind Navigation Aid with 95% obstacle detection accuracy. Voice-command integration with ultrasonic sensors.
+        </p>
+        <p>Reduced navigation errors by 85% with Raspberry Pi deployment and real-time processing.</p>
+        <div class="tech">Python • Raspberry Pi • AI</div>
+      </div>
 
-        <!-- Web Development Category -->
-        <div class="service-card">
-          <div class="number">03</div>
-          <div class="service-text">
-            <h3>Web Development Projects</h3>
-            <p>Check out the responsive web applications and landing pages I've designed.</p>
-            <a href="web_projects.html">See Web Projects</a>
+      <div class="project-card">
+        <div class="card-header">
+          <h3><i class="fas fa-space-shuttle"></i> AstroScope</h3>
+          <div class="card-links">
+            <a href="https://github.com/vinayak1729-web/AstroScope" target="_blank"><i class="fab fa-github"></i></a>
           </div>
+        </div>
+        <p>VR Space Education app developed for NASA Space Apps Challenge (Semi-finalist). 3D modeling of Hubble, Crew
+          Dragon, and ISS interiors.</p>
+        <p>Web-based VR app designed for all age groups with interactive features.</p>
+        <div class="tech">JavaScript • HTML • CSS • Blender</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GitHub Projects Section -->
+  <section id="github">
+    <h2>GITHUB PROJECTS <i class="fas fa-code-branch" style="color: var(--primary-color);"></i></h2>
+    <p style="margin-bottom: 30px; font-size: 1.2rem;">
+      <i class="fas fa-rocket" style="color: var(--primary-color);"></i>
+      Exploring the frontiers of technology through innovative projects
+    </p>
+
+    <div class="github-grid">
+      <div class="github-card">
+        <div class="card-header">
+          <h3><i class="fas fa-dna"></i> RNA 3D Folding</h3>
+          <span class="status">
+            <i class="fas fa-code-branch"></i> In Development
+          </span>
+        </div>
+        <p>AI-driven RNA folding analysis with sequence data. Pioneering structural prediction through advanced ML
+          models.</p>
+        <div class="tech">
+          <i class="fab fa-python"></i> Python • pandas • NumPy
         </div>
       </div>
-    </section>
 
-    <script>
-      var tablinks = document.getElementsByClassName("tab-links");
-      var tabcontents = document.getElementsByClassName("tab-contents");
-      function opentab(tabname) {
-        for (tablink of tablinks) {
-          tablink.classList.remove("active-links");
-        }
-        for (tabcontent of tabcontents) {
-          tabcontent.classList.remove("active-tab");
-        }
-        event.currentTarget.classList.add("active-links");
-        document.getElementById(tabname).classList.add("active-tab");
+      <div class="github-card">
+        <div class="card-header">
+          <h3><i class="fas fa-square-root-alt"></i> AI Math Olympiad</h3>
+          <span class="status">
+            <i class="fas fa-code-branch"></i> In Development
+          </span>
+        </div>
+        <p>Next-gen mathematical problem-solving using reinforcement learning and LLM optimization.</p>
+        <div class="tech">
+          <i class="fas fa-brain"></i> Python • internlm2-math-plus-7b
+        </div>
+      </div>
 
+      <div class="github-card">
+        <div class="card-header">
+          <h3><i class="fas fa-om"></i> Gyan-GanGa</h3>
+          <div class="card-links">
+            <a href="https://github.com/vinayak1729-web/Gyan-Ganga" target="_blank">
+              <i class="fab fa-github"></i>
+            </a>
+          </div>
+        </div>
+        <p>Virtual gurukul platform bridging ancient wisdom with modern technology.</p>
+        <div class="tech">
+          <i class="fas fa-code"></i> Python • Flask • Sanskrit NLP
+        </div>
+      </div>
+
+      <div class="github-card">
+        <div class="card-header">
+          <h3>Chrome Sahayak</h3>
+          <div class="card-links">
+            <a href="https://github.com/vinayak1729-web/Chrome-Sahayaka" target="_blank"><i
+                class="fab fa-github"></i></a>
+          </div>
+        </div>
+        <p>AI learning extension with audio-to-text translation developed for Chrome Build in AI Challenge.</p>
+        <div class="tech">JavaScript • Chrome API</div>
+      </div>
+
+      <div class="github-card">
+        <div class="card-header">
+          <h3>Fit-Vista</h3>
+          <div class="card-links">
+            <a href="https://github.com/vinayak1729-web/FIT-VISTA" target="_blank"><i class="fab fa-github"></i></a>
+          </div>
+        </div>
+        <p>Comprehensive AI-driven fitness platform featuring workout recommendations, diet planning, BMI tracking, and
+          an intelligent chatbot assistant.</p>
+        <div class="tech">Python • JavaScript • AI</div>
+      </div>
+
+      <div class="github-card">
+        <div class="card-header">
+          <h3>More Projects</h3>
+          <div class="card-links">
+            <a href="https://github.com/vinayak1729-web?tab=repositories" target="_blank"><i
+                class="fab fa-github"></i></a>
+          </div>
+        </div>
+        <p>Explore 20+ additional projects covering AI/ML, web development, blockchain, and embedded systems.</p>
+        <div class="tech">Various Technologies</div>
+      </div>
+    </div>
+  </section>
+  <!-- Awards Section -->
+  <section id="awards">
+    <h2>AWARDS & LEADERSHIP</h2>
+    <div class="awards-grid">
+      <div class="award-card">
+        <h3>Google Gen-AI Exchange 2024</h3>
+        <p>Top 3 rank among 38,000+ participants with Chikitsa v2.0 Digital Psychiatrist AI</p>
+      </div>
+
+      <div class="award-card">
+        <h3>Guinness World Record</h3>
+        <p>Participated in the Largest Gen AI Offline Hackathon, officially recognized by Guinness World Records</p>
+      </div>
+
+      <div class="award-card">
+        <h3>NASA Space Apps Challenge 2023</h3>
+        <p>Semi-finalist with AstroScope VR space education web application</p>
+      </div>
+
+      <div class="award-card">
+        <h3>Mumbai University Avishkar 2024</h3>
+        <p>Finalist for research presentation</p>
+      </div>
+
+      <div class="award-card">
+        <h3>Department Leadership</h3>
+        <p>Vice President, Computer Engineering Department - Organized 5+ technical workshops with 90% satisfaction rate
+        </p>
+      </div>
+
+      <div class="award-card">
+        <h3>Hackathon Participation</h3>
+        <p>Competed in 13+ hackathons featuring innovative AI and software development solutions</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact">
+    <h2><i class="fas fa-envelope"></i> GET IN TOUCH</h2>
+    <div class="contact-info">
+      <div class="contact-card">
+        <i class="fas fa-envelope"></i>
+        <h3>Email</h3>
+        <p><a href="mailto:shindevinayak233@gmail.com">shindevinayak233@gmail.com</a></p>
+      </div>
+
+      <div class="contact-card">
+        <i class="fas fa-phone"></i>
+        <h3>Phone</h3>
+        <p><a href="tel:+918879785320">+91 8879785320</a></p>
+      </div>
+
+      <div class="contact-card">
+        <i class="fab fa-linkedin"></i>
+        <h3>LinkedIn</h3>
+        <p><a href="https://www.linkedin.com/in/vinayak-shinde-1aa968223/" target="_blank">Vinayak Shinde</a></p>
+      </div>
+
+      <div class="contact-card">
+        <i class="fab fa-github"></i>
+        <h3>GitHub</h3>
+        <p><a href="https://github.com/vinayak1729-web" target="_blank">vinayak1729-web</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Vinayak Shinde. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Tab switching functionality
+    var tablinks = document.getElementsByClassName("tab-links");
+    var tabcontents = document.getElementsByClassName("tab-contents");
+
+    function opentab(tabname) {
+      for (tablink of tablinks) {
+        tablink.classList.remove("active-links");
       }
-    </script>
-  </body>
+      for (tabcontent of tabcontents) {
+        tabcontent.classList.remove("active-tab");
+      }
+      event.currentTarget.classList.add("active-links");
+      document.getElementById(tabname).classList.add("active-tab");
+    }
+
+    // Dark mode toggle
+    const themeToggle = document.querySelector('.theme-toggle');
+    const body = document.body;
+
+    // Check for saved theme preference
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      body.classList.add('dark-mode');
+      themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+    }
+
+    // Theme toggle functionality
+    themeToggle.addEventListener('click', () => {
+      body.classList.toggle('dark-mode');
+
+      // Update icon
+      if (body.classList.contains('dark-mode')) {
+        themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        localStorage.setItem('theme', 'dark');
+      } else {
+        themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+        localStorage.setItem('theme', 'light');
+      }
+    });
+
+    // Mobile menu toggle
+    const menuButton = document.querySelector('.menu');
+    const navList = document.querySelector('.nav ul');
+
+    menuButton.addEventListener('click', () => {
+      navList.style.display = navList.style.display === 'flex' ? 'none' : 'flex';
+    });
+
+    // Smooth scroll for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+
+    // Add scroll reveal animation
+    window.addEventListener('scroll', () => {
+      const sections = document.querySelectorAll('section');
+      sections.forEach(section => {
+        const sectionTop = section.getBoundingClientRect().top;
+        const windowHeight = window.innerHeight;
+        if (sectionTop < windowHeight * 0.75) {
+          section.style.opacity = '1';
+          section.style.transform = 'translateY(0)';
+        }
+      });
+    });
+  </script>
+</body>
 
 </html>
