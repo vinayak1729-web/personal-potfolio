@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Superhero Fitness Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Bungee', sans-serif;
+            background-color: #1a1a1a;
+            color: #fff;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: #333;
+            padding: 20px;
+            border: 5px solid #ff00ff;
+            box-shadow: 10px 10px 0 #00ff00;
+        }
+        h1, h2 {
+            color: #00ffff;
+            text-transform: uppercase;
+            text-align: center;
+        }
+        .section {
+            margin: 20px 0;
+            border: 3px solid #00ff00;
+            padding: 15px;
+        }
+        .exercise {
+            margin: 10px 0;
+        }
+        .current {
+            color: #ff00ff;
+            font-size: 1.2em;
+        }
+        .timer {
+            font-size: 2em;
+            text-align: center;
+            margin: 20px 0;
+            color: #00ffff;
+        }
+        button {
+            background-color: #ff00ff;
+            color: #1a1a1a;
+            border: none;
+            padding: 10px 20px;
+            font-family: 'Bungee', sans-serif;
+            cursor: pointer;
+            margin: 10px;
+        }
+        button:hover {
+            background-color: #00ff00;
+        }
+        input[type="checkbox"] {
+            margin-right: 10px;
+        }
+        input[type="number"] {
+            padding: 5px;
+            margin: 10px;
+            border: 2px solid #00ffff;
+            background-color: #333;
+            color: #fff;
+        }
+        canvas {
+            max-width: 100%;
+            margin: 20px 0;
+        }
+        .motivation {
+            text-align: center;
+            color: #ff00ff;
+            font-size: 1.2em;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Superhero Fitness Dashboard</h1>
+        <p class="motivation">You're crushing it! Become the superhero you were born to be!</p>
+
+        <!-- Workout Section -->
+        <div class="section">
+            <h2>30-Minute HIIT Workout</h2>
+            <p>30 sec work, 30 sec rest, 5 sets</p>
+            <div class="exercise" id="ex1">1. Burpees</div>
+            <div class="exercise" id="ex2">2. Mountain Climbers</div>
+            <div class="exercise" id="ex3">3. Jumping Jacks</div>
+            <div class="exercise" id="ex4">4. Bodyweight Squats</div>
+            <div class="exercise" id="ex5">5. Push-ups</div>
+            <div class="exercise" id="ex6">6. Plank</div>
+            <div class="timer" id="timer">00:30</div>
+            <div id="status">Set 1 / 5</div>
+            <button onclick="startTimer()">Start Workout</button>
+            <button onclick="resetTimer()">Reset</button>
+            <p class="motivation">Keep pushing—you're unstoppable!</p>
+        </div>
+
+        <!-- Weight Tracker Section -->
+        <div class="section">
+            <h2>Weight Tracker</h2>
+            <p>Log your weight daily to see your progress!</p>
+            <input type="number" id="weightInput" placeholder="Enter weight (kg)" step="0.1">
+            <button onclick="addWeight()">Add Weight</button>
+            <canvas id="weightChart"></canvas>
+            <p class="motivation">Every step brings you closer to your Spiderman physique!</p>
+        </div>
+
+        <!-- Diet Checklist Section -->
+        <div class="section">
+            <h2>Vegetarian Diet Checklist</h2>
+            <h3>Breakfast (Choose 1)</h3>
+            <label><input type="checkbox"> Oatmeal with Banana & Almonds</label><br>
+            <label><input type="checkbox"> Poha with Veggies</label><br>
+            <label><input type="checkbox"> Upma with Green Peas</label><br>
+            <label><input type="checkbox"> Besan Chilla with Tomato</label><br>
+            <label><input type="checkbox"> Idli with Coconut Chutney</label><br>
+
+            <h3>Lunch (Choose 1)</h3>
+            <label><input type="checkbox"> Dal with 2 Rotis & Cucumber Salad</label><br>
+            <label><input type="checkbox"> Rajma with Brown Rice</label><br>
+            <label><input type="checkbox"> Chole with 2 Rotis</label><br>
+            <label><input type="checkbox"> Mixed Veg Curry with Brown Rice</label><br>
+            <label><input type="checkbox"> Paneer Bhurji with 2 Rotis</label><br>
+
+            <h3>Snack (Choose 1)</h3>
+            <label><input type="checkbox"> Sprouts Salad</label><br>
+            <label><input type="checkbox"> Greek Yogurt with Honey</label><br>
+            <label><input type="checkbox"> Roasted Makhana</label><br>
+            <label><input type="checkbox"> Fruit Salad (Apple & Banana)</label><br>
+            <label><input type="checkbox"> Boiled Chana Chat</label><br>
+
+            <h3>Dinner (Choose 1)</h3>
+            <label><input type="checkbox"> Chole with Brown Rice & Veggies</label><br>
+            <label><input type="checkbox"> Dal Tadka with 2 Rotis</label><br>
+            <label><input type="checkbox"> Veg Khichdi with Curd</label><br>
+            <label><input type="checkbox"> Paneer Tikka with Salad</label><br>
+            <label><input type="checkbox"> Spinach Dal with Brown Rice</label><br>
+            <p class="motivation">Fuel your body like a hero!</p>
+        </div>
+    </div>
+
+    <script>
+        // Workout Timer Logic
+        let time = 30;
+        let isRunning = false;
+        let isWork = true;
+        let setCount = 1;
+        let exerciseIndex = 1;
+        const maxSets = 5;
+        const maxExercises = 6;
+
+        function startTimer() {
+            if (!isRunning && setCount <= maxSets) {
+                isRunning = true;
+                updateExerciseHighlight();
+                updateTimer();
+            }
+        }
+
+        function updateExerciseHighlight() {
+            for (let i = 1; i <= maxExercises; i++) {
+                const ex = document.getElementById(`ex${i}`);
+                ex.classList.remove('current');
+            }
+            const currentEx = document.getElementById(`ex${exerciseIndex}`);
+            currentEx.classList.add('current');
+        }
+
+        function updateTimer() {
+            if (!isRunning) return;
+
+            const timerDisplay = document.getElementById('timer');
+            const statusDisplay = document.getElementById('status');
+            timerDisplay.textContent = `${isWork ? 'Work' : 'Rest'}: 00:${time.toString().padStart(2, '0')}`;
+            statusDisplay.textContent = `Set ${setCount} / ${maxSets}`;
+
+            if (time > 0) {
+                time--;
+                setTimeout(updateTimer, 1000);
+            } else {
+                isWork = !isWork;
+                time = 30;
+
+                if (!isWork) {
+                    exerciseIndex++;
+                    if (exerciseIndex > maxExercises) {
+                        exerciseIndex = 1;
+                        setCount++;
+                        if (setCount > maxSets) {
+                            isRunning = false;
+                            timerDisplay.textContent = 'Done!';
+                            statusDisplay.textContent = 'Workout Complete!';
+                            return;
+                        }
+                    }
+                    updateExerciseHighlight();
+                }
+
+                setTimeout(updateTimer, 1000);
+            }
+        }
+
+        function resetTimer() {
+            isRunning = false;
+            time = 30;
+            isWork = true;
+            setCount = 1;
+            exerciseIndex = 1;
+            document.getElementById('timer').textContent = '00:30';
+            document.getElementById('status').textContent = 'Set 1 / 5';
+            updateExerciseHighlight();
+        }
+
+        // Weight Tracker Logic
+        let weightData = JSON.parse(localStorage.getItem('weightData')) || [];
+
+        const ctx = document.getElementById('weightChart').getContext('2d');
+        const weightChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: weightData.map((entry, i) => `Day ${i + 1}`),
+                datasets: [{
+                    label: 'Weight (kg)',
+                    data: weightData.map(entry => entry.weight),
+                    borderColor: '#00ff00',
+                    backgroundColor: '#ff00ff',
+                    fill: false,
+                    tension: 0.1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        title: {
+                            display: true,
+                            text: 'Weight (kg)',
+                            color: '#00ffff'
+                        },
+                        ticks: { color: '#fff' }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Day',
+                            color: '#00ffff'
+                        },
+                        ticks: { color: '#fff' }
+                    }
+                },
+                plugins: {
+                    legend: { labels: { color: '#fff' } }
+                }
+            }
+        });
+
+        function addWeight() {
+            const weightInput = document.getElementById('weightInput');
+            const weight = parseFloat(weightInput.value);
+            if (weight && weight > 0) {
+                weightData.push({ weight, date: new Date().toISOString().split('T')[0] });
+                localStorage.setItem('weightData', JSON.stringify(weightData));
+                weightChart.data.labels = weightData.map((entry, i) => `Day ${i + 1}`);
+                weightChart.data.datasets[0].data = weightData.map(entry => entry.weight);
+                weightChart.update();
+                weightInput.value = '';
+                alert('Weight added! You’re one step closer to your goal!');
+            } else {
+                alert('Please enter a valid weight!');
+            }
+        }
+    </script>
+</body>
+</html>
