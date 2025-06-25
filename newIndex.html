@@ -6,8 +6,11 @@
   <title>Vinayak Shinde | AI & Software Developer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lexend+Mega&family=Inter:wght@400;500;600&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lexend+Mega&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
   <style>
     :root {
       --primary-color: #0298fc;
@@ -47,14 +50,14 @@
       max-width: 1440px;
       background: var(--bg-color);
       margin: 0 auto;
-      font-family: 'Inter', 'Poppins', sans-serif;
+      font-family: 'Poppins','Inter', sans-serif;
       padding: 0 20px;
       color: var(--text-color);
       overflow-x: hidden;
     }
 
     h1, h2, h3, .logo, .tab-links, .nav-item {
-      font-family: 'Lexend Mega', sans-serif;
+      font-family: 'Lexend Mega', 'Poppins';
       text-transform: uppercase;
     }
 
@@ -149,7 +152,7 @@
       margin-top: 60px;
       display: flex;
       gap: 40px;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
       min-height: 90vh;
       padding: 80px 20px 50px;
@@ -182,12 +185,12 @@
 
     .social-icons {
       display: flex;
-      gap: 20px;
+      gap: 15px;
     }
 
     .social-icon {
       font-size: 1.8rem;
-      padding: 12px;
+      padding: 10px;
       border: 3px solid var(--card-border);
       border-radius: 8px;
       color: var(--text-color);
@@ -218,7 +221,7 @@
       border: 4px solid var(--card-border);
       box-shadow: 12px 12px 0 var(--card-shadow);
       border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-      animation: morph 12s ease-in-out infinite;
+      animation: morph 8s ease-in-out infinite;
     }
 
     @keyframes morph {
@@ -266,8 +269,7 @@
     .sub-title {
       font-size: clamp(1.8rem, 3vw, 2.2rem);
       color: var(--text-color);
-      margin-bottom: 30px;
-      padding-left: 10px;
+      margin-bottom: 20px;
       display: flex;
       align-items: center;
       gap: 10px;
@@ -338,7 +340,6 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 2rem;
-      justify-content: center;
     }
 
     .project-slider {
@@ -347,10 +348,9 @@
       scroll-snap-type: x mandatory;
       -webkit-overflow-scrolling: touch;
       gap: 1.5rem;
-      padding: 0 20px 20px;
+      padding-bottom: 20px;
       scrollbar-width: thin;
       scrollbar-color: var(--primary-color) var(--bg-color);
-      scroll-padding: 20px;
     }
 
     .project-slider::-webkit-scrollbar {
@@ -372,14 +372,13 @@
       border-radius: 12px;
       padding: 1.5rem;
       box-shadow: 8px 8px 0 var(--card-shadow);
-      transition: all 0.4s ease;
+      transition: all 0.3s ease;
       display: flex;
       flex-direction: column;
       position: relative;
       overflow: hidden;
       scroll-snap-align: start;
       min-width: 280px;
-      margin: 0 auto;
     }
 
     .project-card:hover {
@@ -454,19 +453,11 @@
       background: var(--gradient-bg);
       color: var(--card-bg);
       padding: 6px 12px;
-      border-radius: 10px;
+      border-radius: 20px;
       font-size: 0.8rem;
       font-weight: 500;
       box-shadow: 2px 2px 0 var(--card-shadow);
       text-transform: uppercase;
-    }
-
-    .status[data-status="Completed"] {
-      background: var(--primary-color);
-    }
-
-    .status[data-status="In Progress"] {
-      background: var(--secondary-color);
     }
 
     .tech-tags {
@@ -479,7 +470,7 @@
     .tech {
       background: var(--header-bg);
       padding: 6px 12px;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       border: 2px solid var(--card-border);
       border-radius: 6px;
       transition: all 0.3s ease;
@@ -501,7 +492,6 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 2rem;
-      justify-content: center;
     }
 
     .github-card {
@@ -510,7 +500,7 @@
       border-radius: 12px;
       padding: 1.5rem;
       box-shadow: 8px 8px 0 var(--card-shadow);
-      transition: all 0.4s ease;
+      transition: all 0.3s ease;
       position: relative;
     }
 
@@ -558,7 +548,6 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 2rem;
-      justify-content: center;
     }
 
     .award-card {
@@ -567,7 +556,7 @@
       border-radius: 12px;
       padding: 1.5rem;
       box-shadow: 8px 8px 0 var(--card-shadow);
-      transition: all 0.4s ease;
+      transition: all 0.3s ease;
       position: relative;
     }
 
@@ -615,7 +604,6 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 2rem;
-      justify-content: center;
     }
 
     .contact-card {
@@ -625,7 +613,7 @@
       padding: 1.5rem;
       box-shadow: 8px 8px 0 var(--card-shadow);
       text-align: center;
-      transition: all 0.4s ease;
+      transition: all 0.3s ease;
     }
 
     .contact-card:hover {
@@ -705,7 +693,7 @@
       .nav-links {
         display: none;
         position: fixed;
-        top: 60px;
+        top: 50px;
         left: 0;
         right: 0;
         flex-direction: column;
@@ -714,7 +702,6 @@
         border: 4px solid var(--card-border);
         box-shadow: 8px 8px 0 var(--card-shadow);
         z-index: 999;
-        backdrop-filter: blur(5px);
       }
 
       .nav-links.active {
@@ -747,7 +734,6 @@
 
       .project-slider {
         display: flex;
-        justify-content: flex-start;
       }
 
       .project-image {
@@ -757,13 +743,9 @@
 
     @media (max-width: 480px) {
       .blob-container {
-        max-width: 300px;
-        height: 300px;
+        max-width: 280px;
+        height: 280px;
         display: block;
-      }
-
-      .about-col-1 img {
-        max-height: 300px;
       }
 
       .sub-title {
@@ -776,7 +758,7 @@
       }
 
       .project-image, .github-image {
-        height: 140px;
+        height: 120px;
       }
     }
 
@@ -792,7 +774,7 @@
     <nav class="nav">
       <h3 class="logo"><span>V</span>INAYAK S.</h3>
       <div class="menu" id="menuToggle"><i class="fas fa-bars"></i></div>
-      <ul class="nav-links">
+      <ul class="nav-links" style="font-size: small;">
         <li><a href="#" class="nav-item"><i class="fas fa-home"></i> HOME</a></li>
         <li><a href="#about" class="nav-item"><i class="fas fa-user"></i> ABOUT</a></li>
         <li><a href="#projects" class="nav-item"><i class="fas fa-code"></i> PROJECTS</a></li>
@@ -831,7 +813,7 @@
       </div>
       <div class="about-col-2">
         <h2 class="sub-title"><i class="fas fa-user"></i> ABOUT ME</h2>
-        <p>I'm Vinayak Shinde, a Computer Engineering graduate (8.41 CGPA, Mumbai University, 2025) passionate about AI/ML and software development. I excel at creating innovative solutions, like Data Flox, Chikitsa, Project Ramanujan, and DaanChain, leading teams to solve real-world challenges. With expertise in Python, LLMs, and cloud platforms, I aim to build tech that shapes a better future.</p>
+        <p>I'm Vinayak Shinde, a Computer Engineering graduate (8.41 CGPA, Mumbai University, 2025) passionate about AI/ML and software development. I excel at creating innovative solutions, like Chikitsa, Project Ramanujan, and DaanChain, leading teams to solve real-world challenges. With expertise in Python, LLMs, and cloud platforms, I aim to build tech that shapes a better future.</p>
         <div class="tab-titles">
           <p class="tab-links active-links" onclick="opentab('skills')">SKILLS</p>
           <p class="tab-links" onclick="opentab('exp')">EXPERIENCE</p>
@@ -866,26 +848,10 @@
     <h2 class="sub-title"><i class="fas fa-project-diagram"></i> FEATURED PROJECTS</h2>
     <div class="project-grid">
       <div class="project-card">
-        <img src="images/dataflowX.png" alt="Data Flox Project" class="project-image">
-        <div class="card-header">
-          <h3><i class="fas fa-database"></i> Data Flox</h3>
-          <span class="status" data-status="In Progress">In Progress</span>
-        </div>
-        <p>AI-driven data processing platform for real-time analytics and insights.</p>
-        <div class="card-links">
-          <a href="https://github.com/vinayak1729-web/DataFlowx" target="_blank"><i class="fab fa-github"></i></a>
-        </div>
-        <div class="tech-tags">
-          <span class="tech">Python</span>
-          <span class="tech">Flask</span>
-          <span class="tech">AI</span>
-        </div>
-      </div>
-      <div class="project-card">
         <img src="images/chikitsa.png" alt="Chikitsa" class="project-image">
         <div class="card-header">
           <h3><i class="fas fa-brain"></i> Chikitsa</h3>
-          <span class="status" data-status="Completed">Completed</span>
+          <span class="status">Completed</span>
         </div>
         <p>AI mental health platform with 96% mood inference accuracy. Top 3 in Google Gen AI Hackathon 2024.</p>
         <div class="card-links">
@@ -901,7 +867,7 @@
         <img src="images/ramanujan.png" alt="Project Ramanujan" class="project-image">
         <div class="card-header">
           <h3><i class="fas fa-square-root-alt"></i> Project Ramanujan</h3>
-          <span class="status" data-status="In Progress">In Progress</span>
+          <span class="status">In Progress</span>
         </div>
         <p>AI mathematical intuition engine inspired by Ramanujan, using Gemma 3 for deep reasoning and Vedic Maths.</p>
         <div class="card-links">
@@ -918,7 +884,7 @@
         <img src="images/daan-chain.png" alt="DaanChain" class="project-image">
         <div class="card-header">
           <h3><i class="fas fa-link"></i> DaanChain</h3>
-          <span class="status" data-status="Completed">Completed</span>
+          <span class="status">Completed</span>
         </div>
         <p>Blockchain-based emergency relief system with 100% OTP verification.</p>
         <div class="card-links">
@@ -933,26 +899,10 @@
     </div>
     <div class="project-slider">
       <div class="project-card">
-        <img src="images/dataflowX.png" alt="Data Flox Project" class="project-image">
-        <div class="card-header">
-          <h3><i class="fas fa-database"></i> Data Flox</h3>
-          <span class="status" data-status="In Progress">In Progress</span>
-        </div>
-        <p>AI-driven data processing platform for real-time analytics and insights.</p>
-        <div class="card-links">
-          <a href="https://github.com/vinayak1729-web/Data-Flox" target="_blank"><i class="fab fa-github"></i></a>
-        </div>
-        <div class="tech-tags">
-          <span class="tech">Python</span>
-          <span class="tech">Flask</span>
-          <span class="tech">AI</span>
-        </div>
-      </div>
-      <div class="project-card">
         <img src="images/chikitsa.png" alt="Chikitsa" class="project-image">
         <div class="card-header">
           <h3><i class="fas fa-brain"></i> Chikitsa</h3>
-          <span class="status" data-status="Completed">Completed</span>
+          <span class="status">Completed</span>
         </div>
         <p>AI mental health platform with 96% mood inference accuracy. Top 3 in Google Gen AI Hackathon 2024.</p>
         <div class="card-links">
@@ -968,7 +918,7 @@
         <img src="images/ramanujan.png" alt="Project Ramanujan" class="project-image">
         <div class="card-header">
           <h3><i class="fas fa-square-root-alt"></i> Project Ramanujan</h3>
-          <span class="status" data-status="In Progress">In Progress</span>
+          <span class="status">In Progress</span>
         </div>
         <p>AI mathematical intuition engine inspired by Ramanujan, using Gemma 3 for deep reasoning and Vedic Maths.</p>
         <div class="card-links">
@@ -982,10 +932,10 @@
         </div>
       </div>
       <div class="project-card">
-        <img src="images/daan-chain.png" alt="DaanChain" class="project-image">
+        <img src="images/daanchain.png" alt="DaanChain" class="project-image">
         <div class="card-header">
           <h3><i class="fas fa-link"></i> DaanChain</h3>
-          <span class="status" data-status="Completed">Completed</span>
+          <span class="status">Completed</span>
         </div>
         <p>Blockchain-based emergency relief system with 100% OTP verification.</p>
         <div class="card-links">
@@ -1009,11 +959,11 @@
         <img src="images/pitcher_perfect.png" alt="Pitcher Perfect" class="github-image">
         <div class="card-header">
           <h3><i class="fas fa-baseball-ball"></i> Pitcher Perfect</h3>
-          <span class="status" data-status="Completed">Completed</span>
+          <span class="status">Completed</span>
         </div>
         <p>AI-powered MLB analytics platform with personalized highlights, multilingual support, and interactive team builder.</p>
         <div class="card-links">
-          <a href="https://github.com/vinayak1729-web/pitcherr_perfect_final" target="_blank"><i class="fab fa-github"></i></a>
+          <a href="https://github.com/vinayak1729-web/pitcherrrPerfect_final" target="_blank"><i class="fab fa-github"></i></a>
           <a href="https://pitcherrrperfect-final.onrender.com/" target="_blank"><i class="fas fa-globe"></i></a>
           <a href="https://youtu.be/-ELvMqja4uw?si=JhBT3p2oq5kUMwl9" target="_blank"><i class="fab fa-youtube"></i></a>
         </div>
@@ -1028,7 +978,7 @@
         <img src="images/skill-forge.png" alt="Skill Forge" class="github-image">
         <div class="card-header">
           <h3><i class="fas fa-tools"></i> Skill Forge</h3>
-          <span class="status" data-status="In Progress">In Progress</span>
+          <span class="status">In Progress</span>
         </div>
         <p>Adaptive skilling platform for Indian youth with offline-first PWA, gamified learning, and AI-driven evaluations.</p>
         <div class="card-links">
@@ -1045,7 +995,7 @@
         <img src="images/3d_iss_tracker.png" alt="3D ISS Tracker" class="github-image">
         <div class="card-header">
           <h3><i class="fas fa-satellite"></i> 3D ISS Tracker</h3>
-          <span class="status" data-status="Completed">Completed</span>
+          <span class="status">Completed</span>
         </div>
         <p>Web app for NASA Space Apps Challenge 2022 visualizing ISS tracks, ground stations, and space debris.</p>
         <div class="card-links">
@@ -1061,7 +1011,7 @@
       <div class="github-card">
         <div class="card-header">
           <h3><i class="fas fa-om"></i> Gyan-GanGa</h3>
-          <span class="status" data-status="Completed">Completed</span>
+          <span class="status">Completed</span>
         </div>
         <p>Virtual learning platform bridging ancient wisdom with AI-driven NLP.</p>
         <div class="card-links">
@@ -1075,8 +1025,8 @@
       </div>
       <div class="github-card">
         <div class="card-header">
-          <h3><i class="fas fa-chrome"></i> Chrome Sahayak</h3>
-          <span class="status" data-status="Completed">Completed</span>
+          <h3></i> Chrome Sahayak</h3>
+          <span class="status">Completed</span>
         </div>
         <p>AI learning Chrome extension with audio-to-text translation.</p>
         <div class="card-links">
