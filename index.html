@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Vinayak Shinde | AI & Software Developer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lexend+Mega&family=Inter:wght@400;500;600&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Lexend+Mega&family=Inter:wght@400;500;600&family=Poppins:wght@400;500;600&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <style>
     :root {
       --primary-color: #0298fc;
@@ -50,15 +53,32 @@
       max-width: 1440px;
       background: var(--bg-color);
       margin: 0 auto;
-      font-family: 'Lexend Mega','Inter', 'Poppins', sans-serif;
+      font-family:  'Inter', 'Poppins', sans-serif;
       padding: 0 20px;
       color: var(--text-color);
       overflow-x: hidden;
+      position: relative;
     }
 
-    h1, h2, h3, .logo, .tab-links, .nav-item {
-      font-family: 'Press Start 2P', sans-serif;
+    h1,
+    h2,
+    h3,
+    .logo,
+    .tab-links,
+    .nav-item {
+      font-family: 'Lexend Mega', sans-serif;
       text-transform: uppercase;
+    }
+
+    /* Background Canvas */
+    #gameCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      opacity: 0.15;
     }
 
     /* Header */
@@ -69,7 +89,7 @@
       left: 0;
       right: 0;
       background: var(--header-bg);
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
       z-index: 1000;
     }
 
@@ -225,8 +245,12 @@
     }
 
     @keyframes morph {
-      0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
-      50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+      0%, 100% {
+        border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+      }
+      50% {
+        border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+      }
     }
 
     /* About Section */
@@ -328,8 +352,14 @@
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     /* Projects Section */
@@ -340,7 +370,7 @@
     .project-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 3rem;
+      gap: 2rem;
       justify-content: center;
     }
 
@@ -388,6 +418,19 @@
     .project-card:hover {
       transform: translate(-6px, -6px);
       box-shadow: 12px 12px 0 var(--card-shadow);
+      background: var(--gradient-bg);
+      color: var(--card-bg);
+    }
+
+    .project-card:hover .project-image {
+      transform: scale(1.05);
+      border-color: var(--card-bg);
+    }
+
+    .project-card:hover p,
+    .project-card:hover .card-links a,
+    .project-card:hover .card-header h3 {
+      color: var(--card-bg);
     }
 
     .project-card::before {
@@ -413,11 +456,7 @@
       border: 3px solid var(--card-border);
       border-radius: 8px;
       margin-bottom: 1rem;
-      transition: transform 0.3s ease;
-    }
-
-    .project-card:hover .project-image {
-      transform: scale(1.05);
+      transition: transform 0.3s ease, border-color 0.3s ease;
     }
 
     .card-header {
@@ -432,6 +471,7 @@
       display: flex;
       align-items: center;
       gap: 8px;
+      transition: color 0.3s ease;
     }
 
     .card-links a {
@@ -451,6 +491,7 @@
       line-height: 1.6;
       margin-bottom: 1rem;
       flex-grow: 1;
+      transition: color 0.3s ease;
     }
 
     .status {
@@ -699,7 +740,8 @@
         align-items: center;
       }
 
-      .about-col-1, .about-col-2 {
+      .about-col-1,
+      .about-col-2 {
         max-width: 100%;
       }
     }
@@ -773,23 +815,37 @@
         font-size: 1.6rem;
       }
 
-      .project-card, .github-card, .award-card, .contact-card {
+      .project-card,
+      .github-card,
+      .award-card,
+      .contact-card {
         padding: 1rem;
         min-width: 260px;
       }
 
-      .project-image, .github-image {
+      .project-image,
+      .github-image {
         height: 140px;
       }
     }
 
     @keyframes slideDown {
-      from { opacity: 0; transform: translateY(-10px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
   </style>
 </head>
+
 <body>
+  <!-- Background Canvas for Animations -->
+  <canvas id="gameCanvas"></canvas>
+
   <!-- Header -->
   <header>
     <nav class="nav">
@@ -802,7 +858,6 @@
         <li><a href="#github" class="nav-item"><i class="fab fa-github"></i> GITHUB</a></li>
         <li><a href="#awards" class="nav-item"><i class="fas fa-trophy"></i> AWARDS</a></li>
         <li><a href="#contact" class="nav-item"><i class="fas fa-envelope"></i> CONTACT</a></li>
-<!--         <li><a href="pages/routine.html" class="nav-item"><i class="fas fa-calendar"></i> ROUTINE</a></li> -->
         <li class="theme-toggle"><i class="fas fa-moon"></i></li>
       </ul>
     </nav>
@@ -812,11 +867,12 @@
   <section class="hero-container">
     <div class="content">
       <p class="title-text">AN <span>AI & SOFTWARE</span> DEVELOPER</p>
-      <h1>HI, I'M <span>VINAYAK</span> SHINDE<br>FROM MUMBAI</h1>
+      <h1 style="font-family: 'Press Start 2P';">HI, I'M <span>VINAYAK</span> SHINDE<br>FROM MUMBAI</h1>
       <p>Computer Engineering Graduate | AI/ML Innovator | Hackathon Champion | Building Impactful Tech Solutions</p>
       <div class="social-icons">
         <a href="https://github.com/vinayak1729-web" class="social-icon"><i class="fab fa-github"></i></a>
-        <a href="https://www.linkedin.com/in/vinayak-shinde-1aa968223/" class="social-icon"><i class="fab fa-linkedin"></i></a>
+        <a href="https://www.linkedin.com/in/vinayak-shinde-1aa968223/" class="social-icon"><i
+            class="fab fa-linkedin"></i></a>
         <a href="mailto:shindevinayak233@gmail.com" class="social-icon"><i class="fas fa-envelope"></i></a>
         <a href="https://www.codechef.com/users/focus_doves_64" class="social-icon"><i class="fas fa-code"></i></a>
       </div>
@@ -834,7 +890,10 @@
       </div>
       <div class="about-col-2">
         <h2 class="sub-title"><i class="fas fa-user"></i> ABOUT ME</h2>
-        <p>I'm Vinayak Shinde, a Computer Engineering graduate (8.41 CGPA, Mumbai University, 2025) passionate about AI/ML and software development. I excel at creating innovative solutions, like Data Flox, Chikitsa, Project Ramanujan, and DaanChain, leading teams to solve real-world challenges. With expertise in Python, LLMs, and cloud platforms, I aim to build tech that shapes a better future.</p>
+        <p>I'm Vinayak Shinde, a Computer Engineering graduate (8.41 CGPA, Mumbai University, 2025) passionate about
+          AI/ML and software development. I excel at creating innovative solutions, like Data Flox, Chikitsa, Project
+          Ramanujan, and DaanChain, leading teams to solve real-world challenges. With expertise in Python, LLMs, and
+          cloud platforms, I aim to build tech that shapes a better future.</p>
         <div class="tab-titles">
           <p class="tab-links active-links" onclick="opentab('skills')">SKILLS</p>
           <p class="tab-links" onclick="opentab('exp')">EXPERIENCE</p>
@@ -842,22 +901,31 @@
         </div>
         <div class="tab-contents active-tab" id="skills">
           <ul>
-            <li><span><i class="fas fa-code"></i> LANGUAGES</span><br>Python (Advanced), SQL, JavaScript, C/C++, HTML, CSS, Solidity</li>
-            <li><span><i class="fas fa-brain"></i> AI/ML</span><br>NLP, Machine Learning, Computer Vision, LLMs (Gemini, Gemma, Llama), Predictive Modeling</li>
-            <li><span><i class="fas fa-tools"></i> FRAMEWORKS & TOOLS</span><br>Flask, FastAPI, React, Electron, Git, Google Cloud (Vertex AI, BigQuery), OpenCV, Raspberry Pi</li>
-            <li><span><i class="fas fa-book"></i> LIBRARIES</span><br>pandas, NumPy, Scikit-learn, TensorFlow, Matplotlib</li>
+            <li><span><i class="fas fa-code"></i> LANGUAGES</span><br>Python (Advanced), SQL, JavaScript, C/C++, HTML,
+              CSS, Solidity</li>
+            <li><span><i class="fas fa-brain"></i> AI/ML</span><br>NLP, Machine Learning, Computer Vision, LLMs (Gemini,
+              Gemma, Llama), Predictive Modeling</li>
+            <li><span><i class="fas fa-tools"></i> FRAMEWORKS & TOOLS</span><br>Flask, FastAPI, React, Electron, Git,
+              Google Cloud (Vertex AI, BigQuery), OpenCV, Raspberry Pi</li>
+            <li><span><i class="fas fa-book"></i> LIBRARIES</span><br>pandas, NumPy, Scikit-learn, TensorFlow,
+              Matplotlib</li>
           </ul>
         </div>
         <div class="tab-contents" id="exp">
           <ul>
-            <li><span>June 2025 - Present</span><br>Trainee Engineer, Bixware Technologies<br>- Learning and building in the data analytics field</li>
-            <li><span>Jan 2025 - Mar 2025</span><br>Implementation Engineer Intern, Engagely.ai<br>- Built WhatsApp bot and Flask APIs for real-time analytics<br>- Optimized Gen AI workflows, reducing response times by 40%</li>
-            <li><span>June 2024 - Nov 2024</span><br>Robotics Tutor & Intern, Enovators-Hub<br>- Developed AI-integrated STEM curriculum, mentoring 50+ students<br>- Led 5+ IoT projects, achieving 92% success rate</li>
+            <li><span>June 2025 - Present</span><br>Trainee Engineer, Bixware Technologies<br>- Learning and building in
+              the data analytics field</li>
+            <li><span>Jan 2025 - Mar 2025</span><br>Implementation Engineer Intern, Engagely.ai<br>- Built WhatsApp bot
+              and Flask APIs for real-time analytics<br>- Optimized Gen AI workflows, reducing response times by 40%
+            </li>
+            <li><span>June 2024 - Nov 2024</span><br>Robotics Tutor & Intern, Enovators-Hub<br>- Developed AI-integrated
+              STEM curriculum, mentoring 50+ students<br>- Led 5+ IoT projects, achieving 92% success rate</li>
           </ul>
         </div>
         <div class="tab-contents" id="edu">
           <ul>
-            <li><span>2021 - 2025</span><br>B.Eng. in Computer Engineering, Mumbai University<br>CGPA: 8.41/10<br>Focus: AI, ML, Embedded Systems</li>
+            <li><span>2021 - 2025</span><br>B.Eng. in Computer Engineering, Mumbai University<br>CGPA: 8.41/10<br>Focus:
+              AI, ML, Embedded Systems</li>
           </ul>
         </div>
       </div>
@@ -892,7 +960,8 @@
         </div>
         <p>AI mental health platform with 96% mood inference accuracy. Top 3 in Google Gen AI Hackathon 2024.</p>
         <div class="card-links">
-          <a href="https://github.com/vinayak1729-web/Chikitsa_your_Mental_health-welbeing" target="_blank"><i class="fab fa-github"></i></a>
+          <a href="https://github.com/vinayak1729-web/Chikitsa_your_Mental_health-welbeing" target="_blank"><i
+              class="fab fa-github"></i></a>
         </div>
         <div class="tech-tags">
           <span class="tech">Python</span>
@@ -908,8 +977,10 @@
         </div>
         <p>AI mathematical intuition engine inspired by Ramanujan, using Gemma 3 for deep reasoning and Vedic Maths.</p>
         <div class="card-links">
-          <a href="https://github.com/vinayak1729-web/PROJECT-RAMANUJAN" target="_blank"><i class="fab fa-github"></i></a>
-          <a href="https://www.kaggle.com/code/vinu1729/project-ramanujan" target="_blank"><i class="fas fa-kaggle"></i></a>
+          <a href="https://github.com/vinayak1729-web/PROJECT-RAMANUJAN" target="_blank"><i
+              class="fab fa-github"></i></a>
+          <a href="https://www.kaggle.com/code/vinu1729/project-ramanujan" target="_blank"><i
+              class="fas fa-kaggle"></i></a>
         </div>
         <div class="tech-tags">
           <span class="tech">Python</span>
@@ -943,7 +1014,7 @@
         </div>
         <p>AI-driven data processing platform for real-time analytics and insights.</p>
         <div class="card-links">
-          <a href="https://github.com/vinayak1729-web/Data-Flox" target="_blank"><i class="fab fa-github"></i></a>
+          <a href="https://github.com/vinayak1729-web/DataFlowx" target="_blank"><i class="fab fa-github"></i></a>
         </div>
         <div class="tech-tags">
           <span class="tech">Python</span>
@@ -959,7 +1030,8 @@
         </div>
         <p>AI mental health platform with 96% mood inference accuracy. Top 3 in Google Gen AI Hackathon 2024.</p>
         <div class="card-links">
-          <a href="https://github.com/vinayak1729-web/Chikitsa_your_Mental_health-welbeing" target="_blank"><i class="fab fa-github"></i></a>
+          <a href="https://github.com/vinayak1729-web/Chikitsa_your_Mental_health-welbeing" target="_blank"><i
+              class="fab fa-github"></i></a>
         </div>
         <div class="tech-tags">
           <span class="tech">Python</span>
@@ -975,8 +1047,10 @@
         </div>
         <p>AI mathematical intuition engine inspired by Ramanujan, using Gemma 3 for deep reasoning and Vedic Maths.</p>
         <div class="card-links">
-          <a href="https://github.com/vinayak1729-web/PROJECT-RAMANUJAN" target="_blank"><i class="fab fa-github"></i></a>
-          <a href="https://www.kaggle.com/code/vinu1729/project-ramanujan" target="_blank"><i class="fas fa-kaggle"></i></a>
+          <a href="https://github.com/vinayak1729-web/PROJECT-RAMANUJAN" target="_blank"><i
+              class="fab fa-github"></i></a>
+          <a href="https://www.kaggle.com/code/vinu1729/project-ramanujan" target="_blank"><i
+              class="fas fa-kaggle"></i></a>
         </div>
         <div class="tech-tags">
           <span class="tech">Python</span>
@@ -1014,9 +1088,11 @@
           <h3><i class="fas fa-baseball-ball"></i> Pitcher Perfect</h3>
           <span class="status" data-status="Completed">Completed</span>
         </div>
-        <p>AI-powered MLB analytics platform with personalized highlights, multilingual support, and interactive team builder.</p>
+        <p>AI-powered MLB analytics platform with personalized highlights, multilingual support, and interactive team
+          builder.</p>
         <div class="card-links">
-          <a href="https://github.com/vinayak1729-web/pitcherr_perfect_final" target="_blank"><i class="fab fa-github"></i></a>
+          <a href="https://github.com/vinayak1729-web/pitcherr_perfect_final" target="_blank"><i
+              class="fab fa-github"></i></a>
           <a href="https://pitcherrrperfect-final.onrender.com/" target="_blank"><i class="fas fa-globe"></i></a>
           <a href="https://youtu.be/-ELvMqja4uw?si=JhBT3p2oq5kUMwl9" target="_blank"><i class="fab fa-youtube"></i></a>
         </div>
@@ -1033,7 +1109,8 @@
           <h3><i class="fas fa-tools"></i> Skill Forge</h3>
           <span class="status" data-status="In Progress">In Progress</span>
         </div>
-        <p>Adaptive skilling platform for Indian youth with offline-first PWA, gamified learning, and AI-driven evaluations.</p>
+        <p>Adaptive skilling platform for Indian youth with offline-first PWA, gamified learning, and AI-driven
+          evaluations.</p>
         <div class="card-links">
           <a href="https://github.com/vinayak1729-web/skill-forge" target="_blank"><i class="fab fa-github"></i></a>
         </div>
@@ -1052,8 +1129,10 @@
         </div>
         <p>Web app for NASA Space Apps Challenge 2022 visualizing ISS tracks, ground stations, and space debris.</p>
         <div class="card-links">
-          <a href="https://github.com/vinayak1729-web/3D_ISS_Tracker-main" target="_blank"><i class="fab fa-github"></i></a>
-          <a href="https://vinayak1729-web.github.io/3D_ISS_Tracker-main/" target="_blank"><i class="fas fa-globe"></i></a>
+          <a href="https://github.com/vinayak1729-web/3D_ISS_Tracker-main" target="_blank"><i
+              class="fab fa-github"></i></a>
+          <a href="https://vinayak1729-web.github.io/3D_ISS_Tracker-main/" target="_blank"><i
+              class="fas fa-globe"></i></a>
         </div>
         <div class="tech-tags">
           <span class="tech">JavaScript</span>
@@ -1174,10 +1253,137 @@
       themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
     }
 
+    // Canvas Animation Setup
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+    let animationFrameId;
+
+    // Set canvas size
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    // Dark Mode: Space Invaders Animation
+    const aliens = [];
+    const alienSize = 30;
+    const alienSpeed = 2;
+    const alienCount = 10;
+
+    function createAliens() {
+      aliens.length = 0;
+      for (let i = 0; i < alienCount; i++) {
+        aliens.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          vx: (Math.random() - 0.5) * alienSpeed * 2,
+          vy: (Math.random() - 0.5) * alienSpeed * 2,
+        });
+      }
+    }
+
+    function drawAlien(x, y) {
+      ctx.fillStyle = '#00eaff'; // Dark mode secondary color
+      ctx.beginPath();
+      ctx.fillRect(x - alienSize / 2, y - alienSize / 2, alienSize, alienSize / 3); // Body
+      ctx.fillRect(x - alienSize / 3, y - alienSize / 6, alienSize / 6, alienSize / 3); // Left eye
+      ctx.fillRect(x + alienSize / 6, y - alienSize / 6, alienSize / 6, alienSize / 3); // Right eye
+      ctx.fillRect(x - alienSize / 3, y + alienSize / 6, alienSize / 6, alienSize / 6); // Left leg
+      ctx.fillRect(x + alienSize / 6, y + alienSize / 6, alienSize / 6, alienSize / 6); // Right leg
+      ctx.closePath();
+    }
+
+    function updateAliens() {
+      aliens.forEach(alien => {
+        alien.x += alien.vx;
+        alien.y += alien.vy;
+        if (alien.x < 0 || alien.x > canvas.width - alienSize) alien.vx *= -1;
+        if (alien.y < 0 || alien.y > canvas.height - alienSize) alien.vy *= -1;
+        drawAlien(alien.x, alien.y);
+      });
+    }
+
+    // Light Mode: Falling Blocks Animation
+    const blocks = [];
+    const blockSize = 20;
+    const blockSpeed = 3;
+    const blockCount = 15;
+
+    function createBlocks() {
+      blocks.length = 0;
+      for (let i = 0; i < blockCount; i++) {
+        blocks.push({
+          x: Math.random() * canvas.width,
+          y: -blockSize,
+          vy: blockSpeed + Math.random() * 2,
+          type: Math.floor(Math.random() * 4) // 0: square, 1: L, 2: T, 3: line
+        });
+      }
+    }
+
+    function drawBlock(block) {
+      ctx.fillStyle = block.type % 2 === 0 ? '#0298fc' : '#00d4ff'; // Light mode colors
+      ctx.beginPath();
+      switch (block.type) {
+        case 0: // Square
+          ctx.fillRect(block.x, block.y, blockSize, blockSize);
+          break;
+        case 1: // L-shape
+          ctx.fillRect(block.x, block.y, blockSize, blockSize * 2);
+          ctx.fillRect(block.x + blockSize, block.y + blockSize, blockSize, blockSize);
+          break;
+        case 2: // T-shape
+          ctx.fillRect(block.x, block.y, blockSize * 3, blockSize);
+          ctx.fillRect(block.x + blockSize, block.y + blockSize, blockSize, blockSize);
+          break;
+        case 3: // Line
+          ctx.fillRect(block.x, block.y, blockSize, blockSize * 4);
+          break;
+      }
+      ctx.closePath();
+    }
+
+    function updateBlocks() {
+      blocks.forEach(block => {
+        block.y += block.vy;
+        if (block.y > canvas.height) {
+          block.y = -blockSize * 4;
+          block.x = Math.random() * canvas.width;
+          block.type = Math.floor(Math.random() * 4);
+        }
+        drawBlock(block);
+      });
+    }
+
+    // Animation Loop
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      if (body.classList.contains('dark-mode')) {
+        updateAliens();
+      } else {
+        updateBlocks();
+      }
+      animationFrameId = requestAnimationFrame(animate);
+    }
+
+    // Initialize animations
+    createAliens();
+    createBlocks();
+    animate();
+
+    // Theme toggle with animation control
     themeToggle.addEventListener('click', () => {
       body.classList.toggle('dark-mode');
       themeToggle.innerHTML = body.classList.contains('dark-mode') ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
       localStorage.setItem('theme', body.classList.contains('dark-mode') ? 'dark' : 'light');
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      if (body.classList.contains('dark-mode')) {
+        createAliens();
+      } else {
+        createBlocks();
+      }
     });
 
     // Mobile Menu Toggle
@@ -1219,4 +1425,5 @@
     });
   </script>
 </body>
+
 </html>
