@@ -1,0 +1,351 @@
+{
+  "personal": {
+    "name": "Vinayak Raju Shinde",
+    "title": "AI Engineer | Data Scientist | Quantitative Researcher",
+    "tagline": "Building intelligent systems that solve real-world problems",
+    "email": "vinayak.r.shinde.1729@gmail.com",
+    "phone": "+91-8879785320",
+    "location": "Mumbai, Maharashtra, India",
+    "avatar": "https://i.imgur.com/iczRZC2.png",
+    "bio": "Passionate AI Engineer and Data Scientist with expertise in building scalable machine learning systems, quantitative trading strategies, and GenAI applications. Currently working as Jr. AI Engineer at Bixware Technologies, developing cutting-edge LLM-powered solutions. Strong background in competitive programming (CodeForces 1082), quantitative research, and system design.",
+    "social": {
+      "github": "https://github.com/vinayak1729-web",
+      "linkedin": "https://www.linkedin.com/in/vinayak-shinde-1aa968223/",
+      "kaggle": "https://www.kaggle.com/",
+      "codeforces": "https://codeforces.com/profile/vinayak1729"
+    }
+  },
+  "stats": [
+    {"label": "CodeForces Rating", "value": "1082", "icon": "🎯"},
+    {"label": "CGPA", "value": "8.43/10", "icon": "🎓"},
+    {"label": "Hackathon Wins", "value": "3+", "icon": "🏆"},
+    {"label": "Projects Built", "value": "50+", "icon": "⚡"}
+  ],
+  "experience": [
+    {
+      "id": 1,
+      "company": "Bixware Technologies",
+      "role": "Jr AI Engineer",
+      "location": "Vashi, Mumbai",
+      "duration": "Jun 2025 – Present",
+      "type": "Full-time",
+      "achievements": [
+        "Developed scalable chatbot using Gemini LLM, LangChain, VectorDB for information retrieval, and React frontend, reducing data retrieval time by 50% through multi-agent analysis",
+        "Built ELT/ETL pipelines with SQL, Pandas, and Databricks, enhancing real-time analytics for retail clients",
+        "Implemented distributed systems architecture for actionable insights generation"
+      ],
+      "technologies": ["Gemini LLM", "LangChain", "VectorDB", "React", "SQL", "Pandas", "Databricks", "Python"]
+    },
+    {
+      "id": 2,
+      "company": "JPMorgan Chase & Co.",
+      "role": "Quantitative Research Job Simulation",
+      "location": "Virtual",
+      "duration": "Oct 2025",
+      "type": "Simulation",
+      "achievements": [
+        "Completed quantitative research simulation on Forage platform, analyzing loan book to estimate customer probability of default",
+        "Applied dynamic programming to convert FICO scores into categorical data for default prediction",
+        "Enhanced data analysis and predictive modeling skills using advanced Python in real-world banking context"
+      ],
+      "technologies": ["Python", "Dynamic Programming", "Financial Modeling", "Predictive Analytics"]
+    },
+    {
+      "id": 3,
+      "company": "Engagely.ai (BCG Project)",
+      "role": "Implementation Engineer Intern",
+      "location": "Mumbai, India",
+      "duration": "Jan 2025 – Mar 2025",
+      "type": "Internship",
+      "achievements": [
+        "Developed scalable WhatsApp bot with Flask APIs, boosting engagement by 35%",
+        "Designed CI/CD containerized ETL pipelines with Databricks, improving real-time analytics",
+        "Optimized GenAI NLP workflows, reducing latency by 40%"
+      ],
+      "technologies": ["Flask", "Databricks", "GenAI", "NLP", "WhatsApp API", "Docker", "CI/CD"]
+    },
+    {
+      "id": 4,
+      "company": "Enovators-Hub",
+      "role": "Robotics Tutor",
+      "location": "Mumbai, India",
+      "duration": "2024",
+      "type": "Part-time",
+      "achievements": [
+        "Guided 50+ students in AI-embedded robotics projects",
+        "Led IoT and biomimetic robot builds using Python and microcontrollers",
+        "Developed curriculum for hands-on robotics education"
+      ],
+      "technologies": ["Python", "Arduino", "IoT", "Robotics", "AI"]
+    }
+  ],
+  "projects": [
+    {
+      "id": 1,
+      "title": "Chikitsa: AI Mental Health Platform",
+      "category": "AI/ML",
+      "featured": true,
+      "icon": "🧠",
+      "tagline": "Privacy-preserving mental health support powered by cutting-edge AI",
+      "description": "Revolutionary mental health platform combining Facial Expression Recognition (FER) with advanced conversational AI to provide empathetic, personalized mental wellness support while maintaining complete user privacy.",
+      "longDescription": "Chikitsa AI is a groundbreaking platform that democratizes access to mental health support through artificial intelligence. The system uses real-time facial expression analysis to detect emotional states, combined with an AI voice assistant for natural, empathetic interactions. All processing happens with privacy-first architecture, ensuring no personal data is stored. The platform includes gamified progress tracking, crisis detection, and personalized interventions based on cognitive behavioral therapy principles.",
+      "achievements": [
+        "Ranked Top 3 in Google GenAI Hackathon 2024 (38,000+ participants)",
+        "Achieved 96% accuracy in FER-based mood inference",
+        "Integrated humanities and psychiatry for contextual guidance",
+        "Gamified user behavior analysis using Gemini 2.5 and Gemma3n"
+      ],
+      "technologies": ["Gemini 2.5", "Gemma3n", "TensorFlow", "OpenCV", "Python", "Flask", "React", "WebRTC", "NLP", "Computer Vision"],
+      "metrics": {
+        "accuracy": "96%",
+        "participants": "38,000+",
+        "rank": "Top 3"
+      },
+      "links": {
+        "github": "https://github.com/vinayak1729-web/Chikitsa_lite",
+        "youtube": "https://www.youtube.com/"
+      },
+      "duration": "Sep 2024 – Present",
+      "impact": "Provides 24/7 accessible, judgment-free mental health support with zero-knowledge privacy architecture"
+    },
+    {
+      "id": 2,
+      "title": "Quantitative Trading Strategy",
+      "category": "Quant Finance",
+      "featured": true,
+      "icon": "📊",
+      "tagline": "Unsupervised learning approach to algorithmic trading",
+      "description": "Advanced trading algorithms using technical indicators and machine learning to build portfolios that outperform benchmark indices.",
+      "longDescription": "Engineered a comprehensive quantitative trading system using advanced feature engineering and unsupervised learning techniques. The system calculates Garman-Klass volatility for accurate price movement estimation, applies RSI and Bollinger Bands for momentum analysis, and uses K-Means clustering to identify market regimes. Portfolio optimization through Efficient Frontier theory enables risk-adjusted returns that consistently outperform the Nifty-50 benchmark.",
+      "achievements": [
+        "Outperformed Nifty-50 benchmark with optimized portfolio",
+        "Engineered features using Garman-Klass Volatility, RSI, and Bollinger Bands",
+        "Applied K-Means clustering for market regime identification",
+        "Built Efficient Frontier portfolios for optimal risk-return balance"
+      ],
+      "technologies": ["Python", "NumPy", "Pandas", "Scikit-learn", "Matplotlib", "Seaborn", "Financial Analysis"],
+      "metrics": {
+        "benchmark": "Nifty-50",
+        "performance": "Outperformed"
+      },
+      "links": {
+        "colab": "https://colab.research.google.com/"
+      },
+      "duration": "Aug 2025 – Present",
+      "impact": "Demonstrates practical application of ML in quantitative finance with measurable alpha generation"
+    },
+    {
+      "id": 3,
+      "title": "Volatility Curve Prediction",
+      "category": "Quant Finance",
+      "featured": true,
+      "icon": "📈",
+      "tagline": "High-frequency trading volatility prediction engine",
+      "description": "Machine learning pipeline for implied volatility prediction in high-frequency trading environments, achieving industry-leading accuracy.",
+      "longDescription": "Developed a sophisticated quadratic Huber regression pipeline specifically designed for implied volatility prediction in HFT scenarios. The system implements advanced feature scaling, log transformations, and robust regression techniques to handle outliers. Achieved exceptional MSE of 0.000062497, demonstrating the model's precision in volatile market conditions. Ranked highly in NK Securities HFT competition against professional quants.",
+      "achievements": [
+        "Achieved MSE: 0.000062497 in volatility prediction",
+        "Ranked highly in NK Securities HFT competition",
+        "Implemented feature scaling and log-transform optimizations",
+        "Built production-ready regression pipeline"
+      ],
+      "technologies": ["Python", "Scikit-learn", "Pandas", "NumPy", "Regression Models", "Feature Engineering"],
+      "metrics": {
+        "mse": "0.000062497",
+        "competition": "NK Securities HFT"
+      },
+      "links": {
+        "github": "https://github.com/vinayak1729-web"
+      },
+      "duration": "Jun 2025 – Jul 2025",
+      "impact": "Demonstrates ability to build production-grade quantitative models for financial markets"
+    },
+    {
+      "id": 4,
+      "title": "LLM GPU Scheduler",
+      "category": "Systems/AI",
+      "featured": false,
+      "icon": "⚡",
+      "tagline": "GPU-optimized resource allocation for LLM inference",
+      "description": "Intelligent GPU scheduling system for efficient LLM inference with ultra-low latency.",
+      "longDescription": "Developed an intelligent GPU resource allocation system specifically optimized for Large Language Model inference workloads. The scheduler dynamically manages GPU resources across multiple concurrent LLM requests, implementing advanced queuing strategies and memory management. Achieved 0.3-second average latency through careful optimization of GPU kernel launches, memory transfers, and batch processing strategies.",
+      "achievements": [
+        "1st Runner Up at AMDxSPRINT Hackathon",
+        "Achieved 0.3s average latency for LLM inference",
+        "Implemented dynamic GPU resource allocation",
+        "Optimized memory management for concurrent requests"
+      ],
+      "technologies": ["C++", "CUDA", "GPU Programming", "LLM Optimization", "Systems Programming"],
+      "metrics": {
+        "latency": "0.3s",
+        "rank": "1st Runner Up"
+      },
+      "links": {},
+      "duration": "Jul 2025",
+      "impact": "Enables efficient scaling of LLM applications through intelligent resource management"
+    },
+    {
+      "id": 5,
+      "title": "Bharat Browser",
+      "category": "Cybersecurity",
+      "featured": false,
+      "icon": "🔒",
+      "tagline": "AI-driven cybersecurity browser solution",
+      "description": "Privacy-focused browser with AI-powered threat detection and prevention capabilities.",
+      "longDescription": "Developed an AI-driven cybersecurity browser solution that provides enhanced protection against modern cyber threats. The browser implements machine learning models for real-time threat detection, phishing prevention, and malicious script blocking. Includes privacy-enhancing features like advanced tracking prevention and secure DNS. Received MeitY (Ministry of Electronics and Information Technology) recognition for innovation in digital security.",
+      "achievements": [
+        "Received MeitY National Recognition",
+        "Implemented AI-driven threat detection",
+        "Built privacy-enhancing features",
+        "Real-time phishing and malware prevention"
+      ],
+      "technologies": ["Python", "AI/ML", "Cybersecurity", "Browser Development", "Threat Detection"],
+      "metrics": {
+        "recognition": "MeitY Award"
+      },
+      "links": {},
+      "duration": "Mar 2025",
+      "impact": "Enhances digital security for users through intelligent threat prevention"
+    },
+    {
+      "id": 6,
+      "title": "Multi-Agent Chatbot System",
+      "category": "AI/ML",
+      "featured": false,
+      "icon": "🤖",
+      "tagline": "Scalable enterprise chatbot with multi-agent architecture",
+      "description": "Production-grade chatbot system with LangChain, VectorDB, and React frontend for enterprise deployment.",
+      "longDescription": "Architected a scalable enterprise chatbot solution leveraging Gemini LLM with advanced retrieval-augmented generation (RAG) capabilities. The system uses VectorDB for efficient semantic search and information retrieval, LangChain for orchestrating complex AI workflows, and a React frontend for seamless user interactions. Multi-agent architecture enables specialized agents for different tasks, improving response quality and system reliability.",
+      "achievements": [
+        "Reduced data retrieval time by 50%",
+        "Implemented multi-agent analysis architecture",
+        "Built scalable React frontend",
+        "Production deployment for retail clients"
+      ],
+      "technologies": ["Gemini LLM", "LangChain", "VectorDB", "React", "Python", "Flask", "RAG"],
+      "metrics": {
+        "improvement": "50% faster retrieval"
+      },
+      "links": {},
+      "duration": "2025",
+      "impact": "Enables efficient information access and actionable insights for enterprise users"
+    }
+  ],
+  "skills": {
+    "programming": [
+      {"name": "Python", "level": 95, "icon": "🐍"},
+      {"name": "C++", "level": 85, "icon": "⚙️"},
+      {"name": "C", "level": 80, "icon": "🔧"},
+      {"name": "SQL", "level": 90, "icon": "🗄️"}
+    ],
+    "ml_ai": [
+      {"name": "Machine Learning", "level": 95, "icon": "🤖"},
+      {"name": "Deep Learning", "level": 90, "icon": "🧠"},
+      {"name": "NLP", "level": 90, "icon": "💬"},
+      {"name": "Computer Vision", "level": 85, "icon": "👁️"},
+      {"name": "LangChain", "level": 88, "icon": "⛓️"},
+      {"name": "RAG Systems", "level": 87, "icon": "📚"}
+    ],
+    "tools": [
+      {"name": "Flask", "level": 90, "icon": "🌶️"},
+      {"name": "Docker", "level": 85, "icon": "🐳"},
+      {"name": "Git", "level": 90, "icon": "📦"},
+      {"name": "Databricks", "level": 85, "icon": "⚡"},
+      {"name": "GCP (Vertex AI, BigQuery)", "level": 88, "icon": "☁️"},
+      {"name": "Streamlit", "level": 82, "icon": "🎨"}
+    ],
+    "data_science": [
+      {"name": "NumPy", "level": 95, "icon": "🔢"},
+      {"name": "Pandas", "level": 95, "icon": "🐼"},
+      {"name": "Scikit-learn", "level": 92, "icon": "📊"},
+      {"name": "TensorFlow", "level": 85, "icon": "🧮"},
+      {"name": "PyTorch", "level": 83, "icon": "🔥"}
+    ],
+    "computer_science": [
+      {"name": "Data Structures & Algorithms", "level": 90, "icon": "🌳"},
+      {"name": "System Design", "level": 88, "icon": "🏗️"},
+      {"name": "Operating Systems", "level": 82, "icon": "💻"},
+      {"name": "Networks", "level": 80, "icon": "🌐"}
+    ],
+    "mathematics": [
+      {"name": "Probability & Statistics", "level": 92, "icon": "📈"},
+      {"name": "Linear Algebra", "level": 90, "icon": "🔤"},
+      {"name": "Calculus", "level": 88, "icon": "∫"},
+      {"name": "Optimization", "level": 87, "icon": "⬆️"}
+    ],
+    "models": [
+      {"name": "Gemini", "icon": "✨"},
+      {"name": "OpenAI GPT", "icon": "🤖"},
+      {"name": "Grok 3", "icon": "🚀"},
+      {"name": "Gemma (3n, 3)", "icon": "💎"},
+      {"name": "Mistral", "icon": "🌪️"}
+    ]
+  },
+  "education": [
+    {
+      "degree": "B.Eng. Computer Engineering",
+      "institution": "Mumbai University",
+      "location": "Mumbai, India",
+      "duration": "2021 – 2025",
+      "cgpa": "8.43/10",
+      "achievements": [
+        "Strong foundation in algorithms, data structures, and system design",
+        "Specialized in AI/ML and quantitative computing",
+        "Active participant in competitive programming"
+      ]
+    },
+    {
+      "degree": "HSC (12th)",
+      "institution": "Maharashtra State Board",
+      "location": "Maharashtra, India",
+      "duration": "2021",
+      "percentage": "88% (Mathematics: 92%)",
+      "achievements": []
+    },
+    {
+      "degree": "SSC (10th)",
+      "institution": "Maharashtra State Board",
+      "location": "Maharashtra, India",
+      "duration": "2019",
+      "percentage": "82% (Mathematics: 95%)",
+      "achievements": []
+    }
+  ],
+  "achievements": [
+    {
+      "title": "1st Runner Up - AMDxSPRINT Hackathon",
+      "date": "July 2025",
+      "description": "GPU-optimized LLM scheduler achieving 0.3s latency",
+      "icon": "🥈",
+      "category": "Hackathon"
+    },
+    {
+      "title": "Top 3 - Google GenAI Hackathon",
+      "date": "Sept 2024",
+      "description": "Chikitsa AI Mental Health Platform (38,000+ participants)",
+      "icon": "🏆",
+      "category": "Hackathon"
+    },
+    {
+      "title": "MeitY National Recognition",
+      "date": "Mar 2025",
+      "description": "Bharat Browser - AI-driven cybersecurity solution",
+      "icon": "🛡️",
+      "category": "Award"
+    },
+    {
+      "title": "Published Research",
+      "date": "Apr 2025",
+      "description": "My Mental Health Assistant Guide: Step Towards AGI (SCOE Conference)",
+      "icon": "📄",
+      "category": "Research"
+    },
+    {
+      "title": "Kaggle Competition - Volatility Prediction",
+      "date": "2025",
+      "description": "Nk Securites Competition (MSE: 0.00006249)",
+      "icon": "📊",
+      "category": "Competition"
+    }
+  ]
+}
