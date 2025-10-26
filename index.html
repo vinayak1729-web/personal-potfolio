@@ -79,6 +79,31 @@
     .top    { background-color: #D2691E; transform: rotateX(90deg) translateZ(40px); }
     .bottom { background-color: #654321; transform: rotateX(-90deg) translateZ(40px); }
     
+    /* Avatar/Initials */
+    .name-initials {
+      width: 150px;
+      height: 150px;
+      margin: 0 auto 30px auto;
+      background: linear-gradient(145deg, #4CAF50, #388E3C);
+      border: 5px solid #1B5E20;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3.5em;
+      font-weight: 900;
+      color: #FFF;
+      text-shadow: 3px 3px 0 rgba(0,0,0,0.3);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.4), 0 0 30px rgba(76,175,80,0.6);
+      animation: float3d 3s infinite ease-in-out;
+      font-family: 'Press Start 2P', monospace;
+    }
+    
+    @keyframes float3d {
+      0%, 100% { transform: translateY(0) rotateY(0deg); }
+      50% { transform: translateY(-20px) rotateY(10deg); }
+    }
+    
     /* Navigation */
     nav {
       position: sticky;
@@ -146,21 +171,6 @@
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(-30px); }
       to { opacity: 1; transform: translateY(0); }
-    }
-    
-    .avatar {
-      width: 150px;
-      height: 150px;
-      border-radius: 20px;
-      border: 5px solid var(--text-dark);
-      box-shadow: 0 15px 40px rgba(0,0,0,0.4), 0 0 30px rgba(139,195,74,0.6);
-      animation: float3d 3s infinite ease-in-out;
-      margin-bottom: 30px;
-    }
-    
-    @keyframes float3d {
-      0%, 100% { transform: translateY(0) rotateY(0deg); }
-      50% { transform: translateY(-20px) rotateY(10deg); }
     }
     
     .hero h1 {
@@ -673,6 +683,7 @@
       .timeline-item:before { left: -50px; width: 40px; height: 40px; font-size: 1.5em; }
       .projects-grid { grid-template-columns: 1fr; }
       .nav-container { flex-direction: column; gap: 15px; }
+      .name-initials { width: 120px; height: 120px; font-size: 2.5em; }
     }
     
     /* Loading Animation */
@@ -756,7 +767,7 @@
       app.innerHTML = `
         <!-- Hero Section -->
         <section id="home" class="hero">
-          <img src="${data.personal.avatar}" alt="${data.personal.name}" class="avatar">
+          <div class="name-initials">VRS</div>
           <h1 class="pixel-font">${data.personal.name.toUpperCase()}</h1>
           <div class="title">${data.personal.title}</div>
           <p class="tagline">${data.personal.tagline}</p>
@@ -816,11 +827,13 @@
                   </ul>
                 </div>
                 
-                <div class="project-links">
-                  ${Object.entries(project.links).map(([key, url]) => 
-                    `<a href="${url}" target="_blank" class="project-link">${key.toUpperCase()}</a>`
-                  ).join('')}
-                </div>
+                ${Object.keys(project.links).length > 0 ? `
+                  <div class="project-links">
+                    ${Object.entries(project.links).map(([key, url]) => 
+                      `<a href="${url}" target="_blank" class="project-link">${key.toUpperCase()}</a>`
+                    ).join('')}
+                  </div>
+                ` : ''}
               </div>
             `).join('')}
           </div>
