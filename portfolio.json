@@ -6,7 +6,7 @@
     "email": "shindevinayak233@gmail.com",
     "phone": "+91-8879785320",
     "location": "Mumbai, Maharashtra, India",
-    "bio": "Passionate AI Engineer and Data Scientist with expertise in building scalable machine learning systems, quantitative trading strategies, and GenAI applications. Currently working as Jr. AI Engineer at Bixware Technologies, developing cutting-edge LLM-powered solutions. Strong background in competitive programming (CodeForces 1082), quantitative research, and system design. Active hackathon participant with 20+ competitions under my belt.",
+    "bio": "Passionate AI Engineer and Data Scientist with expertise in building scalable machine learning systems, quantitative trading strategies, and GenAI applications. Currently working as Jr. AI Engineer at Bixware Technologies, developing cutting-edge LLM-powered solutions. Strong background in competitive programming (CodeForces 1154), quantitative research, and system design. Active hackathon participant with 20+ competitions under my belt.",
     "social": {
       "github": "https://github.com/vinayak1729-web",
       "linkedin": "https://www.linkedin.com/in/vinayak-shinde-1aa968223/",
@@ -15,7 +15,7 @@
     }
   },
   "stats": [
-    {"label": "CodeForces Rating", "value": "1082", "icon": "🎯"},
+    {"label": "CodeForces Rating", "value": "1154 ", "icon": "🎯"},
     {"label": "CGPA", "value": "8.43/10", "icon": "🎓"},
     {"label": "Hackathons", "value": "20+", "icon": "🏆"},
     {"label": "Projects Built", "value": "50+", "icon": "⚡"}
@@ -342,7 +342,7 @@
       "achievements": [
         "Strong foundation in algorithms, data structures, and system design",
         "Specialized in AI/ML and quantitative computing",
-        "Active participant in competitive programming (CodeForces Rating: 1082)",
+        "Active participant in competitive programming (CodeForces Rating: 1154 )",
         "Participated in 20+ hackathons across various domains"
       ]
     },
