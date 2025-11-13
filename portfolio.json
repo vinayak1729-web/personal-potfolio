@@ -1,24 +1,26 @@
 {
   "personal": {
     "name": "Vinayak Raju Shinde",
-    "title": "AI Engineer | Data Scientist | Quantitative Researcher",
+    "title": "AI Engineer | Data Scientist | Quantitative Researcher | Content Creator",
     "tagline": "Building intelligent systems that solve real-world problems",
     "email": "shindevinayak233@gmail.com",
     "phone": "+91-8879785320",
     "location": "Mumbai, Maharashtra, India",
-    "bio": "Passionate AI Engineer and Data Scientist with expertise in building scalable machine learning systems, quantitative trading strategies, and GenAI applications. Currently working as Jr. AI Engineer at Bixware Technologies, developing cutting-edge LLM-powered solutions. Strong background in competitive programming (CodeForces 1154), quantitative research, and system design. Active hackathon participant with 20+ competitions under my belt.",
+    "bio": "Passionate AI Engineer and Data Scientist with expertise in building scalable machine learning systems, quantitative trading strategies, and GenAI applications. Currently working as Jr. AI Engineer at Bixware Technologies, developing cutting-edge LLM-powered solutions. Strong background in competitive programming (CodeForces 1154), quantitative research, and system design. Active hackathon participant with 20+ competitions under my belt. Creator of 'The Algorithmic Forge' YouTube channel, educating aspiring quants on algorithmic trading, ML, and Python.",
     "social": {
       "github": "https://github.com/vinayak1729-web",
       "linkedin": "https://www.linkedin.com/in/vinayak-shinde-1aa968223/",
       "kaggle": "https://www.kaggle.com/vinu1729/",
-      "codeforces": "https://codeforces.com/profile/vinayak1729"
+      "codeforces": "https://codeforces.com/profile/vinayak1729",
+      "youtube": "https://www.youtube.com/@TheAlgorithmicForge"
     }
   },
   "stats": [
     {"label": "CodeForces Rating", "value": "1154 ", "icon": "🎯"},
     {"label": "CGPA", "value": "8.43/10", "icon": "🎓"},
     {"label": "Hackathons", "value": "20+", "icon": "🏆"},
-    {"label": "Projects Built", "value": "50+", "icon": "⚡"}
+    {"label": "Projects Built", "value": "50+", "icon": "⚡"},
+    {"label": "YouTube Subscribers", "value": "Growing", "icon": "📺"}
   ],
   "experience": [
     {
@@ -37,6 +39,21 @@
     },
     {
       "id": 2,
+      "company": "The Algorithmic Forge",
+      "role": "YouTube Content Creator & Educator",
+      "location": "Remote",
+      "duration": "2024 – Present",
+      "type": "Content Creation",
+      "achievements": [
+        "Created comprehensive educational content on quantitative research, algorithmic trading, ML, Python, and robotics",
+        "Developed full playlist series on quantitative research methodologies and implementations",
+        "Teaching practical applications of machine learning in financial markets",
+        "Building community of aspiring quantitative researchers and algorithmic traders"
+      ],
+      "technologies": ["Python", "Quantitative Finance", "Machine Learning", "Algorithmic Trading", "Educational Content"]
+    },
+    {
+      "id": 3,
       "company": "JPMorgan Chase & Co.",
       "role": "Quantitative Research Job Simulation",
       "location": "Virtual",
@@ -50,7 +67,7 @@
       "technologies": ["Python", "Dynamic Programming", "Financial Modeling", "Predictive Analytics"]
     },
     {
-      "id": 3,
+      "id": 4,
       "company": "Engagely.ai (BCG Project)",
       "role": "Implementation Engineer Intern",
       "location": "Mumbai, India",
@@ -64,7 +81,7 @@
       "technologies": ["Flask", "Databricks", "GenAI", "NLP", "WhatsApp API", "Docker", "CI/CD"]
     },
     {
-      "id": 4,
+      "id": 5,
       "company": "Enovators-Hub",
       "role": "Robotics Tutor",
       "location": "Mumbai, India",
@@ -133,29 +150,43 @@
     },
     {
       "id": 3,
-      "title": "Unsupervised Learning Trading Strategy",
+      "title": "ML Momentum: Unsupervised Learning Trading Strategy",
       "category": "Quant Finance",
       "featured": true,
       "icon": "📊",
-      "tagline": "Machine learning approach to algorithmic trading",
-      "description": "Advanced trading algorithms using technical indicators and unsupervised machine learning to build portfolios that outperform benchmark indices.",
-      "longDescription": "Engineered a comprehensive quantitative trading system using advanced feature engineering and unsupervised learning techniques. The system calculates Garman-Klass volatility for accurate price movement estimation, applies RSI and Bollinger Bands for momentum analysis, and uses K-Means clustering to identify market regimes. Portfolio optimization through Efficient Frontier theory enables risk-adjusted returns that consistently outperform the Nifty-50 benchmark.",
+      "tagline": "Machine learning approach to algorithmic trading with exceptional alpha generation",
+      "description": "Advanced trading algorithms using technical indicators and unsupervised machine learning to build portfolios that significantly outperform benchmark indices with superior risk-adjusted returns.",
+      "longDescription": "Engineered a comprehensive quantitative trading system using advanced feature engineering and unsupervised learning techniques. The system calculates Garman-Klass volatility for accurate price movement estimation, applies RSI and Bollinger Bands for momentum analysis, and uses K-Means clustering to identify market regimes. Portfolio optimization through Efficient Frontier theory enables risk-adjusted returns that consistently outperform the Nifty-50 benchmark. Comprehensive backtesting across 85 months with 58 trading days demonstrates robust performance with a Sharpe ratio of 3.38.",
       "achievements": [
-        "Outperformed Nifty-50 benchmark with optimized portfolio",
+        "Achieved 73.48% annual return vs. Nifty-50's 34.31% (39.17% outperformance)",
+        "Generated 17.44% total return compared to benchmark's 7.73% (9.71% alpha)",
+        "Attained exceptional Sharpe ratio of 3.38 vs. benchmark's 2.06",
+        "Maintained controlled volatility at 21.75% with max drawdown of -6.19%",
+        "Backtested across 85 months with 58 trading days for robust validation",
         "Engineered features using Garman-Klass Volatility, RSI, and Bollinger Bands",
         "Applied K-Means clustering for market regime identification",
-        "Built Efficient Frontier portfolios using Python, NumPy, and Pandas"
+        "Built Efficient Frontier portfolios with optimal risk-return profiles"
       ],
-      "technologies": ["Python", "NumPy", "Pandas", "Scikit-learn", "K-Means", "Portfolio Optimization"],
+      "technologies": ["Python", "NumPy", "Pandas", "Scikit-learn", "K-Means", "Portfolio Optimization", "YFinance"],
       "metrics": {
-        "benchmark": "Nifty-50",
-        "performance": "Outperformed"
+        "total_return": "17.44%",
+        "annual_return": "73.48%",
+        "sharpe_ratio": "3.38",
+        "volatility": "21.75%",
+        "max_drawdown": "-6.19%",
+        "outperformance": "39.17%",
+        "backtest_period": "85 months"
+      },
+      "portfolio_weights": {
+        "SBIN": "50.00%",
+        "RELIANCE": "33.30%",
+        "INFY": "16.70%"
       },
       "links": {
         "colab": "https://colab.research.google.com/drive/1evk4bpWyVP1CxfTBf8sXQa2ta-pl6LPT?usp=sharing"
       },
       "duration": "Aug 2025 – Present",
-      "impact": "Demonstrates practical application of ML in quantitative finance with measurable alpha generation"
+      "impact": "Demonstrates practical application of ML in quantitative finance with measurable alpha generation and superior risk-adjusted returns"
     },
     {
       "id": 4,
@@ -288,13 +319,25 @@
       {"name": "C", "level": 80, "icon": "🔧"},
       {"name": "SQL", "level": 90, "icon": "🗄️"}
     ],
+    "quantitative_research": [
+      {"name": "Portfolio Optimization", "level": 95, "icon": "📈"},
+      {"name": "Risk Management", "level": 92, "icon": "🛡️"},
+      {"name": "Backtesting & Simulation", "level": 93, "icon": "⏮️"},
+      {"name": "Technical Analysis", "level": 90, "icon": "📊"},
+      {"name": "Market Regime Detection", "level": 88, "icon": "🔍"},
+      {"name": "Volatility Modeling", "level": 90, "icon": "📉"},
+      {"name": "Alpha Generation", "level": 89, "icon": "💰"},
+      {"name": "Sharpe Ratio Optimization", "level": 92, "icon": "🎯"}
+    ],
     "ml_ai": [
       {"name": "Regression & Classification", "level": 95, "icon": "🤖"},
       {"name": "Feature Engineering", "level": 92, "icon": "🔨"},
       {"name": "NLP", "level": 90, "icon": "💬"},
       {"name": "Ensemble Methods", "level": 88, "icon": "🌳"},
       {"name": "LangChain", "level": 88, "icon": "⛓️"},
-      {"name": "RAG Systems", "level": 87, "icon": "📚"}
+      {"name": "RAG Systems", "level": 87, "icon": "📚"},
+      {"name": "Unsupervised Learning", "level": 93, "icon": "🔮"},
+      {"name": "K-Means Clustering", "level": 91, "icon": "🎲"}
     ],
     "tools": [
       {"name": "Flask", "level": 90, "icon": "🌶️"},
@@ -310,7 +353,8 @@
       {"name": "Pandas", "level": 95, "icon": "🐼"},
       {"name": "Scikit-learn", "level": 92, "icon": "📊"},
       {"name": "SciPy", "level": 88, "icon": "🔬"},
-      {"name": "Optimization", "level": 87, "icon": "📈"}
+      {"name": "Optimization", "level": 87, "icon": "📈"},
+      {"name": "YFinance", "level": 90, "icon": "💹"}
     ],
     "computer_science": [
       {"name": "Data Structures & Algorithms", "level": 90, "icon": "🌳"},
@@ -322,7 +366,8 @@
       {"name": "Probability & Statistics", "level": 92, "icon": "📈"},
       {"name": "Linear Algebra", "level": 90, "icon": "🔤"},
       {"name": "Calculus", "level": 88, "icon": "∫"},
-      {"name": "Optimization", "level": 87, "icon": "⬆️"}
+      {"name": "Optimization", "level": 87, "icon": "⬆️"},
+      {"name": "Stochastic Processes", "level": 85, "icon": "🎲"}
     ],
     "models": [
       {"name": "Gemini 2.5", "icon": "✨"},
@@ -365,6 +410,13 @@
   ],
   "achievements": [
     {
+      "title": "73.48% Annual Returns - ML Momentum Strategy",
+      "date": "Nov 2025",
+      "description": "Achieved 73.48% annual return with Sharpe ratio of 3.38, outperforming Nifty-50 by 39.17%",
+      "icon": "💹",
+      "category": "Quant Finance"
+    },
+    {
       "title": "1st Runner Up - AMDxSPRINT Hackathon",
       "date": "July 2025",
       "description": "GPU-optimized LLM scheduler achieving 0.3s latency",
@@ -400,11 +452,32 @@
       "category": "Competition"
     },
     {
+      "title": "The Algorithmic Forge - YouTube Creator",
+      "date": "2024 - Present",
+      "description": "Educational content on quantitative research, ML, Python, and robotics",
+      "icon": "📺",
+      "category": "Content Creation"
+    },
+    {
       "title": "Active Hackathon Participant",
       "date": "2021 - Present",
       "description": "Participated in 20+ hackathons across AI/ML, IoT, and software development",
       "icon": "🎮",
       "category": "Participation"
     }
-  ]
+  ],
+  "content_creation": {
+    "platform": "YouTube",
+    "channel_name": "The Algorithmic Forge",
+    "channel_url": "https://www.youtube.com/@TheAlgorithmicForge",
+    "focus_areas": [
+      "Quantitative Research",
+      "Algorithmic Trading",
+      "Machine Learning",
+      "Python Programming",
+      "Robotics"
+    ],
+    "description": "Educational YouTube channel dedicated to teaching aspiring quants and data scientists. Comprehensive playlists covering quantitative research methodologies, algorithmic trading strategies, ML implementations, and Python best practices.",
+    "impact": "Building a community of quantitative researchers and algorithmic traders through high-quality educational content"
+  }
 }
