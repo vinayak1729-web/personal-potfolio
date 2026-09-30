@@ -214,8 +214,8 @@ html { scroll-behavior: smooth; }
     <h1 class="font-serif text-4xl font-semibold leading-[1.05] tracking-tight sm:text-6xl md:text-7xl" data-site="name"></h1>
     <p class="mt-4 max-w-2xl text-lg text-muted-foreground sm:text-xl">
       <span class="text-gradient font-medium">Quantitative Developer &amp; Researcher</span>
-      building the <em class="not-italic text-foreground">kinematics of order books</em> and the
-      <em class="not-italic text-foreground">linear algebra of risk</em> into fast,
+      building <em class="not-italic text-foreground">order-book microstructure signals</em> and the
+      <em class="not-italic text-foreground">portfolio-risk math</em> behind them into fast,
       production-grade trading systems.
     </p>
 
@@ -244,10 +244,10 @@ html { scroll-behavior: smooth; }
           <span class="font-medium text-copper">when that signal should not be traded</span>.
         </p>
         <p class="mt-4 leading-relaxed text-muted-foreground">
-          I started with rule-based option structures and moved steadily toward ideas borrowed from
-          physics and statistics: treating the order book as a system with mass and momentum, measuring
-          whether price is moving with direction or just diffusing, and letting thresholds adapt to the
-          market instead of fixing them by hand.
+          I started with rule-based option structures and moved steadily toward market microstructure
+          and time-series statistics: separating the order flow that's actually moving price from
+          liquidity that's just resting in the book, measuring whether a move has real direction or is
+          just noise, and letting thresholds adapt to the market instead of fixing them by hand.
         </p>
         <p class="mt-4 leading-relaxed text-muted-foreground">
           I ship that research as production software in C++ and Python — deterministic, monitored and
@@ -351,6 +351,8 @@ const SITE = {
   linkedinHandle: 'vinayak-shinde-1aa968223',
   github: 'https://github.com/vinayak1729-web',
   githubHandle: 'vinayak1729-web',
+  codeforces: 'https://codeforces.com/profile/vinayak1729',
+  codeforcesHandle: 'vinayak1729',
   resume: 'https://drive.google.com/file/d/1HDBhcnYVmHKYTq2dk9FSHorfH7Cyj2jM/view',
   youtube: {
     latestId: '9cGGpAp1tUM',
@@ -375,6 +377,7 @@ const ICON = {
   youtube: (c) => svg('<path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><path d="m10 15 5-3-5-3z"/>', c),
   github: (c) => svg('<path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 .5 5 .5 5 .5c-.3 1.15-.3 2.35 0 3.5A5.4 5.4 0 0 0 4 7.5c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/>', c),
   linkedin: (c) => svg('<path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/>', c),
+  codeforces: (c) => svg('<rect x="2" y="14" width="5" height="7" rx="1"/><rect x="9.5" y="8.5" width="5" height="12.5" rx="1"/><rect x="17" y="3" width="5" height="18" rx="1"/>', c),
 };
 
 /* ================= DATA ================= */
@@ -385,14 +388,14 @@ const LINKS = [
 
 const HIGHLIGHTS = [
   'Rebuilt exchange order books in C++ from raw tick-by-tick multicast, on lock-free, core-pinned pipelines',
-  'Designed physics- and statistics-based order-flow signals with adaptive regime filters',
-  '2nd prize at the AMD AI Hackathon and Top 3 in India at Google Gen AI Exchange',
+  'Designed order-flow and regime-detection signals, benchmarked generation over generation on held-out data',
+  '1st runner-up at the AMD AI Hackathon and Top 3 in India at Google Gen AI Exchange',
   'Teaching quant finance on YouTube — The Algorithmic Forge',
 ];
 
 const HACKATHONS = {
   won: [
-    ['2nd Prize', 'AMD AI Hackathon @ IIT · 2025'],
+    ['1st Runner-Up', 'AMD AI Hackathon @ IIT · 2025'],
     ['Top 3 India', 'Google Gen AI Exchange · 2024'],
   ],
   cleared: [
@@ -410,7 +413,7 @@ const FOCUS = [
 
 const EDUCATION = [
   ['B.Eng. Computer Engineering — University of Mumbai', 'CGPA 8.43 / 10 · 2021 – 2025'],
-  ['Self-directed study', 'Stochastic Calculus · Statistical Mechanics · Measure-Theoretic Probability'],
+  ['HSC / SSC Mathematics', '92% · 95%'],
 ];
 
 /*
@@ -420,7 +423,7 @@ const EDUCATION = [
 const ROLES = [
   {
     company: 'Vikabh Securities', title: 'Quantitative Associate', period: 'Dec 2025 — Present',
-    summary: 'I research strategies and own the systems beneath them, from rule-based option structures to physics- and statistics-based readings of the order book, and the low-latency C++ that runs it all live.',
+    summary: 'I research strategies and own the systems beneath them, from rule-based option structures to microstructure- and statistics-based readings of the order book, and the low-latency C++ that runs it all live.',
     cases: [
       {
         area: 'Order-book engine in C++',
@@ -429,22 +432,22 @@ const ROLES = [
         thinking: 'Go to the source, and treat every missed packet as a bug to detect and repair, not ignore.',
       },
       {
-        area: 'Order-flow signal from physics',
-        did: 'Designed a signal that measures who is actively pushing the price, not who is just waiting in the book. It combines a volume-weighted micro-price (the book\'s centre of mass), order-flow imbalance and a drift-to-noise ratio. Flow counts only when price agrees, and it updates in O(1) time on every tick.',
+        area: 'Order-flow and micro-price signal',
+        did: 'Designed a signal that measures who is actively pushing the price, not who is just waiting in the book. It combines a volume-weighted micro-price, order-flow imbalance, and a drift-to-volatility ratio. Flow only counts when price direction agrees with it, and the whole thing updates in O(1) time on every tick.',
         challenge: 'A signal that counted large resting orders was indistinguishable from noise, because a passive or spoofed order looks the same as real buying.',
-        thinking: 'Treat the book like a physical system: what matters is what moves, not what sits.',
+        thinking: 'What matters is what\'s actively moving the price, not what\'s just sitting in the book.',
       },
       {
         area: 'Regime filters: when not to trade',
-        did: 'Built filters that tell a real trend from choppy noise, using displacement energy, path efficiency, velocity and acceleration, plus wavelet analysis of volatility. Thresholds adapt to recent conditions using only past data (no look-ahead), and several bars must confirm before a regime switches.',
+        did: 'Built filters that tell a real trend from choppy noise, using realized-variance and trend-efficiency features (a Kaufman-style efficiency ratio), plus wavelet decomposition of volatility into slow-moving and fast-moving components. Thresholds adapt to recent conditions using only past data (no look-ahead), and several bars must confirm before a regime switches.',
         challenge: 'Good signals lost money in choppy markets, where large movement looked like trend but had no direction.',
-        thinking: 'Measure whether motion is directed or random, and let thresholds adapt instead of fixing them by hand.',
+        thinking: 'Measure whether a move has real direction or is just noise, and let thresholds adapt instead of fixing them by hand.',
       },
       {
-        area: 'Reversal model as a spring',
-        did: 'Modelled price as a spring around VWAP. Distance from VWAP, scaled by implied volatility, is stored energy, and volume-weighted speed is moving energy. Trades fire near turning points, when stored energy dominates, with a stop anchored to a VWAP started at entry.',
+        area: 'Mean-reversion model around VWAP',
+        did: 'Built a mean-reversion model that treats intraday price as reverting to VWAP: distance from VWAP (scaled by implied volatility) and volume-weighted momentum are combined into a single turning-point score. Trades fire when that score signals the move is exhausted, with a stop anchored to a VWAP started at entry.',
         challenge: 'Mean-reversion entries came either too early, while price was still running, or too late.',
-        thinking: 'Near a turning point almost all the energy is stored and hardly any is in motion.',
+        thinking: 'Most of a move is already priced in by the time momentum starts fading — that fade is the signal to look for.',
       },
       {
         area: 'Option structures with comparable risk',
@@ -505,13 +508,23 @@ const PROJECTS = [
     tags: ['Python', 'DSL', 'Backtesting'], href: 'https://pypi.org/project/QuantResearch/',
   },
   {
-    name: 'IV Surface Prediction', tagline: 'NK Securities HFT Competition',
+    name: 'IV Surface Prediction', tagline: 'NK Securities HFT Competition · Rank 137 globally',
     points: [
       'Quadratic Huber regression across moneyness and tenor to predict the implied-volatility surface.',
-      'Achieved MSE of 6.25×10⁻⁵ via hyperparameter optimisation and k-fold cross-validation.',
+      'Finished 137th globally, tuned via hyperparameter optimisation and k-fold cross-validation.',
       'Engineered 40+ derivative features — delta-adjusted ratios, vega exposures, gamma surfaces.',
     ],
-    tags: ['scikit-learn', 'SciPy', 'Options'], href: 'https://github.com/vinayak1729-web',
+    tags: ['scikit-learn', 'SciPy', 'Options'],
+    href: 'https://github.com/vinayak1729-web/Volatility-Curve-Prediction--NK-Securities-HFT-',
+  },
+  {
+    name: 'IMC Prosperity', tagline: 'Global algorithmic trading challenge · Rank 172 in India, 981 globally',
+    points: [
+      'Built an inventory-aware market maker around a volume-weighted fair price for a multi-product order book.',
+      'Built an options market maker pricing from a fitted volatility smile with delta hedging.',
+      'A post-mortem on a losing trend-fading position led directly to the regime-filtering work in my current role.',
+    ],
+    tags: ['Market Making', 'Options', 'Python'], href: 'https://prosperity.imc.com/',
   },
   {
     name: 'Chikitsa Lite', tagline: 'Offline-first health AI · Gemma 3n',
@@ -536,7 +549,7 @@ const PROJECTS = [
 
 const AWARDS = [
   {
-    badge: '2nd Prize', event: 'AMD AI Hackathon · IIT', year: '2025',
+    badge: '1st Runner-Up', event: 'AMD AI Hackathon · IIT', year: '2025',
     project: 'Synapse — autonomous meeting scheduler',
     problem: 'Corporate teams lose hours every month to back-and-forth emails just to find a meeting slot.',
     points: [
@@ -630,7 +643,7 @@ const GROUPS = [
   ['Systems', ['Lock-free (SPSC)', 'Memory pools', 'UDP multicast', 'ZeroMQ', 'WebSocket', 'Binary serialization']],
   ['ML & Data', ['PyTorch', 'TensorFlow', 'scikit-learn', 'NumPy / Pandas', 'DuckDB / QuestDB', 'LangChain / RAG']],
   ['Infra', ['Docker', 'GCP (Vertex, BigQuery)', 'Databricks', 'FastAPI', 'Redis', 'CI/CD']],
-  ['Risk & Derivatives', ['Iron Condor / BWB', 'Delta hedging', 'ATR / Garman-Klass', 'Econophysics', 'VaR / CVaR', 'Walk-forward testing']],
+  ['Risk & Derivatives', ['Iron Condor / BWB', 'Delta hedging', 'ATR / Garman-Klass', 'Mean reversion', 'VaR / CVaR', 'Walk-forward testing']],
 ];
 
 const CHAPTERS = [
@@ -741,6 +754,7 @@ $('#highlights').innerHTML = HIGHLIGHTS.map((h) =>
 $('#hero-socials').innerHTML = [
   ['github', SITE.github, 'GitHub'],
   ['linkedin', SITE.linkedin, 'LinkedIn'],
+  ['codeforces', SITE.codeforces, 'Codeforces'],
   ['youtube', SITE.youtube.channelUrl, 'YouTube'],
   ['mail', `mailto:${SITE.email}`, 'Email'],
 ].map(([icon, href, label]) =>
@@ -766,6 +780,7 @@ $('#stats').innerHTML = [
   statShell(statTop('8.43', 'CGPA · B.Eng Computer Engineering', 'University of Mumbai · 2021–2025')),
   `<a href="${SITE.youtube.channelUrl}" target="_blank" rel="noopener noreferrer" class="block h-full">${statShell(statTop('YouTube', 'The Algorithmic Forge', 'Linear algebra → tradable strategies'))}</a>`,
   `<a href="https://pypi.org/project/QuantResearch/" target="_blank" rel="noopener noreferrer" class="block h-full">${statShell(statTop('v2.5', 'QuantResearch library on PyPI', 'Python · DSL · backtesting engine'))}</a>`,
+  `<a href="${SITE.codeforces}" target="_blank" rel="noopener noreferrer" class="block h-full">${statShell(statTop('1116', 'Codeforces rating', 'Actively training toward 1800+'))}</a>`,
 ].join('');
 
 /* --- About --- */
@@ -861,9 +876,9 @@ $('#chapters').outerHTML = `<div class="mt-5">${bulletList(CHAPTERS)}</div>`;
 /* --- Contact --- */
 $('#channels').innerHTML = [
   ['mail', 'Email', SITE.email, `mailto:${SITE.email}`],
-  ['mail', 'Alternate email', SITE.email2, `mailto:${SITE.email2}`],
   ['linkedin', 'LinkedIn', SITE.linkedinHandle, SITE.linkedin],
   ['github', 'GitHub', SITE.githubHandle, SITE.github],
+  ['codeforces', 'Codeforces', SITE.codeforcesHandle, SITE.codeforces],
   ['youtube', 'YouTube', SITE.youtube.handle, SITE.youtube.channelUrl],
 ].map(([icon, label, value, href]) => `
   <a href="${href}" ${ext(href)} class="glass glass-hover group flex min-w-0 flex-col gap-2 rounded-2xl p-5">
