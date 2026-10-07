@@ -148,28 +148,48 @@ section{padding:92px clamp(18px,5vw,60px); max-width:1220px; margin:0 auto;}
 @media (max-width:700px){.section-sub{display:none;}}
 .section-lede{font-size:15px; line-height:1.75; color:var(--ink-1); max-width:760px; margin-bottom:36px;}
 
-/* ---------- blob profile photo ---------- */
+/* ---------- sun-themed profile photo ---------- */
 .blob-wrap{
   display:flex; align-items:center; justify-content:center;
   margin-bottom:28px;
+  position:relative;
 }
 .blob-photo{
   position:relative; width:220px; height:220px;
 }
+/* outer corona — warm rotating glow */
 .blob-photo::before{
-  content:''; position:absolute; inset:-12px;
-  background:linear-gradient(135deg, var(--accent-bright), var(--accent-2), var(--accent));
+  content:''; position:absolute; inset:-28px; z-index:0;
+  background:conic-gradient(
+    from 0deg,
+    rgba(255,184,31,0.55),
+    rgba(255,140,0,0.15),
+    rgba(255,184,31,0.55),
+    rgba(255,214,110,0.10),
+    rgba(255,184,31,0.55)
+  );
+  border-radius:60% 40% 30% 70% / 60% 30% 70% 40%;
+  animation:blob-morph 8s ease-in-out infinite, sun-corona 20s linear infinite;
+  filter:blur(16px);
+}
+/* inner warm ring — tighter glow */
+.blob-photo::after{
+  content:''; position:absolute; inset:-8px; z-index:0;
+  background:linear-gradient(145deg, var(--accent-bright), var(--accent), rgba(255,184,31,0.3));
   border-radius:60% 40% 30% 70% / 60% 30% 70% 40%;
   animation:blob-morph 8s ease-in-out infinite;
-  opacity:0.45;
-  filter:blur(18px);
+  opacity:0.7;
+  filter:blur(6px);
 }
 .blob-photo img{
   width:100%; height:100%; object-fit:cover;
   border-radius:60% 40% 30% 70% / 60% 30% 70% 40%;
   animation:blob-morph 8s ease-in-out infinite;
-  border:3px solid var(--glass-border);
-  box-shadow:0 12px 40px -12px var(--shadow-b);
+  border:3px solid rgba(184,124,8,0.7);
+  box-shadow:
+    0 0 20px rgba(255,184,31,0.35),
+    0 0 60px rgba(255,140,0,0.15),
+    0 12px 40px -12px var(--shadow-b);
   position:relative; z-index:1;
 }
 @keyframes blob-morph{
@@ -179,6 +199,7 @@ section{padding:92px clamp(18px,5vw,60px); max-width:1220px; margin:0 auto;}
   75% {border-radius:40% 60% 50% 40% / 60% 40% 60% 30%;}
   100%{border-radius:60% 40% 30% 70% / 60% 30% 70% 40%;}
 }
+@keyframes sun-corona{to{transform:rotate(360deg);}}
 
 /* ---------- hero ---------- */
 .hero{padding-top:70px; padding-bottom:44px;}
