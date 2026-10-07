@@ -148,6 +148,38 @@ section{padding:92px clamp(18px,5vw,60px); max-width:1220px; margin:0 auto;}
 @media (max-width:700px){.section-sub{display:none;}}
 .section-lede{font-size:15px; line-height:1.75; color:var(--ink-1); max-width:760px; margin-bottom:36px;}
 
+/* ---------- blob profile photo ---------- */
+.blob-wrap{
+  display:flex; align-items:center; justify-content:center;
+  margin-bottom:28px;
+}
+.blob-photo{
+  position:relative; width:220px; height:220px;
+}
+.blob-photo::before{
+  content:''; position:absolute; inset:-12px;
+  background:linear-gradient(135deg, var(--accent-bright), var(--accent-2), var(--accent));
+  border-radius:60% 40% 30% 70% / 60% 30% 70% 40%;
+  animation:blob-morph 8s ease-in-out infinite;
+  opacity:0.45;
+  filter:blur(18px);
+}
+.blob-photo img{
+  width:100%; height:100%; object-fit:cover;
+  border-radius:60% 40% 30% 70% / 60% 30% 70% 40%;
+  animation:blob-morph 8s ease-in-out infinite;
+  border:3px solid var(--glass-border);
+  box-shadow:0 12px 40px -12px var(--shadow-b);
+  position:relative; z-index:1;
+}
+@keyframes blob-morph{
+  0%  {border-radius:60% 40% 30% 70% / 60% 30% 70% 40%;}
+  25% {border-radius:30% 60% 70% 40% / 50% 60% 30% 60%;}
+  50% {border-radius:50% 60% 30% 60% / 30% 50% 70% 50%;}
+  75% {border-radius:40% 60% 50% 40% / 60% 40% 60% 30%;}
+  100%{border-radius:60% 40% 30% 70% / 60% 30% 70% 40%;}
+}
+
 /* ---------- hero ---------- */
 .hero{padding-top:70px; padding-bottom:44px;}
 .hero-grid{display:grid; grid-template-columns:1.3fr 1fr; gap:52px; align-items:center;}
@@ -436,7 +468,13 @@ body.journey-open .journey-panel{transform:translateX(0);}
         </div>
       </div>
 
-      <div class="hero-card glass">
+      <div>
+        <div class="blob-wrap">
+          <div class="blob-photo">
+            <img src="images/223.jpg" alt="Vinayak Shinde" loading="eager">
+          </div>
+        </div>
+        <div class="hero-card glass">
         <div class="hc-head">
           <div class="hc-dots"><span></span><span></span><span></span></div>
           <div class="hc-label">ledger // profile</div>
@@ -451,6 +489,7 @@ body.journey-open .journey-panel{transform:translateX(0);}
           <div><span class="prompt">›</span> <span class="k">library</span> <span class="v">QuantResearch v2.5 · PyPI</span></div>
           <div><span class="prompt">›</span> <span class="k">signals</span> <span class="v">OBI · order-flow · Greeks-aware structuring</span></div>
         </div>
+      </div>
       </div>
     </div>
 
@@ -560,11 +599,11 @@ body.journey-open .journey-panel{transform:translateX(0);}
 
             <div class="achv" data-achv>
               <div class="achv-head" onclick="toggleAchv(this)">
-                <div><h5>Greeks-aware backtesting suite</h5><p>Econophysics models, DTE-adaptive risk, 3yr walk-forward</p></div>
+                <div><h5>Greeks-aware backtesting suite</h5><p>Mean-reversion models, DTE-adaptive risk, 3yr walk-forward</p></div>
                 <div class="achv-toggle">Show details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
               </div>
               <div class="achv-body"><div class="achv-inner">
-                Shipped a parallelized backtest suite spanning econophysics-style energy models, DTE-adaptive stoploss scaling, and premium-fraction options structuring (Iron Condor/BWB/ratio spreads); the portfolio module computes Sharpe/Sortino/skew/kurtosis and simulates Indian tax drag with high-water-mark tracking across rolling 3-year walk-forward tranches.
+                Shipped a parallelized backtest suite spanning mean-reversion and trend-exhaustion models, DTE-adaptive stoploss scaling, and premium-fraction options structuring (Iron Condor/BWB/ratio spreads); the portfolio module computes Sharpe/Sortino/skew/kurtosis and simulates Indian tax drag with high-water-mark tracking across rolling 3-year walk-forward tranches.
                 <span class="chal-lbl">The challenge</span>A strategy that looks good over one backtest window can be quietly relying on a single regime, or ignoring real costs and taxes.
                 <span class="app-lbl">How I approached it</span>Test every idea across rolling multi-year windows with real Indian tax drag built in, and attribute every trade's P&amp;L back to the specific Greek exposure that produced it.
               </div></div>
@@ -796,7 +835,7 @@ body.journey-open .journey-panel{transform:translateX(0);}
     <div class="strat-grid">
       <div class="strat-card glass">
         <h4>Momentum energy models</h4>
-        <p class="concept">An econophysics-style read on trend — price momentum treated like kinetic energy, and its distance from a fair-value anchor (VWAP/EMA) treated like potential energy, with exits triggered on the first signs of deceleration rather than a lagging crossover.</p>
+        <p class="concept">A momentum-exhaustion model — entries are driven by the strength of price momentum, with exits triggered on the first signs of deceleration relative to a fair-value anchor (VWAP/EMA), rather than a lagging crossover.</p>
         <span class="behavior-lbl">Market behavior</span>
         <p class="behavior">Performs best in <b>genuinely trending sessions</b> where a move keeps adding energy in the same direction, and gives back less on the way down by exiting as momentum fades instead of waiting for confirmation. Struggles in choppy, directionless sessions where price oscillates without ever building sustained momentum.</p>
         <div class="tech-note" data-note style="margin-top:14px; margin-bottom:0;">
@@ -1015,7 +1054,7 @@ body.journey-open .journey-panel{transform:translateX(0);}
       </div>
       <div class="skill-card glass">
         <h4>Risk &amp; derivatives</h4>
-        <div class="chip-row"><span class="chip">Iron Condor / BWB</span><span class="chip">Ratio spreads</span><span class="chip">ATR / Garman-Klass</span><span class="chip">Econophysics</span><span class="chip">VaR / CVaR</span><span class="chip">Walk-forward testing</span></div>
+        <div class="chip-row"><span class="chip">Iron Condor / BWB</span><span class="chip">Ratio spreads</span><span class="chip">ATR / Garman-Klass</span><span class="chip">Mean reversion</span><span class="chip">VaR / CVaR</span><span class="chip">Walk-forward testing</span></div>
       </div>
     </div>
   </section>
@@ -1196,7 +1235,7 @@ body.journey-open .journey-panel{transform:translateX(0);}
             <div class="note-toggle" data-show="Show details " data-hide="Hide details ">Show details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
           </div>
           <div class="note-body"><div class="note-inner">
-            <span class="evo-lbl">What it does</span><p class="evo-txt">Applying the same physics, math and linear-algebra approach — price as a dynamical system, order-book state as vectors, weighted baskets — to equities.</p>
+            <span class="evo-lbl">What it does</span><p class="evo-txt">Applying the same microstructure and linear-algebra approach — order-book state as vectors, weighted baskets, regime-aware filtering — to equities.</p>
             <span class="evo-lbl">Under the hood</span><p class="evo-hood">The market-data engine already carries F&O and cash-segment streams in one unified snapshot format, so the research moves across without rebuilding the plumbing.</p>
           </div></div>
         </div>
