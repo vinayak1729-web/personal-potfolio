@@ -1,938 +1,1251 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Vinayak Raju Shinde — Quantitative Developer &amp; Researcher</title>
-<meta name="description" content="Quantitative developer and researcher building low-latency trading systems, order-book signals, regime filters and options research on NSE data." />
-<meta name="theme-color" media="(prefers-color-scheme: light)" content="#f5f2ea" />
-<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#14161f" />
-
-<script>
-  try {
-    if (localStorage.getItem('theme') === 'light') document.documentElement.classList.remove('dark');
-  } catch (e) {}
-</script>
-
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" />
-<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-
-<style type="text/tailwindcss">
-@custom-variant dark (&:is(.dark *));
-
-@theme {
-  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
-  --font-serif: 'Fraunces', ui-serif, Georgia, serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   THEME TOKENS
+   ============================================================ */
+:root{
+  /* ---- SUN GOD (primary) with a touch of water ---- */
+  --bg-0:#fdefc2;
+  --bg-1:#f6da8c;
+  --bg-2:#cfe0c9;
+  --ink-0:#2a1a02;
+  --ink-1:#5a3f0d;
+  --ink-2:#6f5320;
+  --line:rgba(150,102,8,0.30);
+  --glass:rgba(255,250,232,0.56);
+  --glass-strong:rgba(255,252,241,0.84);
+  --glass-border:rgba(184,124,8,0.58);
+  --accent:#8f5700;
+  --accent-bright:#ffb81f;
+  --accent-soft:rgba(255,184,31,0.34);
+  --accent-2:#0a6f93;
+  --accent-2-soft:rgba(10,111,147,0.14);
+  --danger:#c4553b;
+  --shadow-a:rgba(120,75,5,0.24);
+  --shadow-b:rgba(110,65,5,0.42);
+  --radius-lg:22px;
+  --radius-md:14px;
+  --radius-sm:9px;
+  --font-display:'Nunito',sans-serif;
+  --font-body:'Nunito',sans-serif;
+  --font-mono:'IBM Plex Mono',monospace;
+  --sweep:linear-gradient(100deg, transparent 30%, rgba(255,246,205,0.85) 48%, rgba(255,214,110,0.75) 52%, transparent 70%);
 }
 
-@theme inline {
-  --color-chart-3: var(--chart-3);
-  --color-border: var(--border);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-muted: var(--muted);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-primary: var(--primary);
-  --color-card: var(--card);
-  --color-foreground: var(--foreground);
-  --color-background: var(--background);
-  --color-ring: var(--ring);
-  --color-copper: var(--copper);
-  --color-cyan-accent: var(--cyan-accent);
-  --radius-sm: calc(var(--radius) * 0.6);
-  --radius-md: calc(var(--radius) * 0.8);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) * 1.4);
-  --radius-2xl: calc(var(--radius) * 1.8);
-  --radius-3xl: calc(var(--radius) * 2.2);
-  --radius-4xl: calc(var(--radius) * 2.6);
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:
+    radial-gradient(1400px 850px at 82% -14%, rgba(255,190,40,0.62), transparent 62%),
+    radial-gradient(900px 600px at -8% 25%, var(--accent-2-soft), transparent 55%),
+    linear-gradient(180deg,var(--bg-0) 0%, var(--bg-1) 45%, var(--bg-2) 100%);
+  color:var(--ink-0);
+  font-family:var(--font-body);
+  min-height:100vh;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  transition:background .5s ease, color .5s ease;
+}
+body::before{
+  content:''; position:fixed; top:-45vmax; right:-45vmax; width:100vmax; height:100vmax; z-index:0; pointer-events:none;
+  background:repeating-conic-gradient(from 0deg, rgba(255,184,31,0.20) 0deg 5deg, transparent 5deg 16deg);
+  -webkit-mask-image:radial-gradient(circle, #000 0%, transparent 62%); mask-image:radial-gradient(circle, #000 0%, transparent 62%);
+  animation:sun-rays 140s linear infinite;
+}
+@keyframes sun-rays{to{transform:rotate(360deg);}}
+::selection{background:var(--accent-soft); color:var(--ink-0);}
+a{color:inherit; text-decoration:none;}
+img{max-width:100%;}
+
+/* ---------- background field ---------- */
+.grid-field{
+  position:fixed; inset:0; z-index:0; pointer-events:none;
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size:68px 68px;
+  mask-image:radial-gradient(ellipse 80% 55% at 50% 8%, rgba(0,0,0,0.85), transparent 75%);
+  opacity:0.55;
+  transition:opacity .5s ease;
+}
+.field-glow{position:fixed; z-index:0; pointer-events:none; inset:0;
+  background:
+    radial-gradient(620px 320px at 12% 6%, var(--accent-soft), transparent 70%),
+    radial-gradient(520px 280px at 92% 16%, var(--accent-2-soft), transparent 70%);
 }
 
-:root {
-  color-scheme: light;
-  --background: oklch(0.97 0.008 85);
-  --foreground: oklch(0.22 0.015 60);
-  --card: oklch(0.99 0.006 85);
-  --primary: oklch(0.58 0.11 52);
-  --primary-foreground: oklch(0.98 0.01 85);
-  --muted: oklch(0.93 0.01 85);
-  --muted-foreground: oklch(0.5 0.015 65);
-  --border: oklch(0.85 0.01 80);
-  --ring: oklch(0.58 0.11 52);
-  --copper: oklch(0.62 0.12 52);
-  --cyan-accent: oklch(0.6 0.11 210);
-  --chart-3: oklch(0.55 0.08 160);
-  --radius: 0.75rem;
+/* ---------- nav ---------- */
+nav{
+  position:sticky; top:0; z-index:50;
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  padding:15px clamp(18px,5vw,56px);
+  background:var(--glass);
+  backdrop-filter:blur(18px) saturate(140%);
+  -webkit-backdrop-filter:blur(18px) saturate(140%);
+  border-bottom:1px solid var(--line);
+  transition:background .5s ease, border-color .5s ease;
+}
+.brand{display:flex; align-items:center; gap:10px; font-family:var(--font-display); font-weight:800; font-size:19px;}
+.brand-mark{
+  width:30px; height:30px; border-radius:9px; display:flex; align-items:center; justify-content:center;
+  background:linear-gradient(150deg, var(--accent-soft), transparent);
+  border:1px solid var(--glass-border); font-family:var(--font-mono); font-size:12px; color:var(--accent);
+}
+.nav-links{display:none; gap:2px; align-items:center;}
+@media (min-width:960px){.nav-links{display:flex;}}
+.nav-links a{font-size:13.5px; font-weight:500; color:var(--ink-1); padding:8px 13px; border-radius:100px; transition:color .2s ease, background .2s ease;}
+.nav-links a:hover{color:var(--ink-0); background:var(--accent-soft);}
+.nav-right{display:flex; align-items:center; gap:14px;}
+
+
+/* ---------- glass buttons ---------- */
+.btn{
+  display:inline-flex; align-items:center; gap:8px; padding:11px 24px; border-radius:100px;
+  font-family:var(--font-body); font-weight:600; font-size:13.5px;
+  border:1px solid var(--glass-border);
+  background:linear-gradient(180deg, var(--glass-strong), var(--glass));
+  backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.25), 0 6px 20px -8px var(--shadow-a);
+  color:var(--ink-0); cursor:pointer; position:relative; overflow:hidden;
+  transition:transform .18s cubic-bezier(.2,.9,.3,1), box-shadow .25s ease, border-color .25s ease;
+  -webkit-tap-highlight-color:transparent;
+}
+.btn::after{
+  content:''; position:absolute; inset:0; background:var(--sweep);
+  background-size:220% 100%; background-position:120% 0; opacity:0; transition:opacity .3s ease, background-position .6s ease;
+}
+.btn:hover::after{opacity:1; background-position:-20% 0;}
+.btn:hover{transform:translateY(-2px); border-color:var(--accent); box-shadow:inset 0 1px 0 rgba(255,255,255,0.3), 0 10px 30px -8px var(--shadow-b);}
+.btn:active{transform:translateY(0) scale(0.97);}
+.btn-primary{background:linear-gradient(180deg, var(--accent-bright), var(--accent)); border-color:var(--accent); color:#1d1300;}
+.btn-ghost{background:rgba(255,255,255,0.02);}
+.btn svg{width:15px; height:15px; opacity:0.85;}
+
+/* ---------- glass surface ---------- */
+.glass{
+  background:linear-gradient(155deg, var(--glass-strong), var(--glass));
+  border:1px solid var(--glass-border);
+  backdrop-filter:blur(20px) saturate(130%); -webkit-backdrop-filter:blur(20px) saturate(130%);
+  border-radius:var(--radius-lg);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.12), 0 20px 50px -30px var(--shadow-b);
+  transition:background .5s ease, border-color .5s ease, box-shadow .5s ease;
 }
 
-.dark {
-  color-scheme: dark;
-  --background: oklch(0.16 0.012 260);
-  --foreground: oklch(0.93 0.012 80);
-  --card: oklch(0.21 0.014 260);
-  --primary: oklch(0.74 0.1 55);
-  --primary-foreground: oklch(0.18 0.012 260);
-  --muted: oklch(0.27 0.016 260);
-  --muted-foreground: oklch(0.7 0.014 250);
-  --border: oklch(1 0 0 / 10%);
-  --ring: oklch(0.74 0.1 55);
-  --copper: oklch(0.76 0.11 58);
-  --cyan-accent: oklch(0.78 0.11 205);
-  --chart-3: oklch(0.7 0.1 160);
-}
+main{position:relative; z-index:2;}
+section{padding:92px clamp(18px,5vw,60px); max-width:1220px; margin:0 auto;}
+.section-head{display:flex; align-items:baseline; gap:16px; margin-bottom:40px; border-bottom:1px solid var(--line); padding-bottom:18px;}
+.section-index{font-family:var(--font-mono); font-size:12px; color:var(--accent); letter-spacing:0.06em;}
+.section-title{font-family:var(--font-display); font-size:clamp(28px,3.2vw,38px); font-weight:800; letter-spacing:-0.005em;}
+.section-sub{font-size:13.5px; color:var(--ink-2); margin-left:auto; max-width:290px; text-align:right; line-height:1.55;}
+@media (max-width:700px){.section-sub{display:none;}}
+.section-lede{font-size:15px; line-height:1.75; color:var(--ink-1); max-width:760px; margin-bottom:36px;}
 
-@layer base {
-  * { @apply border-border outline-ring/50; }
-  body {
-    @apply bg-background text-foreground;
-    font-feature-settings: "ss01", "cv01";
-  }
-}
+/* ---------- hero ---------- */
+.hero{padding-top:70px; padding-bottom:44px;}
+.hero-grid{display:grid; grid-template-columns:1.3fr 1fr; gap:52px; align-items:center;}
+@media (max-width:920px){.hero-grid{grid-template-columns:1fr;}}
+.eyebrow{display:inline-flex; align-items:center; gap:9px; font-family:var(--font-mono); font-size:12px; color:var(--ink-1); padding:7px 14px; border-radius:100px; border:1px solid var(--glass-border); background:var(--glass); margin-bottom:24px;}
+.eyebrow .dot{width:6px; height:6px; border-radius:50%; background:var(--accent); box-shadow:0 0 8px var(--accent); animation:pulse-dot 2.4s ease-in-out infinite;}
+@keyframes pulse-dot{0%,100%{opacity:1;}50%{opacity:0.3;}}
+.hero h1{font-family:var(--font-display); font-weight:800; font-size:clamp(36px,5.6vw,60px); line-height:1.05; letter-spacing:-0.01em; margin-bottom:20px;}
+.hero .role-line{display:block; color:var(--accent); font-weight:600; font-size:clamp(17px,2.1vw,22px); margin-top:12px; font-family:var(--font-body);}
+.hero-desc{font-size:16px; line-height:1.75; color:var(--ink-1); max-width:580px; margin-bottom:28px;}
+.hero-desc b{color:var(--ink-0); font-weight:600;}
+.hero-bullets{list-style:none; display:flex; flex-direction:column; gap:9px; margin-bottom:30px;}
+.hero-bullets li{font-size:14px; color:var(--ink-1); padding-left:20px; position:relative; line-height:1.6;}
+.hero-bullets li::before{content:''; position:absolute; left:0; top:8px; width:7px; height:7px; background:var(--accent); border-radius:2px; transform:rotate(45deg); opacity:0.8;}
+.hero-actions{display:flex; gap:12px; flex-wrap:wrap;}
 
-@layer utilities {
-  .glass {
-    background: color-mix(in oklch, var(--card) 55%, transparent);
-    backdrop-filter: blur(20px) saturate(160%);
-    -webkit-backdrop-filter: blur(20px) saturate(160%);
-    border: 1px solid color-mix(in oklch, var(--foreground) 12%, transparent);
-    box-shadow:
-      0 1px 0 0 color-mix(in oklch, #fff 22%, transparent) inset,
-      0 -1px 0 0 color-mix(in oklch, #000 12%, transparent) inset,
-      0 24px 60px -24px color-mix(in oklch, #000 55%, transparent);
-  }
-  .glass-strong {
-    background: color-mix(in oklch, var(--card) 78%, transparent);
-    backdrop-filter: blur(28px) saturate(180%);
-    -webkit-backdrop-filter: blur(28px) saturate(180%);
-    border: 1px solid color-mix(in oklch, var(--foreground) 14%, transparent);
-    box-shadow:
-      0 1px 0 0 color-mix(in oklch, #fff 25%, transparent) inset,
-      0 20px 50px -20px color-mix(in oklch, #000 45%, transparent);
-  }
-  .glass-hover {
-    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s, border-color 0.4s;
-  }
-  .glass-hover:hover {
-    transform: translateY(-4px);
-    border-color: color-mix(in oklch, var(--copper) 55%, transparent);
-    box-shadow:
-      0 1px 0 0 color-mix(in oklch, #fff 25%, transparent) inset,
-      0 30px 70px -25px color-mix(in oklch, var(--copper) 40%, transparent);
-  }
-  .text-gradient {
-    background: linear-gradient(120deg, var(--copper), var(--cyan-accent));
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
-  .grid-bg {
-    background-image:
-      linear-gradient(color-mix(in oklch, var(--foreground) 6%, transparent) 1px, transparent 1px),
-      linear-gradient(90deg, color-mix(in oklch, var(--foreground) 6%, transparent) 1px, transparent 1px);
-    background-size: 48px 48px;
-  }
-  .case-card {
-    background: color-mix(in oklch, var(--foreground) 3%, transparent);
-    border: 1px solid color-mix(in oklch, var(--foreground) 9%, transparent);
-    transition: border-color 0.3s;
-  }
-  .case-card:hover { border-color: color-mix(in oklch, var(--copper) 45%, transparent); }
-}
+.hero-card{padding:24px;}
+.hc-head{display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;}
+.hc-dots{display:flex; gap:6px;}
+.hc-dots span{width:9px; height:9px; border-radius:50%; display:block;}
+.hc-dots span:nth-child(1){background:var(--danger);}
+.hc-dots span:nth-child(2){background:var(--accent-bright);}
+.hc-dots span:nth-child(3){background:var(--accent-2);}
+.hc-label{font-family:var(--font-mono); font-size:11px; color:var(--ink-2); letter-spacing:0.04em;}
+.hc-body{font-family:var(--font-mono); font-size:12.3px; line-height:1.9; color:var(--ink-1);}
+.hc-body .k{color:var(--ink-2);}
+.hc-body .v{color:var(--ink-0);}
+.hc-body .c{color:var(--accent);}
+.hc-body .prompt{color:var(--accent-2);}
+.hc-div{height:1px; background:var(--line); margin:13px 0;}
 
-@keyframes drift {
-  0% { transform: translate(0, 0) rotate(var(--r, 0deg)); }
-  50% { transform: translate(var(--dx, 20px), var(--dy, -24px)) rotate(var(--r2, 0deg)); }
-  100% { transform: translate(0, 0) rotate(var(--r, 0deg)); }
+.stat-strip{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; border:1px solid var(--glass-border); border-radius:var(--radius-md); overflow:hidden; margin-top:48px; background:var(--glass-border);}
+@media (max-width:760px){.stat-strip{grid-template-columns:repeat(2,1fr);}}
+.stat{background:var(--glass-strong); padding:22px 20px;}
+.stat .num{font-family:var(--font-display); font-size:27px; font-weight:800; color:var(--ink-0);}
+.stat .num span{color:var(--accent);}
+.stat .lbl{font-size:11.5px; color:var(--ink-2); margin-top:4px; line-height:1.4;}
+
+/* ---------- about ---------- */
+.about-grid{display:grid; grid-template-columns:1.4fr 1fr; gap:34px;}
+@media (max-width:880px){.about-grid{grid-template-columns:1fr;}}
+.about-body p{font-size:15px; line-height:1.8; color:var(--ink-1); margin-bottom:16px;}
+.about-body p b{color:var(--ink-0); font-weight:600;}
+.focus-list{list-style:none; display:flex; flex-direction:column; gap:11px; margin-top:20px;}
+.focus-list li{font-size:14px; color:var(--ink-1); padding-left:22px; position:relative;}
+.focus-list li::before{content:''; position:absolute; left:0; top:7px; width:8px; height:8px; border:2px solid var(--accent); border-radius:2px; transform:rotate(45deg);}
+.edu-card{padding:26px;}
+.edu-card h4{font-family:var(--font-display); font-size:19px; font-weight:800; margin-bottom:4px;}
+.edu-card .edu-sub{font-size:13px; color:var(--ink-1); margin-bottom:14px;}
+.edu-grade{font-family:var(--font-mono); font-size:22px; color:var(--accent); font-weight:600;}
+.edu-grade-lbl{font-size:11.5px; color:var(--ink-2); margin-top:2px;}
+.edu-div{height:1px; background:var(--line); margin:18px 0;}
+.edu-note{font-size:12.5px; color:var(--ink-2); font-family:var(--font-mono); line-height:1.6;}
+
+/* ---------- timeline (experience) ---------- */
+.timeline{position:relative; padding-left:30px; border-left:1px solid var(--line);}
+.tl-item{position:relative; padding-bottom:48px;}
+.tl-item:last-child{padding-bottom:0;}
+.tl-dot{position:absolute; left:-36px; top:5px; width:14px; height:14px; border-radius:50%; background:var(--bg-1); border:2px solid var(--accent); box-shadow:0 0 0 4px var(--accent-soft);}
+.tl-card{padding:26px 28px;}
+.tl-top{display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:10px; margin-bottom:4px;}
+.tl-role{font-family:var(--font-display); font-size:20px; font-weight:800;}
+.tl-time{font-family:var(--font-mono); font-size:11.5px; color:var(--accent);}
+.tl-org{font-size:13.5px; color:var(--ink-1); margin-bottom:8px; display:flex; align-items:center; gap:8px;}
+.tl-org .sep{width:3px; height:3px; border-radius:50%; background:var(--ink-2);}
+.tl-intro{font-size:14px; color:var(--ink-1); line-height:1.7; margin-bottom:18px;}
+.tl-list{list-style:none; display:flex; flex-direction:column; gap:10px; margin-bottom:14px;}
+.tl-list li{font-size:13.5px; color:var(--ink-1); line-height:1.65;}
+.tl-list li b{color:var(--ink-0); font-weight:600;}
+
+/* expandable achievement cards inside timeline */
+.achv-grid{display:flex; flex-direction:column; gap:10px; margin-top:16px;}
+.achv{border:1px solid var(--line); border-radius:var(--radius-sm); overflow:hidden; background:rgba(255,255,255,0.02);}
+.achv-head{display:flex; align-items:center; justify-content:space-between; gap:14px; padding:15px 18px; cursor:pointer;}
+.achv-head h5{font-family:var(--font-body); font-weight:600; font-size:14.5px;}
+.achv-head p{font-size:12.5px; color:var(--ink-2); margin-top:3px; font-weight:400;}
+.achv-toggle{font-family:var(--font-mono); font-size:11px; color:var(--accent); white-space:nowrap; display:flex; align-items:center; gap:5px;}
+.achv-toggle svg{width:11px; height:11px; transition:transform .3s ease;}
+.achv.open .achv-toggle svg{transform:rotate(180deg);}
+.achv-body{max-height:0; overflow:hidden; transition:max-height .4s ease;}
+.achv.open .achv-body{max-height:400px;}
+.achv-inner{padding:0 18px 18px; font-size:13px; color:var(--ink-1); line-height:1.7;}
+.achv-inner .chal-lbl, .achv-inner .app-lbl{font-family:var(--font-mono); font-size:10.5px; color:var(--accent); letter-spacing:0.05em; margin-top:10px; margin-bottom:4px; display:block;}
+.achv-inner .chal-lbl{margin-top:0;}
+
+.chip-row{display:flex; gap:8px; flex-wrap:wrap;}
+.chip{font-size:12px; color:var(--ink-1); background:rgba(255,255,255,0.03); border:1px solid var(--line); padding:6px 12px; border-radius:9px; transition:border-color .2s ease, color .2s ease, background .2s ease;}
+.chip:hover{border-color:var(--accent); color:var(--ink-0); background:var(--accent-soft);}
+
+/* ---------- tech / research card grids ---------- */
+.deep-card{padding:0; overflow:hidden;}
+.deep-head{display:flex; align-items:flex-start; justify-content:space-between; gap:18px; padding:26px 28px; cursor:pointer;}
+.deep-head-left{display:flex; gap:16px; align-items:flex-start;}
+.deep-icon{width:44px; height:44px; border-radius:12px; flex-shrink:0; display:flex; align-items:center; justify-content:center;
+  background:linear-gradient(155deg, var(--accent-soft), transparent); border:1px solid var(--glass-border);}
+.deep-icon svg{width:21px; height:21px; color:var(--accent);}
+.deep-head h3{font-family:var(--font-display); font-size:21px; font-weight:800; margin-bottom:5px;}
+.deep-head .deep-sub{font-size:13.5px; color:var(--ink-1); line-height:1.6; max-width:520px;}
+.deep-toggle{font-family:var(--font-mono); font-size:11px; color:var(--accent); white-space:nowrap; display:flex; align-items:center; gap:6px; padding-top:4px;}
+.deep-toggle svg{width:12px; height:12px; transition:transform .3s ease;}
+.deep-card.open .deep-toggle svg{transform:rotate(180deg);}
+.deep-body{max-height:0; overflow:hidden; transition:max-height .5s ease;}
+.deep-card.open .deep-body{max-height:9000px;}
+.deep-inner{padding:0 28px 30px;}
+.deep-inner .divider{height:1px; background:var(--line); margin:0 0 22px;}
+
+/* nested technical-breakdown accordion (inside a deep-card) */
+.tech-note{border:1px solid var(--line); border-radius:var(--radius-sm); background:rgba(255,255,255,0.02); margin-bottom:14px; overflow:hidden;}
+.note-head{display:flex; align-items:center; justify-content:space-between; gap:14px; padding:16px 20px; cursor:pointer;}
+.note-head h4{font-family:var(--font-display); font-weight:800; font-size:15.5px;}
+.note-head p{font-size:12.5px; color:var(--ink-2); margin-top:3px; font-weight:400;}
+.note-toggle{font-family:var(--font-mono); font-size:11px; color:var(--accent); white-space:nowrap; display:flex; align-items:center; gap:5px;}
+.note-toggle svg{width:11px; height:11px; transition:transform .3s ease;}
+.tech-note.open .note-toggle svg{transform:rotate(180deg);}
+.note-body{max-height:0; overflow:hidden; transition:max-height .45s ease;}
+.tech-note.open .note-body{max-height:4000px;}
+.note-inner{padding:0 20px 20px;}
+.note-inner > p{font-size:13.5px; color:var(--ink-1); line-height:1.75; margin-bottom:14px;}
+.tech-list{list-style:none; display:flex; flex-direction:column; gap:13px;}
+.tech-list li{font-size:13.5px; color:var(--ink-1); line-height:1.7; padding-left:20px; position:relative;}
+.tech-list li::before{content:''; position:absolute; left:0; top:8px; width:7px; height:7px; background:var(--accent); border-radius:2px; transform:rotate(45deg); opacity:0.75;}
+.tech-list li b{color:var(--ink-0); font-weight:700;}
+
+.greek-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:14px; margin-bottom:20px;}
+@media (max-width:700px){.greek-grid{grid-template-columns:1fr;}}
+.greek-item{padding:16px 18px; border:1px solid var(--line); border-radius:var(--radius-sm); background:rgba(255,255,255,0.02);}
+.greek-item .g-sym{font-family:var(--font-display); font-size:22px; color:var(--accent); font-weight:800; margin-bottom:4px;}
+.greek-item .g-name{font-family:var(--font-mono); font-size:11px; color:var(--ink-2); text-transform:uppercase; letter-spacing:0.04em; margin-bottom:8px;}
+.greek-item p{font-size:13px; color:var(--ink-1); line-height:1.65;}
+.deep-inner .why-it-matters{font-size:13.5px; color:var(--ink-1); line-height:1.75; padding:16px 18px; border-left:2px solid var(--accent); background:var(--accent-soft); border-radius:0 var(--radius-sm) var(--radius-sm) 0; margin-bottom:20px;}
+.deep-inner .why-it-matters b{color:var(--ink-0);}
+
+/* research strategy cards */
+.freq-label{display:flex; align-items:center; gap:12px; margin:8px 0 22px;}
+.freq-label h3{font-family:var(--font-display); font-size:23px; font-weight:800;}
+.freq-badge{font-family:var(--font-mono); font-size:11px; color:var(--accent); background:var(--accent-soft); border:1px solid var(--glass-border); padding:5px 12px; border-radius:100px;}
+.strat-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:18px; margin-bottom:56px;}
+@media (max-width:840px){.strat-grid{grid-template-columns:1fr;}}
+.strat-grid:last-of-type{margin-bottom:0;}
+.strat-card{padding:26px;}
+.strat-card h4{font-family:var(--font-display); font-size:18px; font-weight:800; margin-bottom:10px;}
+.strat-card .concept{font-size:13.5px; color:var(--ink-1); line-height:1.7; margin-bottom:14px;}
+.strat-card .behavior-lbl{font-family:var(--font-mono); font-size:10.5px; color:var(--accent); letter-spacing:0.05em; margin-bottom:6px; display:block;}
+.strat-card .behavior{font-size:13px; color:var(--ink-1); line-height:1.7;}
+.strat-card .behavior b{color:var(--ink-0);}
+.evo-wrap{margin:6px 0 56px;}
+.evo-list{display:flex; flex-direction:column; gap:12px;}
+.evo-list .tech-note{margin-bottom:0;}
+.evo-num{font-family:var(--font-mono); font-size:11.5px; color:var(--accent); margin-right:10px; letter-spacing:0.04em;}
+.note-inner .evo-lbl{font-family:var(--font-mono); font-size:10.5px; color:var(--accent); letter-spacing:0.05em; display:block; margin:12px 0 4px;}
+.note-inner .evo-lbl:first-child{margin-top:0;}
+.note-inner .evo-txt{font-size:13.5px; color:var(--ink-1); line-height:1.75; margin:0;}
+.note-inner .evo-hood{font-size:13px; color:var(--ink-1); line-height:1.7; margin:0; padding:11px 14px; border-left:2px solid var(--accent-2); background:var(--accent-2-soft); border-radius:0 var(--radius-sm) var(--radius-sm) 0;}
+
+/* ---------- toolkit ---------- */
+.skill-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px;}
+@media (max-width:920px){.skill-grid{grid-template-columns:repeat(2,1fr);}}
+@media (max-width:600px){.skill-grid{grid-template-columns:1fr;}}
+.skill-card{padding:22px 24px;}
+.skill-card h4{font-family:var(--font-mono); font-size:12px; letter-spacing:0.04em; color:var(--accent); margin-bottom:13px; display:flex; align-items:center; gap:9px;}
+.skill-card h4::before{content:''; width:7px; height:7px; background:var(--accent); border-radius:2px; display:inline-block;}
+
+/* ---------- recognition ---------- */
+.ach-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:18px;}
+@media (max-width:900px){.ach-grid{grid-template-columns:1fr;}}
+.ach-card{padding:0; overflow:hidden;}
+.ach-head{padding:24px 24px 20px; cursor:pointer;}
+.ach-badge{display:inline-block; font-family:var(--font-mono); font-size:11px; color:var(--accent); background:var(--accent-soft); border:1px solid var(--glass-border); padding:4px 11px; border-radius:100px; margin-bottom:14px;}
+.ach-card h4{font-family:var(--font-display); font-size:18px; font-weight:800; margin-bottom:4px;}
+.ach-card .ach-when{font-family:var(--font-mono); font-size:11.5px; color:var(--ink-2); margin-bottom:10px;}
+.ach-card .ach-teaser{font-size:13px; color:var(--ink-1); line-height:1.6;}
+.ach-more-toggle{font-family:var(--font-mono); font-size:11px; color:var(--accent); display:flex; align-items:center; gap:5px; margin-top:12px;}
+.ach-more-toggle svg{width:11px; height:11px; transition:transform .3s ease;}
+.ach-card.open .ach-more-toggle svg{transform:rotate(180deg);}
+.ach-body{max-height:0; overflow:hidden; transition:max-height .4s ease;}
+.ach-card.open .ach-body{max-height:300px;}
+.ach-inner{padding:0 24px 24px; font-size:13px; color:var(--ink-1); line-height:1.7;}
+
+/* ---------- contact ---------- */
+.contact-wrap{padding:64px 32px; text-align:center; position:relative;}
+.contact-wrap h2{font-family:var(--font-display); font-size:clamp(28px,4vw,42px); font-weight:800; margin-bottom:14px;}
+.contact-wrap p{color:var(--ink-1); font-size:15px; max-width:480px; margin:0 auto 30px; line-height:1.7;}
+.contact-actions{display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-bottom:34px;}
+.contact-links{display:flex; gap:24px; justify-content:center; flex-wrap:wrap;}
+.contact-links a{display:flex; align-items:center; gap:8px; font-size:13px; color:var(--ink-2); font-family:var(--font-mono); transition:color .2s ease;}
+.contact-links a:hover{color:var(--accent);}
+.contact-links svg{width:15px; height:15px;}
+footer{text-align:center; padding:24px; font-size:12px; color:var(--ink-2); border-top:1px solid var(--line); font-family:var(--font-mono);}
+
+
+/* ---------- research journey side tab ---------- */
+.journey-tab{
+  position:fixed; right:0; top:50%; transform:translateY(-50%); z-index:60;
+  display:flex; flex-direction:column; align-items:center; gap:10px;
+  padding:14px 9px; cursor:pointer; border:1px solid var(--glass-border); border-right:none;
+  border-radius:14px 0 0 14px;
+  background:linear-gradient(180deg, var(--glass-strong), var(--glass));
+  backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
+  box-shadow:-6px 8px 24px -10px var(--shadow-b), inset 0 1px 0 rgba(255,255,255,0.2);
+  color:var(--accent); font-family:var(--font-body);
+  transition:padding .25s ease, box-shadow .25s ease, opacity .25s ease;
 }
-@keyframes float-blob {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(4%, -6%) scale(1.08); }
-  66% { transform: translate(-5%, 4%) scale(0.95); }
+.journey-tab:hover{padding-right:14px; box-shadow:-8px 10px 30px -8px var(--shadow-b), inset 0 1px 0 rgba(255,255,255,0.3);}
+.journey-tab svg{width:20px; height:20px;}
+.journey-tab span{writing-mode:vertical-rl; font-size:11.5px; font-weight:700; letter-spacing:0.08em; color:var(--ink-1);}
+.journey-tab .bulb-glow{filter:drop-shadow(0 0 5px var(--accent-bright));}
+body.journey-open .journey-tab{opacity:0; pointer-events:none;}
+.journey-backdrop{position:fixed; inset:0; z-index:64; background:rgba(10,8,6,0.35); opacity:0; pointer-events:none; transition:opacity .3s ease;}
+body.journey-open .journey-backdrop{opacity:1; pointer-events:auto;}
+.journey-panel{
+  position:fixed; top:0; right:0; bottom:0; z-index:70; width:min(480px,94vw);
+  transform:translateX(105%); transition:transform .4s cubic-bezier(.2,.8,.3,1);
+  display:flex; flex-direction:column;
+  background:linear-gradient(160deg, var(--glass-strong), var(--bg-1));
+  border-left:1px solid var(--glass-border);
+  backdrop-filter:blur(24px) saturate(140%); -webkit-backdrop-filter:blur(24px) saturate(140%);
+  box-shadow:-20px 0 60px -20px var(--shadow-b);
 }
-.floating-eq {
-  animation: drift var(--dur, 22s) ease-in-out infinite;
-  animation-delay: var(--delay, 0s);
-  will-change: transform;
-}
-.blob {
-  animation: float-blob var(--dur, 20s) ease-in-out infinite;
-  will-change: transform;
-}
-@media (prefers-reduced-motion: reduce) {
-  .floating-eq, .blob { animation: none; }
-}
-.katex { font-size: 1em; }
-html { scroll-behavior: smooth; }
+body.journey-open .journey-panel{transform:translateX(0);}
+.jp-head{display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding:22px 24px 16px; border-bottom:1px solid var(--line);}
+.jp-head h3{font-family:var(--font-display); font-size:21px; font-weight:800;}
+.jp-head p{font-size:12.5px; color:var(--ink-2); margin-top:4px;}
+.jp-close{width:34px; height:34px; border-radius:50%; border:1px solid var(--glass-border); background:var(--glass); color:var(--ink-1); cursor:pointer; display:flex; align-items:center; justify-content:center; flex-shrink:0; transition:border-color .2s ease, color .2s ease;}
+.jp-close:hover{border-color:var(--accent); color:var(--accent);}
+.jp-close svg{width:14px; height:14px;}
+.jp-body{overflow-y:auto; padding:18px 24px 40px; flex:1;}
+.jp-body .jp-lede{font-size:13.5px; line-height:1.75; color:var(--ink-1); margin-bottom:18px;}
+@media (max-width:600px){.journey-tab{padding:11px 7px;} .journey-tab span{display:none;}}
+
+.field-glow{animation:tide 16s ease-in-out infinite alternate;}
+@keyframes tide{from{transform:translate3d(0,0,0) scale(1);}to{transform:translate3d(2%,1.5%,0) scale(1.05);}}
+.ach-grid.four{grid-template-columns:repeat(2,1fr);}
+@media (max-width:900px){.ach-grid.four{grid-template-columns:1fr;}}
+@media (prefers-reduced-motion: reduce){*{animation-duration:0.001ms !important; transition-duration:0.001ms !important;}}
 </style>
 </head>
+<body>
 
-<body class="font-sans antialiased">
-<main class="relative min-h-screen overflow-x-hidden">
+<div class="grid-field"></div>
+<div class="field-glow"></div>
 
-  <!-- ============ FLOATING EQUATIONS BACKGROUND ============ -->
-  <div aria-hidden="true" class="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
-    <div class="blob absolute -left-40 top-[-10%] h-[38rem] w-[38rem] rounded-full bg-copper/20 blur-[120px] dark:bg-copper/15" style="--dur:24s"></div>
-    <div class="blob absolute -right-40 top-[30%] h-[34rem] w-[34rem] rounded-full bg-cyan-accent/20 blur-[120px] dark:bg-cyan-accent/15" style="--dur:30s"></div>
-    <div class="blob absolute bottom-[-15%] left-[30%] h-[30rem] w-[30rem] rounded-full bg-chart-3/15 blur-[120px]" style="--dur:27s"></div>
-    <div class="grid-bg absolute inset-0 opacity-40 [mask-image:radial-gradient(ellipse_at_center,black,transparent_75%)]"></div>
-    <div id="equations"></div>
+<nav>
+  <div class="brand">
+    <span class="brand-mark">VS</span>
+    Vinayak Shinde
   </div>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#experience">Experience</a>
+    <a href="#tech">Tech</a>
+    <a href="#research">Research</a>
+    <a href="#toolkit">Toolkit</a>
+    <a href="#recognition">Recognition</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <div class="nav-right">
+    <a class="btn btn-primary" href="#contact" style="padding:9px 20px;">Get in touch</a>
+  </div>
+</nav>
 
-  <!-- ============ NAV ============ -->
-  <header class="fixed inset-x-0 top-0 z-50 px-4 pt-4 sm:px-6">
-    <nav id="nav" class="glass mx-auto flex max-w-5xl items-center justify-between rounded-2xl px-4 py-2.5 transition-all duration-500 sm:px-5">
-      <a href="#top" class="group flex items-center gap-2.5">
-        <span class="grid h-9 w-9 place-items-center rounded-xl bg-gradient-to-br from-copper to-cyan-accent font-serif text-sm font-semibold text-primary-foreground shadow-lg">VRS</span>
-        <span class="hidden text-sm font-medium tracking-tight sm:block">Vinayak R. Shinde</span>
-      </a>
-      <div id="nav-links" class="hidden items-center gap-1 md:flex"></div>
-      <div class="flex items-center gap-2">
-        <a href="#contact" class="hidden rounded-full bg-foreground px-4 py-2 text-sm font-medium text-background transition-transform hover:-translate-y-0.5 sm:inline-block">Let's talk</a>
-        <button id="theme-toggle" type="button" aria-label="Toggle color theme" class="glass glass-hover relative flex h-10 w-10 items-center justify-center rounded-full text-foreground"></button>
-        <button id="menu-btn" type="button" aria-label="Toggle menu" aria-expanded="false" class="glass glass-hover flex h-10 w-10 items-center justify-center rounded-full md:hidden"></button>
-      </div>
-    </nav>
-    <div id="mobile-menu" class="glass mx-auto mt-2 hidden max-w-5xl rounded-2xl p-2 md:hidden"></div>
-  </header>
+<main>
 
   <!-- ============ HERO ============ -->
-  <section id="top" class="relative mx-auto max-w-5xl px-4 pt-32 sm:px-6 sm:pt-40">
-    <div class="mb-6 inline-flex items-center gap-2 rounded-full glass px-4 py-1.5 text-xs font-medium text-muted-foreground">
-      <span class="relative flex h-2 w-2">
-        <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-chart-3 opacity-75"></span>
-        <span class="relative inline-flex h-2 w-2 rounded-full bg-chart-3"></span>
-      </span>
-      Quantitative Associate @ Vikabh Securities · Mumbai
+  <section class="hero">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow"><span class="dot"></span> Available for quant research &amp; trading-systems roles</div>
+        <h1>
+          Quantitative Developer &amp; Researcher
+          <span class="role-line">Quantitative Associate, Vikabh Securities · Mumbai</span>
+        </h1>
+        <p class="hero-desc">
+          I build the <b>Greeks mathematics, order-flow signals, and low-latency C++/Python systems</b> behind systematic options and derivatives trading — from the exchange's raw multicast feed, to the model that reads it, to the dashboard a trader actually watches.
+        </p>
+        <ul class="hero-bullets">
+          <li>Rebuilt multicast order-book pipelines in C++ on lock-free, core-pinned infrastructure</li>
+          <li>Designed Greeks-aware options structures and microstructure-based order-flow signals</li>
+          <li>1st Runner-Up — AMD × SPRINT AI Hackathon @ IIT Bombay · Top 3 Finalist — Google GenAI Exchange (38,000+) · Global rank 137 — NK Securities IV competition</li>
+        </ul>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#tech">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+            View tech systems
+          </a>
+          <a class="btn btn-ghost" href="#research">View research</a>
+        </div>
+      </div>
+
+      <div class="hero-card glass">
+        <div class="hc-head">
+          <div class="hc-dots"><span></span><span></span><span></span></div>
+          <div class="hc-label">ledger // profile</div>
+        </div>
+        <div class="hc-body">
+          <div><span class="prompt">›</span> <span class="k">role</span> <span class="v">Quantitative Associate</span></div>
+          <div><span class="prompt">›</span> <span class="k">desk</span> <span class="v">Vikabh Securities · Derivatives</span></div>
+          <div><span class="prompt">›</span> <span class="k">stack</span> <span class="c">C++17</span> · <span class="c">Python</span> · <span class="c">React</span> · <span class="c">QuestDB</span></div>
+          <div class="hc-div"></div>
+          <div><span class="prompt">›</span> <span class="k">order_pool</span> <span class="v">5,000,000 slots · O(1) lookup</span></div>
+          <div><span class="prompt">›</span> <span class="k">tick_storage</span> <span class="v">~10–15× smaller than JSON</span></div>
+          <div><span class="prompt">›</span> <span class="k">library</span> <span class="v">QuantResearch v2.5 · PyPI</span></div>
+          <div><span class="prompt">›</span> <span class="k">signals</span> <span class="v">OBI · order-flow · Greeks-aware structuring</span></div>
+        </div>
+      </div>
     </div>
 
-    <h1 class="font-serif text-4xl font-semibold leading-[1.05] tracking-tight sm:text-6xl md:text-7xl" data-site="name"></h1>
-    <p class="mt-4 max-w-2xl text-lg text-muted-foreground sm:text-xl">
-      <span class="text-gradient font-medium">Quantitative Developer &amp; Researcher</span>
-      building <em class="not-italic text-foreground">order-book microstructure signals</em> and the
-      <em class="not-italic text-foreground">portfolio-risk math</em> behind them into fast,
-      production-grade trading systems.
-    </p>
-
-    <ul id="highlights" class="mt-8 grid gap-2.5 sm:grid-cols-2"></ul>
-
-    <div class="mt-8 flex flex-wrap items-center gap-3">
-      <a href="#projects" class="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-copper to-cyan-accent px-6 py-3 text-sm font-semibold text-primary-foreground shadow-lg transition-transform hover:-translate-y-0.5">
-        View selected work
-        <span data-icon="arrow" class="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"></span>
-      </a>
-      <a data-href="resume" target="_blank" rel="noopener noreferrer" class="glass glass-hover inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold">Download résumé</a>
-      <div id="hero-socials" class="flex items-center gap-1.5"></div>
+    <div class="stat-strip">
+      <div class="stat"><div class="num"><span>#137</span></div><div class="lbl">Global rank — NK Securities IV-surface prediction, 2025</div></div>
+      <div class="stat"><div class="num"><span>10–15×</span></div><div class="lbl">Tick-storage compression vs. raw JSON</div></div>
+      <div class="stat"><div class="num"><span>18+</span></div><div class="lbl">Indicators shipped in the QuantResearch library</div></div>
+      <div class="stat"><div class="num"><span>5M</span></div><div class="lbl">Preallocated order-pool slots, O(1) lookup</div></div>
     </div>
-
-    <div id="stats" class="mt-14 grid grid-cols-2 items-start gap-3 lg:grid-cols-4"></div>
   </section>
 
   <!-- ============ ABOUT ============ -->
-  <section id="about" class="mx-auto max-w-5xl scroll-mt-28 px-4 py-24 sm:px-6">
-    <div data-heading="01|About"></div>
-    <div class="grid gap-6 md:grid-cols-5">
-      <div class="glass rounded-3xl p-6 sm:p-8 md:col-span-3">
-        <p class="text-lg leading-relaxed text-foreground/90">
-          I'm a quantitative developer and researcher who owns the full loop — from the
-          exchange's raw feed, to the signal computed on it, to the decision of
-          <span class="font-medium text-copper">when that signal should not be traded</span>.
-        </p>
-        <p class="mt-4 leading-relaxed text-muted-foreground">
-          I started with rule-based option structures and moved steadily toward market microstructure
-          and time-series statistics: separating the order flow that's actually moving price from
-          liquidity that's just resting in the book, measuring whether a move has real direction or is
-          just noise, and letting thresholds adapt to the market instead of fixing them by hand.
-        </p>
-        <p class="mt-4 leading-relaxed text-muted-foreground">
-          I ship that research as production software in C++ and Python — deterministic, monitored and
-          fast enough to matter. Outside the desk I publish <span class="text-foreground">QuantResearch</span>
-          on PyPI and run <span class="text-foreground">The Algorithmic Forge</span> on YouTube.
-        </p>
+  <section id="about">
+    <div class="section-head">
+      <span class="section-index">01</span>
+      <span class="section-title">About</span>
+      <span class="section-sub">From raw exchange feed to the Greeks that price every structure sitting on top of it</span>
+    </div>
+    <div class="about-grid">
+      <div class="about-body">
+        <p>I'm a <b>quantitative developer and researcher</b> who owns the full loop — from the exchange's raw multicast tick, to the order-flow and volatility signal computed on it, to the options structure whose Greeks decide how much risk that signal is allowed to take.</p>
+        <p>My work sits where <b>market microstructure meets options mathematics</b>: reading order-book imbalance and liquidity flow on one side, and building Greeks-aware, premium-normalized structures — Iron Condors, Broken-Wing Butterflies, ratio spreads — on the other. Both run on production-grade C++ and Python infrastructure I built end to end, not a research notebook bolted onto someone else's system.</p>
+        <p>I publish some of that research as open-source software — <b>QuantResearch</b> on PyPI — and keep every backtest honest with walk-forward validation and realistic transaction costs before it ever sees live capital.</p>
+        <ul class="focus-list">
+          <li>Order-book microstructure, order-flow &amp; liquidity-imbalance signals</li>
+          <li>Options Greeks, IV surfaces &amp; premium-normalized structuring</li>
+          <li>Regime-aware strategy design: trend vs. range, adaptive risk by DTE</li>
+          <li>Low-latency C++ systems, lock-free data structures, production safety</li>
+        </ul>
       </div>
-      <div class="flex flex-col gap-6 md:col-span-2">
-        <div class="glass rounded-3xl p-6 sm:p-8">
-          <h3 class="mb-4 font-mono text-xs uppercase tracking-widest text-muted-foreground">Focus areas</h3>
-          <ul id="focus" class="space-y-3"></ul>
-        </div>
-        <div class="glass rounded-3xl p-6 sm:p-8">
-          <h3 class="mb-4 font-mono text-xs uppercase tracking-widest text-muted-foreground">Education</h3>
-          <ul id="education" class="space-y-4"></ul>
-        </div>
+      <div class="edu-card glass">
+        <h4>B.E., Computer Engineering</h4>
+        <div class="edu-sub">University of Mumbai</div>
+        <div class="edu-grade">8.43<span style="font-size:14px;color:var(--ink-2);"> / 10</span></div>
+        <div class="edu-grade-lbl">CGPA · 2021 – 2025</div>
+        <div class="edu-div"></div>
+        <div class="edu-note">HSC Mathematics 92% · SSC Mathematics 95% · Codeforces 1116 (active, improving). Applied focus: probability &amp; statistics, linear algebra, optimization — the mathematics underneath every model on this page.</div>
       </div>
     </div>
   </section>
 
   <!-- ============ EXPERIENCE ============ -->
-  <section id="experience" class="mx-auto max-w-5xl scroll-mt-28 px-4 py-24 sm:px-6">
-    <div data-heading="02|Experience|What I built in each role. Open any card to see the challenge and how I approached it; proprietary details stay at the level of ideas."></div>
-    <div id="roles" class="space-y-6"></div>
+  <section id="experience">
+    <div class="section-head">
+      <span class="section-index">02</span>
+      <span class="section-title">Experience</span>
+      <span class="section-sub">What I built in each role — open a card for the challenge and how I approached it</span>
+    </div>
+
+    <div class="timeline">
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-card glass">
+          <div class="tl-top"><span class="tl-role">Quantitative Associate</span><span class="tl-time">Dec 2025 — Present</span></div>
+          <div class="tl-org">Vikabh Securities <span class="sep"></span> Mumbai, India</div>
+          <p class="tl-intro">I research strategies and own the systems beneath them — from Greeks-aware options structuring to the low-latency C++ that reads the order book and the platform that turns all of it into something a trader can watch live.</p>
+
+          <div class="achv-grid">
+            <div class="achv" data-achv>
+              <div class="achv-head" onclick="toggleAchv(this)">
+                <div><h5>Market-data &amp; backtesting platform</h5><p>15+ services, raw feed to live execution</p></div>
+                <div class="achv-toggle">Show details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+              </div>
+              <div class="achv-body"><div class="achv-inner">
+                Architected an end-to-end production platform (React, FastAPI, QuestDB, Redis, DuckDB) across 15+ services, taking systematic options/futures strategies from the raw exchange feed to live execution.
+                <span class="chal-lbl">The challenge</span>Research, live execution, and dashboards all need the same tick data — but no single service can serve all three without one slowing the others down.
+                <span class="app-lbl">How I approached it</span>Split the platform into layers: ingestion, a fast in-memory read layer, and a historical query layer — so live trading never waits on research, and research never reads stale data.
+              </div></div>
+            </div>
+
+            <div class="achv" data-achv>
+              <div class="achv-head" onclick="toggleAchv(this)">
+                <div><h5>Multicast market-data engine in C++</h5><p>5,000,000-slot order pool, O(1) lookups</p></div>
+                <div class="achv-toggle">Show details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+              </div>
+              <div class="achv-body"><div class="achv-inner">
+                Built a three-tier C++ pipeline (LOB builder → binary logger → Python bridge) with a 5,000,000-slot preallocated order pool and O(1) hash-indexed lookups. 508-byte binary snapshots cut daily tick storage ~10–15× versus JSON, with warm-up state recovery restoring full parity after mid-day restarts.
+                <span class="chal-lbl">The challenge</span>JSON tick logs were too large to store a full day at tick resolution, and a restart mid-day lost the exact state of the order book.
+                <span class="app-lbl">How I approached it</span>Preallocate memory once, log in a compact binary format instead of JSON, and let the engine replay history on startup to rebuild the exact book before going live. Dual-feed redundancy with automatic gap detection and snapshot recovery lets the book self-heal after dropped packets without a restart.
+              </div></div>
+            </div>
+
+            <div class="achv" data-achv>
+              <div class="achv-head" onclick="toggleAchv(this)">
+                <div><h5>Active-active data gateway</h5><p>Dual-node QuestDB/Redis, automated failover</p></div>
+                <div class="achv-toggle">Show details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+              </div>
+              <div class="achv-body"><div class="achv-inner">
+                Designed a dual-node active-active QuestDB/Redis data gateway with a 5-minute staleness watchdog and NDJSON streaming, cutting API latency near-zero via a Redis sorted-set cache, plus a DuckDB/Parquet historical engine with hashed query caching and dynamic OHLC time-bucketing.
+                <span class="chal-lbl">The challenge</span>A single database node was a single point of failure, and dashboards needed instant "right now" data without heavy historical queries blocking it.
+                <span class="app-lbl">How I approached it</span>Run two database nodes in parallel with automatic failover, and put a Redis layer in front so live reads never touch the slower historical store.
+              </div></div>
+            </div>
+
+            <div class="achv" data-achv>
+              <div class="achv-head" onclick="toggleAchv(this)">
+                <div><h5>Smart-Netting OMS/RMS</h5><p>ZeroMQ pub/sub, single broker order per net signal</p></div>
+                <div class="achv-toggle">Show details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+              </div>
+              <div class="achv-body"><div class="achv-inner">
+                Designed a Smart-Netting OMS/RMS over ZeroMQ pub/sub that nets sub-strategy signals into a single broker order — with order slicing for exchange compliance, burst-queue batching, per-strategy risk guardrails, a relational database as single source of truth, and an emergency square-off kill switch.
+                <span class="chal-lbl">The challenge</span>Running several sub-strategies on the same instrument meant they could send fully offsetting orders to the broker, wasting cost and risking exchange limits.
+                <span class="app-lbl">How I approached it</span>Net every sub-strategy's desired position first, send the broker only the difference, and give every strategy a guardrail plus one switch that can flatten everything instantly.
+              </div></div>
+            </div>
+
+            <div class="achv" data-achv>
+              <div class="achv-head" onclick="toggleAchv(this)">
+                <div><h5>Greeks-aware backtesting suite</h5><p>Econophysics models, DTE-adaptive risk, 3yr walk-forward</p></div>
+                <div class="achv-toggle">Show details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+              </div>
+              <div class="achv-body"><div class="achv-inner">
+                Shipped a parallelized backtest suite spanning econophysics-style energy models, DTE-adaptive stoploss scaling, and premium-fraction options structuring (Iron Condor/BWB/ratio spreads); the portfolio module computes Sharpe/Sortino/skew/kurtosis and simulates Indian tax drag with high-water-mark tracking across rolling 3-year walk-forward tranches.
+                <span class="chal-lbl">The challenge</span>A strategy that looks good over one backtest window can be quietly relying on a single regime, or ignoring real costs and taxes.
+                <span class="app-lbl">How I approached it</span>Test every idea across rolling multi-year windows with real Indian tax drag built in, and attribute every trade's P&amp;L back to the specific Greek exposure that produced it.
+              </div></div>
+            </div>
+
+            <div class="achv" data-achv>
+              <div class="achv-head" onclick="toggleAchv(this)">
+                <div><h5>Options analytics dashboards</h5><p>Wavelet/spectral IV regime detection, live Greeks heatmaps</p></div>
+                <div class="achv-toggle">Show details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+              </div>
+              <div class="achv-body"><div class="achv-inner">
+                Applied wavelet (SWT/MRA — Daubechies-4, CWT — Complex Morlet) and spectral (Welch PSD, STFT) decomposition to options IV for volatility-regime detection, and delivered 6+ live dashboards (React, Recharts/Plotly) rendering synthetic-ATM option chains, Greeks matrices, and IV skew heatmaps in real time.
+                <span class="chal-lbl">The challenge</span>Volatility doesn't announce when it's changing regime, and a live Greeks book is hard to read from raw numbers alone.
+                <span class="app-lbl">How I approached it</span>Decompose the IV series with wavelet/spectral methods to catch regime changes early, and turn the Greeks book into live heatmaps a trader can read at a glance.
+              </div></div>
+            </div>
+            <div class="achv" data-achv>
+              <div class="achv-head" onclick="toggleAchv(this)">
+                <div><h5>Signal research methodology</h5><p>Three generations of an order-flow signal, each benchmarked on held-out data</p></div>
+                <div class="achv-toggle">Show details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+              </div>
+              <div class="achv-body"><div class="achv-inner">
+                Iterated from a static-threshold count of large resting orders, to a volume-weighted ratio, to a combined micro-price / order-flow-imbalance / drift-volatility signal with exponential weighting — benchmarking each against the last. Signal parameters and live performance stay proprietary.
+                <span class="chal-lbl">The challenge</span>It's easy to keep a signal because it looks good on the data it was built on.
+                <span class="app-lbl">How I approached it</span>Document each generation in a versioned spec and benchmark it against the last on held-out data. Key finding: the first two generations carried no real edge — direction- and volatility-awareness is what separated a useful filter from noise.
+              </div></div>
+            </div>
+
+            <div class="achv" data-achv>
+              <div class="achv-head" onclick="toggleAchv(this)">
+                <div><h5>Regime filtering &amp; validation</h5><p>Trend/chop classification, ablation tests, walk-forward backtester</p></div>
+                <div class="achv-toggle">Show details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+              </div>
+              <div class="achv-body"><div class="achv-inner">
+                Built trend/chop classification filters (realized-variance and trend-efficiency features, adaptive thresholds, hysteresis), and a walk-forward backtester with per-leg costs, next-bar slippage and rolling out-of-sample tranches.
+                <span class="chal-lbl">The challenge</span>A single-window backtest hides overfitting, and good components get mixed up with lucky ones.
+                <span class="app-lbl">How I approached it</span>Use ablation tests to separate the parts that improved out-of-sample stability from the ones that were overfit to the sample window — and build the backtester specifically to catch what a naive one hides.
+              </div></div>
+            </div>
+          </div>
+
+          <div class="chip-row" style="margin-top:20px;">
+            <span class="chip">C++17</span><span class="chip">Python</span><span class="chip">React</span><span class="chip">FastAPI</span><span class="chip">Redis</span><span class="chip">QuestDB</span><span class="chip">DuckDB</span><span class="chip">ZeroMQ</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-card glass">
+          <div class="tl-top"><span class="tl-role">AI/ML Engineer</span><span class="tl-time">Jun 2025 — Dec 2025</span></div>
+          <div class="tl-org">Bixware Technologies <span class="sep"></span> Mumbai, India</div>
+          <ul class="tl-list">
+            <li>Built a <b>RAG chatbot</b> (LangChain, vector search, ChatGPT/Gemini) that cut retrieval latency 50% via caching and index tuning across 500+ document repositories.</li>
+            <li>Built <b>ELT/ETL pipelines</b> (SQL, Pandas, Databricks) processing 100M+ daily retail transaction rows, with schema validation and data-quality checks, at 99.9% uptime across 10+ client deployments.</li>
+          </ul>
+          <div class="chip-row">
+            <span class="chip">LangChain</span><span class="chip">Vector search</span><span class="chip">Databricks</span><span class="chip">SQL</span><span class="chip">Pandas</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-card glass">
+          <div class="tl-top"><span class="tl-role">Implementation Engineer</span><span class="tl-time">Jan 2025 — Mar 2025</span></div>
+          <div class="tl-org">Engagely.ai (BCG Consulting Partnership) <span class="sep"></span> Mumbai, India</div>
+          <ul class="tl-list">
+            <li>Deployed a production <b>WhatsApp bot</b> (Flask, webhooks) serving 50,000+ daily messages; intent classification and response routing drove a 35% engagement uplift.</li>
+          </ul>
+          <div class="chip-row">
+            <span class="chip">Flask</span><span class="chip">Webhooks</span><span class="chip">NLP</span><span class="chip">GenAI</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
   </section>
 
-  <!-- ============ PROJECTS ============ -->
-  <section id="projects" class="mx-auto max-w-5xl scroll-mt-28 px-4 py-24 sm:px-6">
-    <div data-heading="03|Selected Work|Systems, research, and teaching where speed and statistics compound."></div>
-    <div id="project-grid" class="grid gap-4 sm:grid-cols-2"></div>
+  <!-- ============ TECH ============ -->
+  <section id="tech">
+    <div class="section-head">
+      <span class="section-index">03</span>
+      <span class="section-title">Tech</span>
+      <span class="section-sub">The systems and dashboards that turn research into something a trader can watch and trust</span>
+    </div>
+    <p class="section-lede">Everything below runs live on the desk. Open any card — the first is the options-Greeks dashboard itself, explained the way a trader would read it; the rest are the infrastructure underneath it.</p>
+
+    <div class="deep-card glass" data-deep>
+      <div class="deep-head" onclick="toggleDeep(this)">
+        <div class="deep-head-left">
+          <div class="deep-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 14l4-5 3 3 5-7"/></svg></div>
+          <div>
+            <h3>Real-time Greeks &amp; IV Analytics Dashboard</h3>
+            <p class="deep-sub">Live Delta, Gamma, Theta and Vega across every leg of a strategy, alongside synthetic-ATM option chains and IV skew heatmaps — built so a trader sees not just P&amp;L, but why it moved.</p>
+          </div>
+        </div>
+        <div class="deep-toggle">Show breakdown <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+      </div>
+      <div class="deep-body"><div class="deep-inner">
+        <div class="divider"></div>
+        <div class="why-it-matters"><b>Why this exists:</b> a trader who only watches price is blind to <i>why</i> the P&amp;L moved. Watching all four Greeks together tells you whether today's move came from direction, acceleration of that direction, time decay, or a shift in the market's fear — and that decides whether to hold, hedge, or exit.</div>
+        <div class="greek-grid">
+          <div class="greek-item"><div class="g-sym">Δ</div><div class="g-name">Delta</div><p>How much an option's price moves for a ₹1 move in the underlying — effectively your directional exposure. Traders watch <b>net Delta</b> to know how long or short the book really is right now, not just on paper.</p></div>
+          <div class="greek-item"><div class="g-sym">Γ</div><div class="g-name">Gamma</div><p>How fast Delta itself changes as the underlying moves — the risk that a "safe" position suddenly isn't. High Gamma near expiry is why 0-DTE options can swing a book violently in minutes.</p></div>
+          <div class="greek-item"><div class="g-sym">Θ</div><div class="g-name">Theta</div><p>The daily cost — or income, if you're a seller — of time passing. It's the rent every option position pays or collects; premium-selling strategies live and die by Theta versus the other Greeks.</p></div>
+          <div class="greek-item"><div class="g-sym">ν</div><div class="g-name">Vega</div><p>Sensitivity to implied volatility itself, independent of direction. A position can lose money on a directionally correct call if IV crushes hard enough after the move.</p></div>
+        </div>
+        <div class="chip-row">
+          <span class="chip">Synthetic-ATM chain construction</span><span class="chip">Post-trade Greek attribution</span><span class="chip">IV skew heatmaps</span><span class="chip">Wavelet/spectral IV regime detection</span>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="deep-card glass" data-deep style="margin-top:18px;">
+      <div class="deep-head" onclick="toggleDeep(this)">
+        <div class="deep-head-left">
+          <div class="deep-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/><path d="M8 4v5"/></svg></div>
+          <div>
+            <h3>Market-Data &amp; Execution Platform</h3>
+            <p class="deep-sub">The 15+ service platform — multicast C++ ingestion, active-active data gateway, and the Smart-Netting order/risk layer — that carries a signal from the exchange feed to a filled order.</p>
+          </div>
+        </div>
+        <div class="deep-toggle">Show breakdown <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+      </div>
+      <div class="deep-body"><div class="deep-inner">
+        <div class="divider"></div>
+        <div class="why-it-matters"><b>Why this exists:</b> a trader trusts a signal only as far as they trust the plumbing beneath it. This platform rebuilds the exchange order book directly from raw multicast — not a third-party feed — keeps two database nodes running in parallel so a node failure never blackouts a screen, and nets every sub-strategy's orders before anything reaches the broker. The same signal that fires on paper is the exact position that lands in the market, with nothing lost to latency, duplicate fills, or a stale cache.</div>
+
+        <div class="tech-note" data-note>
+          <div class="note-head" onclick="toggleNote(this)">
+            <div><h4>Building the order book — market-data engine (C++)</h4><p>One raw multicast packet → one accurate, ranked order book, tens of thousands of times a second</p></div>
+            <div class="note-toggle">Show technical breakdown <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+          </div>
+          <div class="note-body"><div class="note-inner">
+            <p>Every listed strike needs its own live limit order book, rebuilt tick by tick, with no room for a slow allocation or a blocking lock anywhere near the hot path. Here's the pipeline, piece by piece, and why each one is built the way it is:</p>
+            <ul class="tech-list">
+              <li><b>Lock-free SPSC ring buffer:</b> incoming multicast packets land in a single-producer/single-consumer ring buffer sized as a power of two, so wraparound is a fast bitmask instead of a modulo operation, and the read/write pointers are padded onto their own cache lines. This lets the network-receive thread and the book-building thread run flat out on separate CPU cores without ever taking a lock or waiting on each other — the classic bottleneck in any tick-processing pipeline.</li>
+              <li><b>CPU core pinning:</b> every hot thread — the multicast receiver, the book builder, the snapshot sender — is pinned to its own core via thread affinity, so the OS scheduler never migrates it mid-burst and its working data stays warm in that core's cache. That's the difference between consistently low microsecond latency and occasional multi-millisecond stalls that show up as "random" slippage.</li>
+              <li><b>Free-list pool allocator for orders:</b> every individual resting order lives in a preallocated array — nothing is allocated on the hot path. A stack of free slot indices hands out and reclaims order slots in O(1), so tens of thousands of adds, modifies and cancels a second never touch a memory allocator or fragment memory over the course of a session.</li>
+              <li><b>Hash-map order index:</b> a hash map keyed on the exchange's own order ID resolves straight to that order's slot in the pool in O(1). This matters because a modify or cancel message references an order ID, not a price — the book has to find and mutate the exact right order instantly, out of tens of thousands resting at any moment.</li>
+              <li><b>Direct-indexed price-level array — the book itself:</b> rather than a sorted tree or map of price levels (an O(log n) update every single time), price levels live in one large flat array indexed directly by price-tick, so updating a level is a single array write — O(1), not O(log n). Best-bid and best-ask pointers only ever step forward from wherever they last were, so re-finding the top of book after a change is also O(1) amortized, never a full re-scan of the ladder.</li>
+              <li><b>Packed binary snapshot format:</b> the book is exported as a fixed-layout, byte-packed struct — no padding, no JSON — so a full 20-level, both-sides snapshot with timestamp and trade info for one instrument fits in a few hundred bytes. That compact wire format is what makes storing a full day of tick history ~10–15× smaller than the equivalent JSON.</li>
+              <li><b>Sequence-gap detection &amp; recovery:</b> every multicast stream is sequence-numbered; the engine tracks the next expected sequence number per stream, and any gap, duplicate or reset is counted and reconciled against exchange snapshots rather than silently ignored. A dropped packet becomes a detected, repaired event instead of an invisible source of a wrong book.</li>
+              <li><b>Zero-copy, zero-tick-loss forwarding:</b> downstream, a second ring-buffered service receives those binary snapshots over a Unix domain socket and fans them out to every consumer — loggers, live strategy signal-builders — at once. Busy-wait polling between checks uses a CPU pause instruction rather than sleeping, trading a small amount of CPU time for the lowest possible latency instead of scheduler jitter from waking a sleeping thread.</li>
+            </ul>
+          </div></div>
+        </div>
+
+        <div class="tech-note" data-note>
+          <div class="note-head" onclick="toggleNote(this)">
+            <div><h4>Execution &amp; risk layer — Smart-Netting OMS/RMS</h4><p>Everything between "the model says trade" and "the broker has the position"</p></div>
+            <div class="note-toggle">Show technical breakdown <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+          </div>
+          <div class="note-body"><div class="note-inner">
+            <p>A signal is only as good as the order it actually turns into. This layer sits between every strategy's decision and the broker, and is where cost, compliance and crash-safety are actually enforced:</p>
+            <ul class="tech-list">
+              <li><b>Signal aggregation / netting:</b> several sub-strategies can independently want a position in the same instrument at the same instant. Before anything reaches the broker, every sub-strategy's target is summed into one net target per instrument, and only the delta between that and the current live position is what actually gets ordered — eliminating fully-offsetting trades that would otherwise cost brokerage and slippage for zero net change in exposure.</li>
+              <li><b>ZeroMQ pub/sub messaging:</b> strategy signals are published over ZeroMQ rather than polled over HTTP, so the netting layer reacts the instant a signal is published instead of on the next poll cycle — removing an entire class of latency that comes down to simply "how often did we bother to ask."</li>
+              <li><b>Order slicing for exchange compliance:</b> exchanges cap the quantity permitted per order; the engine automatically slices a large net order into compliant chunks and paces them out, instead of requiring every individual strategy to know and respect that limit itself.</li>
+              <li><b>Per-strategy risk guardrails:</b> position limits are enforced per strategy — some constrained long-only — independent of the netting math, so one mis-behaving signal can never silently override another strategy's risk budget.</li>
+              <li><b>Database as single source of truth:</b> every position and order is written synchronously to a relational database, not just held in memory. If a process crashes or the server reboots mid-session, it queries its own last known state on restart and rebuilds its exact market exposure instead of guessing — or worse, doubling a position it forgot it already held.</li>
+              <li><b>Emergency square-off kill switch:</b> a separate, deliberately minimal tool that bypasses all strategy logic entirely and can flatten every open position by querying the database directly. It's the one button that has to work even if everything else on the desk is on fire.</li>
+            </ul>
+          </div></div>
+        </div>
+
+        <div class="chip-row">
+          <span class="chip">Lock-free SPSC ring buffers</span><span class="chip">Free-list pool allocation</span><span class="chip">O(1) hash-map order index</span><span class="chip">Direct-indexed price-array book</span><span class="chip">Packed binary wire format</span><span class="chip">Sequence-gap recovery</span><span class="chip">CPU core pinning</span><span class="chip">ZeroMQ pub/sub</span><span class="chip">Order netting &amp; slicing</span><span class="chip">DB-backed state recovery</span>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="deep-card glass" data-deep style="margin-top:18px;">
+      <div class="deep-head" onclick="toggleDeep(this)">
+        <div class="deep-head-left">
+          <div class="deep-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div>
+          <div>
+            <h3>API Gateway — Quantitative Endpoints &amp; Lifecycle</h3>
+            <p class="deep-sub">Beyond just moving data, the gateway does live quant math on the way out — plus the daemon that starts, stops and cleans up the whole system every trading day.</p>
+          </div>
+        </div>
+        <div class="deep-toggle">Show breakdown <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+      </div>
+      <div class="deep-body"><div class="deep-inner">
+        <div class="divider"></div>
+        <p style="font-size:13.5px; color:var(--ink-1); line-height:1.75; margin-bottom:18px;">The active-active gateway above moves the data; this is what it does to the data on the way out, and how it keeps itself healthy across a trading day without anyone watching it.</p>
+        <div class="chip-row">
+          <span class="chip">Dynamic ATM calculation — live off the Synthetic Future price</span>
+          <span class="chip">Strategy Premium Builder — multi-leg forward-fill (e.g. a straddle)</span>
+          <span class="chip">Low-IV noise filtering — excludes broken deep-OTM quotes</span>
+          <span class="chip">Historical time-lock guard — blocks heavy queries in market hours</span>
+          <span class="chip">Autonomous daemon — 7am start · 4pm ingestion stop · 6pm cache wipe</span>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="deep-card glass" data-deep style="margin-top:18px;">
+      <div class="deep-head" onclick="toggleDeep(this)">
+        <div class="deep-head-left">
+          <div class="deep-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V6a2 2 0 0 1 2-2h8l6 6v9a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><path d="M14 4v6h6"/></svg></div>
+          <div>
+            <h3>QuantResearch — Open-Source Backtesting Library</h3>
+            <p class="deep-sub">Published on PyPI (v2.5) — a compiled scripting language for strategies, 18+ technical indicators, and institutional risk metrics, so anyone can backtest an idea with the same rigor used on the desk. Co-developed with V. Mishra.</p>
+          </div>
+        </div>
+        <div class="deep-toggle">Show breakdown <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+      </div>
+      <div class="deep-body"><div class="deep-inner">
+        <div class="divider"></div>
+        <p style="font-size:13.5px; color:var(--ink-1); line-height:1.75; margin-bottom:18px;">Built around <b style="color:var(--ink-0);">QuantQL</b>, a compiled domain-specific language for strategy scripting — indicator-based entry/exit logic, stop-loss/take-profit, commission and slippage modeling, and automated equity-curve reporting. Covers NSE, BSE, US and crypto with live WebSocket streaming, and a 5-tab GUI dashboard for real-time charting.</p>
+        <div class="chip-row">
+          <span class="chip">18+ indicators (RSI, MACD, Ichimoku, ADX…)</span><span class="chip">Sharpe · Sortino · Calmar · VaR · CVaR</span><span class="chip">Multi-market data engine</span><span class="chip">Live WebSocket streaming</span>
+        </div>
+      </div></div>
+    </div>
   </section>
 
-  <!-- ============ RECOGNITION ============ -->
-  <section id="awards" class="mx-auto max-w-5xl scroll-mt-28 px-4 py-24 sm:px-6">
-    <div data-heading="04|Competitions & recognition|National, global and industry competitions where I shipped working systems under deadline."></div>
-    <div id="award-grid" class="grid gap-4 md:grid-cols-2"></div>
-  </section>
+  <!-- ============ RESEARCH ============ -->
+  <section id="research">
+    <div class="section-head">
+      <span class="section-index">04</span>
+      <span class="section-title">Research</span>
+      <span class="section-sub">How frequency, not just direction, decides which edge fits which market</span>
+    </div>
+    <p class="section-lede">Same underlying discipline — regime detection, adaptive risk — applied wherever the signal actually lives: from the shape of implied volatility across a session, down to the shape of the order book in microseconds. Described here in market terms, not in the underlying code. Open the Research Journey tab on the right edge to see how it evolved, then the strategies by frequency below.</p>
 
-  <!-- ============ SKILLS ============ -->
-  <section id="skills" class="mx-auto max-w-5xl scroll-mt-28 px-4 py-24 sm:px-6">
-    <div data-heading="05|Toolkit|The instruments I reach for — from proofs to production."></div>
-    <div id="skill-grid" class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"></div>
-  </section>
+    <div class="freq-label"><h3>Medium-Frequency Strategies</h3><span class="freq-badge">Holding period: minutes to full session</span></div>
+    <div class="strat-grid">
+      <div class="strat-card glass">
+        <h4>Momentum energy models</h4>
+        <p class="concept">An econophysics-style read on trend — price momentum treated like kinetic energy, and its distance from a fair-value anchor (VWAP/EMA) treated like potential energy, with exits triggered on the first signs of deceleration rather than a lagging crossover.</p>
+        <span class="behavior-lbl">Market behavior</span>
+        <p class="behavior">Performs best in <b>genuinely trending sessions</b> where a move keeps adding energy in the same direction, and gives back less on the way down by exiting as momentum fades instead of waiting for confirmation. Struggles in choppy, directionless sessions where price oscillates without ever building sustained momentum.</p>
+        <div class="tech-note" data-note style="margin-top:14px; margin-bottom:0;">
+          <div class="note-head" onclick="toggleNote(this)">
+            <div><h4 style="font-size:13px;">Go deeper</h4></div>
+            <div class="note-toggle" data-show="Show more " data-hide="Hide more ">Show more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+          </div>
+          <div class="note-body"><div class="note-inner" style="padding-top:2px;">
+            <p style="margin-bottom:0;">The exit condition specifically watches for deceleration — the rate at which momentum itself is slowing — rather than waiting for a moving-average crossover, which by construction lags the actual turn. In practice this can mean exiting a trade several bars before a classic crossover-based system would even register the reversal, at the cost of occasionally exiting into what turns out to be only a brief pause rather than a genuine top.</p>
+            <p style="margin-top:10px; margin-bottom:0;">This family grew out of a physics analogy — price as a system exchanging potential energy (distance from equilibrium) for kinetic energy (velocity) — applied to range-bound days. It was tested on March 2025 and did poorly, because that window was a one-directional panic-selling shock rather than a range. The lesson kept: separate “the model failed” from “the regime wasn't the one it was built for.”</p>
+          </div></div>
+        </div>
+      </div>
+      <div class="strat-card glass">
+        <h4>VWAP-anchored trend signal</h4>
+        <p class="concept">Watches price velocity relative to VWAP, paired with a stop-loss that tightens automatically as days-to-expiry shrinks — because Theta and Gamma risk both rise sharply as expiry nears.</p>
+        <span class="behavior-lbl">Market behavior</span>
+        <p class="behavior">Suited to sessions building a <b>clear directional bias</b> through the day; risk naturally shrinks on expiry day and loosens further from expiry. Underperforms on quiet, low-realized-volatility days where price never moves far enough from VWAP to trigger a real signal.</p>
+        <div class="tech-note" data-note style="margin-top:14px; margin-bottom:0;">
+          <div class="note-head" onclick="toggleNote(this)">
+            <div><h4 style="font-size:13px;">Go deeper</h4></div>
+            <div class="note-toggle" data-show="Show more " data-hide="Hide more ">Show more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+          </div>
+          <div class="note-body"><div class="note-inner" style="padding-top:2px;">
+            <p style="margin-bottom:0;">The adaptive stop doesn't move by a fixed number of points — it scales with realized short-term volatility and is compressed further by how many days remain to expiry, so the same signal carries a materially different stop distance on a five-day-to-expiry session versus expiry day itself. That keeps risk roughly comparable in rupee terms even as Gamma and Theta both accelerate sharply into the final sessions.</p>
+          </div></div>
+        </div>
+      </div>
+      <div class="strat-card glass">
+        <h4>Premium-fraction options structuring</h4>
+        <p class="concept">Non-directional, Theta-harvesting structures — Iron Condor, Broken-Wing Butterfly, ratio spreads — where strikes are chosen by what fraction of the ATM premium they cost, not a fixed strike distance or fixed Delta.</p>
+        <span class="behavior-lbl">Market behavior</span>
+        <p class="behavior">Normalizes risk across calm and volatile days: on high-IV days the structure automatically widens, on low-IV days it tightens, keeping exposure comparable session to session. Profits from <b>range-bound, Theta-friendly</b> days; most exposed to sudden gaps or a sharp volatility expansion a static structure can't react to intraday.</p>
+        <div class="tech-note" data-note style="margin-top:14px; margin-bottom:0;">
+          <div class="note-head" onclick="toggleNote(this)">
+            <div><h4 style="font-size:13px;">Go deeper</h4></div>
+            <div class="note-toggle" data-show="Show more " data-hide="Hide more ">Show more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+          </div>
+          <div class="note-body"><div class="note-inner" style="padding-top:2px;">
+            <p style="margin-bottom:0;">Because strikes are chosen by premium fraction rather than fixed distance or fixed Delta, the same instruction — say, sell the option at roughly three-quarters of the ATM premium and buy the one at roughly a quarter — produces a wide structure on a high-VIX day and a tight one on a low-VIX day automatically, with no manual re-parameterization needed as the volatility regime shifts session to session.</p>
+          </div></div>
+        </div>
+      </div>
+      <div class="strat-card glass">
+        <h4>Rolling walk-forward validation</h4>
+        <p class="concept">Every medium-frequency idea above is tested across rolling multi-year tranches rather than one long backtest window, with realistic slippage, transaction costs, and Indian tax drag applied throughout.</p>
+        <span class="behavior-lbl">Market behavior</span>
+        <p class="behavior">Surfaces whether a strategy actually <b>survives distinct macro regimes</b> — a sharp crash, a grinding low-volatility year — instead of looking good only because one favorable period dominates the sample.</p>
+        <div class="tech-note" data-note style="margin-top:14px; margin-bottom:0;">
+          <div class="note-head" onclick="toggleNote(this)">
+            <div><h4 style="font-size:13px;">Go deeper</h4></div>
+            <div class="note-toggle" data-show="Show more " data-hide="Hide more ">Show more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+          </div>
+          <div class="note-body"><div class="note-inner" style="padding-top:2px;">
+            <p style="margin-bottom:0;">Beyond the headline return, every tranche is also scored on higher-order moments — skew and kurtosis of the return distribution — because a strategy with excellent average returns but strongly negative skew is quietly building toward one large loss, which a Sharpe ratio alone won't reveal.</p>
+          </div></div>
+        </div>
+      </div>
+      <div class="strat-card glass">
+        <h4>Velocity &amp; Runner — intraday trend</h4>
+        <p class="concept">Two intraday trend strategies that enter on the momentum strength of the option or asset being traded. Velocity takes profit at a target scaled to the index's ATM implied volatility; Runner drops the fixed target and the forced end-of-day exit to ride the whole move.</p>
+        <span class="behavior-lbl">Market behavior</span>
+        <p class="behavior">Velocity captures ordinary directional days cleanly, and its target breathes with real-time volatility instead of sitting at fixed points. Runner earns the most on <b>strong momentum days that run past the normal band</b>. Both lose on choppy days where the index oscillates inside its usual deviation band — which is exactly the gap the Energy research was started to close.</p>
+        <div class="tech-note" data-note style="margin-top:14px; margin-bottom:0;">
+          <div class="note-head" onclick="toggleNote(this)">
+            <div><h4 style="font-size:13px;">Go deeper</h4></div>
+            <div class="note-toggle" data-show="Show more " data-hide="Hide more ">Show more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+          </div>
+          <div class="note-body"><div class="note-inner" style="padding-top:2px;">
+            <p style="margin-bottom:10px;">The stop is DTE-aware: it tightens as expiry approaches and loosens further out, because the same move means very different things to an option with six days left and one with hours left — theta and gamma risk are not constant across the cycle.</p>
+            <p style="margin-bottom:10px;">Runner's trade-off is deliberate: it gives up the certainty of a target to avoid missing the day's biggest move, so its P&amp;L is lumpier but its winners are larger.</p>
+          </div></div>
+        </div>
+      </div>
+      <div class="strat-card glass">
+        <h4>Swing variant — OBI + drift, longer horizon</h4>
+        <p class="concept">Derived from the same order-book-imbalance and drift framework as the high-frequency work, but held over a longer horizon — letting a confirmed trend run instead of scalping it.</p>
+        <span class="behavior-lbl">Market behavior</span>
+        <p class="behavior">Fewer trades, so <b>cost drag per unit of edge falls</b>, and it holds through intraday noise once drift confirms direction. It is weakest when drift flips quickly or an overnight gap lands against the position. This variant has also worked in practice.</p>
+        <div class="tech-note" data-note style="margin-top:14px; margin-bottom:0;">
+          <div class="note-head" onclick="toggleNote(this)">
+            <div><h4 style="font-size:13px;">Go deeper</h4></div>
+            <div class="note-toggle" data-show="Show more " data-hide="Hide more ">Show more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+          </div>
+          <div class="note-body"><div class="note-inner" style="padding-top:2px;">
+            <p style="margin-bottom:10px;">Because it reuses the proven signal framework rather than inventing a new one, the swing version inherits the same causal, no-look-ahead discipline as the faster strategies.</p>
+          </div></div>
+        </div>
+      </div>
+    </div>
 
-  <!-- ============ YOUTUBE ============ -->
-  <section id="youtube" class="mx-auto max-w-5xl scroll-mt-28 px-4 py-24 sm:px-6">
-    <div data-heading="06|The Algorithmic Forge|My YouTube series mapping MIT 18.06 linear algebra to real, tradable quant strategies."></div>
-    <div class="glass-strong grid gap-6 overflow-hidden rounded-[2rem] p-4 sm:p-6 lg:grid-cols-2 lg:items-center">
-      <a data-href="youtubeLatest" target="_blank" rel="noopener noreferrer" class="group relative block overflow-hidden rounded-2xl" aria-label="Watch the latest episode on YouTube">
-        <img id="yt-thumb" alt="Latest episode: null space arbitrage portfolios" class="aspect-video w-full object-cover transition-transform duration-500 group-hover:scale-105" />
-        <span class="absolute inset-0 grid place-items-center">
-          <span class="grid h-16 w-16 place-items-center rounded-full bg-gradient-to-br from-copper to-cyan-accent text-primary-foreground shadow-xl transition-transform group-hover:scale-110">
-            <span data-icon="play" class="translate-x-0.5"></span>
-          </span>
-        </span>
-      </a>
-      <div class="p-2 sm:p-4">
-        <span class="inline-flex items-center gap-2 rounded-full glass px-3 py-1 text-xs font-medium text-muted-foreground">
-          <span class="h-2 w-2 rounded-full bg-red-500"></span>
-          Now airing · Part 1 of 10
-        </span>
-        <h3 class="mt-4 font-serif text-2xl font-semibold leading-tight">Null Space Arbitrage: turning Ax = 0 into a market-neutral portfolio</h3>
-        <ul id="chapters" class="mt-5 space-y-2.5"></ul>
-        <div class="mt-6 flex flex-wrap gap-3">
-          <a data-href="youtubeLatest" target="_blank" rel="noopener noreferrer" class="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-copper to-cyan-accent px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-lg transition-transform hover:-translate-y-0.5">
-            Watch the episode
-            <span data-icon="arrow" class="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"></span>
-          </a>
-          <a data-href="youtubeChannel" target="_blank" rel="noopener noreferrer" class="glass glass-hover inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold">Subscribe to the channel</a>
+    <div class="freq-label"><h3>High-Frequency Strategies</h3><span class="freq-badge">Holding period: seconds to a few minutes</span></div>
+    <div class="strat-grid">
+      <div class="strat-card glass">
+        <h4>Order-book imbalance &amp; liquidity dominance</h4>
+        <p class="concept">Measures the volume of large resting orders on the bid versus the ask across several rolling lookback windows, to read which side of the book genuine size is stacking on.</p>
+        <span class="behavior-lbl">Market behavior</span>
+        <p class="behavior">Markets tend to move toward where liquidity is being pulled or stacked, so this reads directional pressure <b>before it shows up in price</b>. Cross-checking resting size that persists for several ticks against one-tick flickers helps separate real institutional interest from spoofing; most reliable in liquid, actively-traded strikes and loses edge in thin, wide-spread contracts.</p>
+        <div class="tech-note" data-note style="margin-top:14px; margin-bottom:0;">
+          <div class="note-head" onclick="toggleNote(this)">
+            <div><h4 style="font-size:13px;">Go deeper</h4></div>
+            <div class="note-toggle" data-show="Show more " data-hide="Hide more ">Show more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+          </div>
+          <div class="note-body"><div class="note-inner" style="padding-top:2px;">
+            <p style="margin-bottom:0;">Resting size is read across several rolling lookback windows at once — short, medium and longer horizons — rather than a single window, so the signal distinguishes a genuinely building imbalance from a brief, one-tick flicker of size that vanishes as fast as it appeared. Depth sitting right at the top of book is weighted more heavily than depth resting further away, mirroring how a trader reading the tape would naturally read it.</p>
+          </div></div>
+        </div>
+      </div>
+      <div class="strat-card glass">
+        <h4>Order-flow confirmation on the tape</h4>
+        <p class="concept">A short-horizon signal built from actual traded buy/sell flow — not resting orders — requiring flow and price to agree on direction for a couple of consecutive bars before it commits.</p>
+        <span class="behavior-lbl">Market behavior</span>
+        <p class="behavior">Keeps the strategy out of moves where price drifts but nobody's actually pressing the trade — the kind of move that reverses just as fast. Performs well in <b>liquid, directionally-trending tape</b>; gets whipsawed in low-volume, indecisive periods where flow flips faster than price can confirm it.</p>
+        <div class="tech-note" data-note style="margin-top:14px; margin-bottom:0;">
+          <div class="note-head" onclick="toggleNote(this)">
+            <div><h4 style="font-size:13px;">Go deeper</h4></div>
+            <div class="note-toggle" data-show="Show more " data-hide="Hide more ">Show more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+          </div>
+          <div class="note-body"><div class="note-inner" style="padding-top:2px;">
+            <p style="margin-bottom:0;">This is deliberately a two-bar-confirmation signal rather than a one-tick trigger: the first bar establishes that flow and price agree, and the second confirms it wasn't a single print. That one extra bar of patience is a direct trade-off between reacting faster and reacting to something that turns out to be noise — tuned firmly toward the latter.</p>
+          </div></div>
+        </div>
+      </div>
+      <div class="strat-card glass">
+        <h4>Microsecond execution layer</h4>
+        <p class="concept">The lock-free, core-pinned C++ path that acts on these signals — infrastructure, not a strategy in itself, but the layer that decides whether a genuine signal is actually captured.</p>
+        <span class="behavior-lbl">Market behavior</span>
+        <p class="behavior">In HFT, being a few hundred microseconds slower than the rest of the market is functionally the same as being wrong, even when the signal was right. This layer determines <b>how much of a genuine edge is collected versus lost to latency</b>.</p>
+        <div class="tech-note" data-note style="margin-top:14px; margin-bottom:0;">
+          <div class="note-head" onclick="toggleNote(this)">
+            <div><h4 style="font-size:13px;">Go deeper</h4></div>
+            <div class="note-toggle" data-show="Show more " data-hide="Hide more ">Show more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+          </div>
+          <div class="note-body"><div class="note-inner" style="padding-top:2px;">
+            <p style="margin-bottom:0;">Because the strategy layer and the execution layer are architecturally separate, the execution path can be re-optimized — faster parsing, a leaner network transport — without touching a single line of the logic that decides direction, and vice versa. That separation is itself a risk decision: it keeps a latency experiment from being able to accidentally change what a strategy believes about the market.</p>
+          </div></div>
+        </div>
+      </div>
+      <div class="strat-card glass">
+        <h4>Premium &amp; liquidity gatekeeping</h4>
+        <p class="concept">A guardrail that refuses entries when option premium falls below a minimum threshold, regardless of how strong the underlying signal looks.</p>
+        <span class="behavior-lbl">Market behavior</span>
+        <p class="behavior">Protects against Gamma risk and liquidity traps in deep out-of-the-money options near expiry, where the bid-ask spread can be <b>wider than the theoretical edge</b> the signal is chasing — a filter that costs a few trades to avoid the ones that would have lost regardless of direction.</p>
+        <div class="tech-note" data-note style="margin-top:14px; margin-bottom:0;">
+          <div class="note-head" onclick="toggleNote(this)">
+            <div><h4 style="font-size:13px;">Go deeper</h4></div>
+            <div class="note-toggle" data-show="Show more " data-hide="Hide more ">Show more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+          </div>
+          <div class="note-body"><div class="note-inner" style="padding-top:2px;">
+            <p style="margin-bottom:0;">The threshold isn't about the strategy's view being wrong — it's about the cost of trading it. Below a certain premium, the bid-ask spread on a deep out-of-the-money option can be a large fraction of the option's entire value, meaning the position would need an outsized favorable move just to cover the cost of entering and exiting, before any edge from the signal itself is realized.</p>
+          </div></div>
+        </div>
+      </div>
+      <div class="strat-card glass">
+        <h4>Volume Run — order-flow engine</h4>
+        <p class="concept">The production order-flow strategy. It measures buy versus sell pressure from the order book across several lookback windows at once, compares a fast read of that flow against a slow one, and requires price to confirm before it commits — trading a small, expiry-adaptive set of ATM and near-OTM options. Position state moves between flat, long and short, with confirmation over consecutive bars on both entry and exit.</p>
+        <span class="behavior-lbl">Market behavior</span>
+        <p class="behavior">Strongest when <b>flow and price push the same way</b> — directional bursts and post-event moves. In flat, low-volume tape it can be whipsawed, which is why the confirmation requirement exists. And because it holds several strikes at once, it carries residual exposure that isn't visible from any single position — the problem the dynamic hedge below is built around.</p>
+        <div class="tech-note" data-note style="margin-top:14px; margin-bottom:0;">
+          <div class="note-head" onclick="toggleNote(this)">
+            <div><h4 style="font-size:13px;">Go deeper</h4></div>
+            <div class="note-toggle" data-show="Show more " data-hide="Hide more ">Show more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+          </div>
+          <div class="note-body"><div class="note-inner" style="padding-top:2px;">
+            <p style="margin-bottom:10px;">Multiple windows let it tell a building imbalance from a one-tick flicker. Requiring price confirmation keeps it out of moves where size is resting but nobody is actually pushing the market.</p>
+            <p style="margin-bottom:10px;">Net exposure is not just “add up the quantities”: calls and puts, near-the-money and far strikes, and long and short legs all respond very differently to the same move.</p>
+          </div></div>
+        </div>
+      </div>
+      <div class="strat-card glass">
+        <h4>Dynamic scalping hedge for Volume Run</h4>
+        <p class="concept">A hedge that reacts to what the strategy actually holds, instead of carrying the same protective structure all day. Today a predefined multi-leg options structure (Static V3) is held alongside Volume Run as partial protection — but it is static: it never looks at Volume Run's live book. The research goal is a hedge engine that reads the live exposure — which strikes, calls or puts, long or short, how large — aggregates the delta-, gamma- and vega-style sensitivity of the whole position, decides whether a hedge is warranted at all, and then takes and removes a temporary hedge.</p>
+        <span class="behavior-lbl">Market behavior</span>
+        <p class="behavior">Designed as a <b>hybrid</b>: a slower, minute-level read of state authorizes a hedge, and tick-level timing handles the entry and exit — so the decision doesn't flip on every tick, but execution is still responsive. The risk it has to manage is its own cost: hedging too eagerly just converts protection into spread and churn, so “no hedge” is a first-class outcome.</p>
+        <div class="tech-note" data-note style="margin-top:14px; margin-bottom:0;">
+          <div class="note-head" onclick="toggleNote(this)">
+            <div><h4 style="font-size:13px;">Go deeper</h4></div>
+            <div class="note-toggle" data-show="Show more " data-hide="Hide more ">Show more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+          </div>
+          <div class="note-body"><div class="note-inner" style="padding-top:2px;">
+            <p style="margin-bottom:10px;">It is evaluated against four setups on equal footing — Volume Run alone; with the static hedge; with the dynamic hedge; and with both — so the dynamic version has to earn its place on combined P&amp;L and drawdown, not on a flattering chart.</p>
+            <p style="margin-bottom:10px;">The first step is mathematical, not code: define precisely what exposure Volume Run carries and what a hedge should neutralize, <i>before</i> picking any indicator. It is built beside the existing live path, so the working strategy stays untouched.</p>
+          </div></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ============ CONTACT ============ -->
-  <section id="contact" class="mx-auto max-w-5xl scroll-mt-28 px-4 py-24 sm:px-6">
-    <div data-heading="07|Let's build an edge"></div>
-    <div class="glass-strong relative overflow-hidden rounded-[2rem] p-8 sm:p-12">
-      <div class="absolute -right-20 -top-20 h-72 w-72 rounded-full bg-copper/20 blur-3xl"></div>
-      <div class="absolute -bottom-20 -left-20 h-72 w-72 rounded-full bg-cyan-accent/20 blur-3xl"></div>
-      <div class="relative">
-        <p class="max-w-xl font-serif text-2xl font-medium leading-snug sm:text-3xl">Hiring for a quant desk, or want to swap ideas on microstructure and models?</p>
-        <p class="mt-3 max-w-xl text-muted-foreground">Based in <span data-site="location"></span>. I reply fast and love a hard problem — reach out through any channel below.</p>
-        <div id="channels" class="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-5"></div>
+  <!-- ============ TOOLKIT ============ -->
+  <section id="toolkit">
+    <div class="section-head">
+      <span class="section-index">05</span>
+      <span class="section-title">Toolkit</span>
+      <span class="section-sub">The instruments I reach for — from proofs to production</span>
+    </div>
+    <div class="skill-grid">
+      <div class="skill-card glass">
+        <h4>Languages</h4>
+        <div class="chip-row"><span class="chip">C++17</span><span class="chip">Python</span><span class="chip">SQL</span><span class="chip">JavaScript</span><span class="chip">Bash</span></div>
+      </div>
+      <div class="skill-card glass">
+        <h4>Quant &amp; math</h4>
+        <div class="chip-row"><span class="chip">Market microstructure (micro-price, OFI)</span><span class="chip">Regime / trend filtering</span><span class="chip">IV surfaces</span><span class="chip">Wavelets &amp; spectral methods</span><span class="chip">Greeks Δ Γ Θ ν</span><span class="chip">VaR / CVaR</span><span class="chip">Cointegration</span><span class="chip">Time-series analysis</span><span class="chip">Walk-forward backtesting</span></div>
+      </div>
+      <div class="skill-card glass">
+        <h4>Systems</h4>
+        <div class="chip-row"><span class="chip">Lock-free SPSC queues</span><span class="chip">CPU core pinning</span><span class="chip">Memory pooling</span><span class="chip">UDP multicast</span><span class="chip">Unix domain sockets</span><span class="chip">ZeroMQ</span><span class="chip">WebSocket</span><span class="chip">Binary serialization</span></div>
+      </div>
+      <div class="skill-card glass">
+        <h4>ML &amp; data</h4>
+        <div class="chip-row"><span class="chip">Scikit-learn</span><span class="chip">PyTorch</span><span class="chip">TensorFlow</span><span class="chip">NumPy / Pandas</span><span class="chip">DuckDB</span><span class="chip">Redis</span><span class="chip">QuestDB</span><span class="chip">Parquet</span></div>
+      </div>
+      <div class="skill-card glass">
+        <h4>Infra &amp; tools</h4>
+        <div class="chip-row"><span class="chip">Docker</span><span class="chip">GCP</span><span class="chip">Databricks</span><span class="chip">FastAPI</span><span class="chip">Git</span><span class="chip">CI/CD</span></div>
+      </div>
+      <div class="skill-card glass">
+        <h4>Risk &amp; derivatives</h4>
+        <div class="chip-row"><span class="chip">Iron Condor / BWB</span><span class="chip">Ratio spreads</span><span class="chip">ATR / Garman-Klass</span><span class="chip">Econophysics</span><span class="chip">VaR / CVaR</span><span class="chip">Walk-forward testing</span></div>
       </div>
     </div>
-    <footer class="mt-16 flex items-center justify-center border-t border-border pt-8 text-sm text-muted-foreground">
-      <span>© <span id="year"></span> <span data-site="name"></span></span>
-    </footer>
   </section>
+
+  <!-- ============ RECOGNITION ============ -->
+  <section id="recognition">
+    <div class="section-head">
+      <span class="section-index">06</span>
+      <span class="section-title">Recognition</span>
+      <span class="section-sub">National and global competitions where I shipped working systems under a deadline</span>
+    </div>
+    <div class="ach-grid four">
+      <div class="ach-card glass" data-ach>
+        <div class="ach-head" onclick="toggleAch(this)">
+          <span class="ach-badge">1st Runner-Up</span>
+          <h4>AMD × SPRINT AI Hackathon @ IIT Bombay</h4>
+          <div class="ach-when">Jul 2025</div>
+          <p class="ach-teaser">Self-hosted LLM scheduling agent at ~0.3s inference.</p>
+          <div class="ach-more-toggle">Show more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+        </div>
+        <div class="ach-body"><div class="ach-inner">Built a scheduling agent on a self-hosted LLM that keeps inference around a third of a second, under full hackathon time pressure.</div></div>
+      </div>
+      <div class="ach-card glass" data-ach>
+        <div class="ach-head" onclick="toggleAch(this)">
+          <span class="ach-badge">Top 3 Finalist</span>
+          <h4>Google GenAI Exchange Hackathon</h4>
+          <div class="ach-when">Oct 2024</div>
+          <p class="ach-teaser">Among 38,000+ participants — Chikitsa, an AI health assistant.</p>
+          <div class="ach-more-toggle">Show more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+        </div>
+        <div class="ach-body"><div class="ach-inner">Ranked in the top 3 out of 38,000+ participants, building a generative-AI assistant aimed at making health guidance more accessible.</div></div>
+      </div>
+      <div class="ach-card glass" data-ach>
+        <div class="ach-head" onclick="toggleAch(this)">
+          <span class="ach-badge">India 172 · Global 981</span>
+          <h4>IMC Prosperity</h4>
+          <div class="ach-when">Algorithmic trading challenge</div>
+          <p class="ach-teaser">Inventory-aware market making and volatility-smile options pricing.</p>
+          <div class="ach-more-toggle">Show more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+        </div>
+        <div class="ach-body"><div class="ach-inner">Built an inventory-aware market maker around a volume-weighted fair price, and an options market maker pricing from a fitted volatility smile with delta hedging. A post-mortem on a losing trend-fading position led to a trend/chop regime filter — the direct predecessor of the regime-filtering work.</div></div>
+      </div>
+      <div class="ach-card glass" data-ach>
+        <div class="ach-head" onclick="toggleAch(this)">
+          <span class="ach-badge">Global rank 137</span>
+          <h4>NK Securities — IV Surface Prediction</h4>
+          <div class="ach-when">Jun 2025 — Jul 2025</div>
+          <p class="ach-teaser">Huber-regression pipeline across moneyness and tenor.</p>
+          <div class="ach-more-toggle">Show more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+        </div>
+        <div class="ach-body"><div class="ach-inner">Predicted the implied-volatility surface using 40+ derivative-based features (delta-adjusted ratios, vega/gamma exposures), tuned with k-fold cross-validation.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section id="contact">
+    <div class="contact-wrap glass">
+      <h2>Let's build something worth trusting.</h2>
+      <p>Hiring for a quant desk, or want to talk market microstructure, Greeks, or systems? Based in Mumbai, India — I reply fast.</p>
+      <div class="contact-actions">
+        <a class="btn btn-primary" href="mailto:vinayak.r.shinde.1729@gmail.com">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6l9 7 9-7"/><rect x="3" y="4" width="18" height="16" rx="2"/></svg>
+          vinayak.r.shinde.1729@gmail.com
+        </a>
+        <a class="btn btn-ghost" href="tel:+918879785320">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.3 1.79.54 2.65a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.43-1.11a2 2 0 0 1 2.11-.45c.86.24 1.75.42 2.65.54A2 2 0 0 1 22 16.92z"/></svg>
+          +91 88797 85320
+        </a>
+      </div>
+      <div class="contact-links">
+        <a href="mailto:vs8879785320@gmail.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6l9 7 9-7"/><rect x="3" y="4" width="18" height="16" rx="2"/></svg>Alt. email</a>
+        <a href="https://www.linkedin.com/in/vinayak-shinde-1aa968223" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>LinkedIn</a>
+        <a href="https://github.com/vinayak1729-web" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>GitHub</a>
+        <a href="https://www.youtube.com/@TheAlgorithmicForge" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.5 6.5s-.2-1.6-.9-2.3c-.8-.9-1.8-.9-2.2-1C16.4 3 12 3 12 3h0s-4.4 0-7.4.2c-.4.1-1.4.1-2.2 1-.7.7-.9 2.3-.9 2.3S1 8.4 1 10.2v1.6C1 13.6 1.3 15.5 1.3 15.5s.2 1.6.9 2.3c.8.9 1.9.9 2.4 1 1.7.2 7.4.2 7.4.2s4.4 0 7.4-.2c.4 0 1.4-.1 2.2-1 .7-.7.9-2.3.9-2.3s.3-1.9.3-3.7v-1.6c0-1.8-.3-3.7-.3-3.7z"/><path d="M10 15V8.5l6 3.3z" fill="currentColor" stroke="none"/></svg>The Algorithmic Forge</a>
+      </div>
+    </div>
+  </section>
+
 </main>
 
+<footer>Vinayak Raju Shinde — Quantitative Developer &amp; Researcher · Mumbai, India · YouTube: The Algorithmic Forge</footer>
+
+<!-- ============ RESEARCH JOURNEY TAB (right edge) ============ -->
+<button class="journey-tab" onclick="toggleJourney()" aria-label="Open research journey" title="Research journey">
+  <svg class="bulb-glow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 21h4"/><path d="M12 3a6 6 0 0 0-3.6 10.8c.7.6 1.1 1.4 1.1 2.2h5c0-.8.4-1.6 1.1-2.2A6 6 0 0 0 12 3z"/></svg>
+  <span>Research journey</span>
+</button>
+<div class="journey-backdrop" onclick="toggleJourney()"></div>
+<aside class="journey-panel" aria-label="Research journey">
+  <div class="jp-head">
+    <div><h3>How the research evolved</h3><p>Each strategy fixes the failure of the one before it</p></div>
+    <button class="jp-close" onclick="toggleJourney()" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  </div>
+  <div class="jp-body">
+    <p class="jp-lede">Math and physics first, then markets. Every step below started from a specific failure — a stop that didn't survive expiry, a trend system that bled in chop, a volume rule that decayed — and the next strategy was designed to answer exactly that. The engineering that made each step possible is noted in between.</p>
+    <div class="evo-list">
+        <div class="tech-note" data-note>
+          <div class="note-head" onclick="toggleNote(this)">
+            <div><h4><span class="evo-num">01</span>Velocity</h4><p>Intraday trend strategy with volatility-scaled targets</p></div>
+            <div class="note-toggle" data-show="Show details " data-hide="Hide details ">Show details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+          </div>
+          <div class="note-body"><div class="note-inner">
+            <span class="evo-lbl">What it does</span><p class="evo-txt">Originally briefed around protecting an intraday “box” structure. Entries trigger on the force — the momentum strength — of the option or asset being traded, and targets come from the index's ATM implied volatility, so they stretch and shrink with real-time volatility instead of sitting at fixed points.</p>
+            <span class="evo-lbl">What broke</span><p class="evo-txt">The stop-loss. A fixed stop doesn't work on options because behavior changes sharply with days to expiry — a DTE-6 option and a DTE-0/1 option react completely differently to the same move.</p>
+            <span class="evo-lbl">Under the hood</span><p class="evo-hood">Runs on the live state built from the C++ order-book feed; the ATM-IV target comes from the data gateway's synthetic-ATM calculation, so volatility is read in real time rather than from a stale table.</p>
+          </div></div>
+        </div>
+        <div class="tech-note" data-note>
+          <div class="note-head" onclick="toggleNote(this)">
+            <div><h4><span class="evo-num">02</span>DTE-aware stop-loss</h4><p>A stop that adapts to theta risk</p></div>
+            <div class="note-toggle" data-show="Show details " data-hide="Hide details ">Show details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+          </div>
+          <div class="note-body"><div class="note-inner">
+            <span class="evo-lbl">What it does</span><p class="evo-txt">Tightens as expiry approaches and loosens further out, so the stop width matches how violently an option can move for the time it has left.</p>
+            <span class="evo-lbl">What broke</span><p class="evo-txt">Velocity still exited at its IV-based target — and so missed any move that carried beyond the volatility band.</p>
+            <span class="evo-lbl">Under the hood</span><p class="evo-hood">Days-to-expiry is derived from contract metadata at runtime, so the same rule applies consistently across every strike and expiry in the universe.</p>
+          </div></div>
+        </div>
+        <div class="tech-note" data-note>
+          <div class="note-head" onclick="toggleNote(this)">
+            <div><h4><span class="evo-num">03</span>Runner</h4><p>No fixed target, no forced end-of-day exit</p></div>
+            <div class="note-toggle" data-show="Show details " data-hide="Hide details ">Show details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+          </div>
+          <div class="note-body"><div class="note-inner">
+            <span class="evo-lbl">What it does</span><p class="evo-txt">Rides the full move on strong momentum days instead of capping it at the volatility band.</p>
+            <span class="evo-lbl">What broke</span><p class="evo-txt">Choppy, sideways days — where the index stays inside its normal deviation band — are loss-making for both Velocity and Runner. A trend strategy can't fix a day that has no trend.</p>
+            <span class="evo-lbl">Under the hood</span><p class="evo-hood">Because a position can outlive a session, position state is kept in the database as the source of truth, so a restart recovers the exact exposure instead of guessing.</p>
+          </div></div>
+        </div>
+        <div class="tech-note" data-note>
+          <div class="note-head" onclick="toggleNote(this)">
+            <div><h4><span class="evo-num">04</span>Energy</h4><p>Potential-to-kinetic model for range-bound days</p></div>
+            <div class="note-toggle" data-show="Show details " data-hide="Hide details ">Show details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+          </div>
+          <div class="note-body"><div class="note-inner">
+            <span class="evo-lbl">What it does</span><p class="evo-txt">The choppy-day gap was treated as its own research problem rather than patched into the trend strategies. Inspired by Walter Lewin's lectures on potential and kinetic energy, range-bound price action is modeled as potential energy (distance from equilibrium) converting into kinetic energy (price velocity) — to find turning points and exhaustion inside a range.</p>
+            <span class="evo-lbl">What broke</span><p class="evo-txt">Tested on March 2025, it performed poorly. That window was a market-wide panic-selling regime — a one-directional liquidity shock, not the range-bound chop the model was built for.</p>
+            <span class="evo-lbl">The lesson</span><p class="evo-txt">Separate “the model failed” from “the regime wasn't the one it was designed for.” It's the reason regime detection became a research track of its own.</p>
+            <span class="evo-lbl">Under the hood</span><p class="evo-hood">Evaluated in the parallelized walk-forward backtest suite with realistic costs, so a bad window shows up as a bad window — not as a hidden average.</p>
+          </div></div>
+        </div>
+        <div class="tech-note" data-note>
+          <div class="note-head" onclick="toggleNote(this)">
+            <div><h4><span class="evo-num">05</span>HFT pivot</h4><p>From bar-level strategies to microstructure</p></div>
+            <div class="note-toggle" data-show="Show details " data-hide="Hide details ">Show details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+          </div>
+          <div class="note-body"><div class="note-inner">
+            <span class="evo-lbl">What it does</span><p class="evo-txt">Moved to microstructure strategies on options and futures. First a simple bid-ask spread strategy, then a volume-threshold futures strategy: if traded volume crossed a fixed threshold, trade the side that drove it.</p>
+            <span class="evo-lbl">What broke</span><p class="evo-txt">It worked at first, then started losing money. Rising volume on one side doesn't reliably predict the next price move — the assumption behind it wasn't robust, so the edge decayed.</p>
+            <span class="evo-lbl">Under the hood</span><p class="evo-hood">Tick-level work only became possible because of the C++ order-book engine: full-depth snapshots streamed over Unix sockets and ring buffers with no tick loss.</p>
+          </div></div>
+        </div>
+        <div class="tech-note" data-note>
+          <div class="note-head" onclick="toggleNote(this)">
+            <div><h4><span class="evo-num">06</span>OBI — Order Book Imbalance</h4><p>Replace “is volume rising” with “is price actually being pushed”</p></div>
+            <div class="note-toggle" data-show="Show details " data-hide="Hide details ">Show details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+          </div>
+          <div class="note-body"><div class="note-inner">
+            <span class="evo-lbl">What it does</span><p class="evo-txt">The arbitrary static threshold is gone. Bid-side and ask-side volume are collected into window-based baskets and turned into an imbalance ratio, which is then amplified when the change in traded price confirms it — flow only counts when price agrees.</p>
+            <span class="evo-lbl">What broke</span><p class="evo-txt">A strong signal, but small moves in last-traded price could swing the ratio between its extremes and trigger excessive trades.</p>
+            <span class="evo-lbl">Under the hood</span><p class="evo-hood">The baskets are built in the C++ signal builder over several rolling windows, weighted toward the top of the book, and updated in constant time per tick.</p>
+          </div></div>
+        </div>
+        <div class="tech-note" data-note>
+          <div class="note-head" onclick="toggleNote(this)">
+            <div><h4><span class="evo-num">07</span>Drift filter + swing variant</h4><p>Let a trend through only once momentum is established</p></div>
+            <div class="note-toggle" data-show="Show details " data-hide="Hide details ">Show details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+          </div>
+          <div class="note-body"><div class="note-inner">
+            <span class="evo-lbl">What it does</span><p class="evo-txt">A drift/momentum filter suppresses small chops and releases a signal only once momentum is established — cutting overtrading while keeping the directional edge. From the same OBI + drift framework, a swing-trading version with a longer holding horizon was also derived, and it has worked too.</p>
+            <span class="evo-lbl">Under the hood</span><p class="evo-hood">The filter is strictly causal — it only ever uses data available at that moment — so what shows up in a backtest is what could have happened live.</p>
+          </div></div>
+        </div>
+        <div class="tech-note" data-note>
+          <div class="note-head" onclick="toggleNote(this)">
+            <div><h4><span class="evo-num">08</span>Equities</h4><p>Same framework, new asset class</p></div>
+            <div class="note-toggle" data-show="Show details " data-hide="Hide details ">Show details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+          </div>
+          <div class="note-body"><div class="note-inner">
+            <span class="evo-lbl">What it does</span><p class="evo-txt">Applying the same physics, math and linear-algebra approach — price as a dynamical system, order-book state as vectors, weighted baskets — to equities.</p>
+            <span class="evo-lbl">Under the hood</span><p class="evo-hood">The market-data engine already carries F&O and cash-segment streams in one unified snapshot format, so the research moves across without rebuilding the plumbing.</p>
+          </div></div>
+        </div>
+        <div class="tech-note" data-note>
+          <div class="note-head" onclick="toggleNote(this)">
+            <div><h4><span class="evo-num">09</span>Dynamic scalping hedge</h4><p>Hedging what the strategy actually holds</p></div>
+            <div class="note-toggle" data-show="Show details " data-hide="Hide details ">Show details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+          </div>
+          <div class="note-body"><div class="note-inner">
+            <span class="evo-lbl">What it does</span><p class="evo-txt">Replacing an all-day static protective structure with a hedge that reads the live exposure of the order-flow strategy and acts only when it's needed. Full write-up in the High-Frequency section of Research.</p>
+            <span class="evo-lbl">Under the hood</span><p class="evo-hood">Built alongside the existing pipeline rather than inside it — the same feed and signal path, a second consumer — so the live strategy is never put at risk by the experiment.</p>
+          </div></div>
+        </div>
+      </div>
+  </div>
+</aside>
+
 <script>
-/* ================= YOUR DETAILS ================= */
-const SITE = {
-  name: 'Vinayak Raju Shinde',
-  location: 'Mumbai, India',
-  email: 'vinayak.r.shinde.1729@gmail.com',
-  email2: 'vs8879785320@gmail.com',
-  linkedin: 'https://www.linkedin.com/in/vinayak-shinde-1aa968223/',
-  linkedinHandle: 'vinayak-shinde-1aa968223',
-  github: 'https://github.com/vinayak1729-web',
-  githubHandle: 'vinayak1729-web',
-  codeforces: 'https://codeforces.com/profile/vinayak1729',
-  codeforcesHandle: 'vinayak1729',
-  resume: 'https://drive.google.com/file/d/1HDBhcnYVmHKYTq2dk9FSHorfH7Cyj2jM/view',
-  youtube: {
-    latestId: '9cGGpAp1tUM',
-    latestUrl: 'https://youtu.be/9cGGpAp1tUM',
-    channelUrl: 'https://www.youtube.com/@thealgorithmicforge',
-    handle: '@thealgorithmicforge',
-  },
-};
+  function toggleJourney(){ document.body.classList.toggle('journey-open'); }
+  document.addEventListener('keydown', e => { if(e.key==='Escape') document.body.classList.remove('journey-open'); });
+  function toggleNote(headEl){
+    const card = headEl.parentElement;
+    card.classList.toggle('open');
+    const label = headEl.querySelector('.note-toggle');
+    const showTxt = label.dataset.show || 'Show technical breakdown ';
+    const hideTxt = label.dataset.hide || 'Hide technical breakdown ';
+    label.firstChild.textContent = card.classList.contains('open') ? hideTxt : showTxt;
+  }
+  function toggleDeep(headEl){
+    headEl.parentElement.classList.toggle('open');
+    const label = headEl.querySelector('.deep-toggle');
+    label.firstChild.textContent = headEl.parentElement.classList.contains('open') ? 'Hide breakdown ' : 'Show breakdown ';
+  }
+  function toggleAchv(headEl){
+    const card = headEl.parentElement;
+    card.classList.toggle('open');
+    const label = headEl.querySelector('.achv-toggle');
+    label.firstChild.textContent = card.classList.contains('open') ? 'Hide details ' : 'Show details ';
+  }
+  function toggleAch(headEl){
+    const card = headEl.parentElement;
+    card.classList.toggle('open');
+    const label = headEl.querySelector('.ach-more-toggle');
+    label.firstChild.textContent = card.classList.contains('open') ? 'Show less ' : 'Show more ';
+  }
 
-/* ================= ICONS ================= */
-const svg = (inner, cls = 'h-4 w-4', extra = '') =>
-  `<svg class="${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ${extra}>${inner}</svg>`;
-const ICON = {
-  arrow: (c) => svg('<path d="M7 7h10v10"/><path d="M7 17 17 7"/>', c),
-  mail: (c) => svg('<rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>', c),
-  menu: (c) => svg('<line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/>', c),
-  x: (c) => svg('<path d="M18 6 6 18"/><path d="m6 6 12 12"/>', c),
-  moon: (c) => svg('<path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>', c),
-  sun: (c) => svg('<circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/>', c),
-  chevron: (c) => svg('<path d="m6 9 6 6 6-6"/>', c),
-  play: (c) => svg('<polygon points="6 3 20 12 6 21 6 3" fill="currentColor"/>', c),
-  youtube: (c) => svg('<path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><path d="m10 15 5-3-5-3z"/>', c),
-  github: (c) => svg('<path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 .5 5 .5 5 .5c-.3 1.15-.3 2.35 0 3.5A5.4 5.4 0 0 0 4 7.5c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/>', c),
-  linkedin: (c) => svg('<path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/>', c),
-  codeforces: (c) => svg('<rect x="2" y="14" width="5" height="7" rx="1"/><rect x="9.5" y="8.5" width="5" height="12.5" rx="1"/><rect x="17" y="3" width="5" height="18" rx="1"/>', c),
-};
 
-/* ================= DATA ================= */
-const LINKS = [
-  ['#about', 'About'], ['#experience', 'Experience'], ['#projects', 'Work'],
-  ['#awards', 'Awards'], ['#skills', 'Toolkit'], ['#youtube', 'YouTube'], ['#contact', 'Contact'],
-];
-
-const HIGHLIGHTS = [
-  'Rebuilt exchange order books in C++ from raw tick-by-tick multicast, on lock-free, core-pinned pipelines',
-  'Designed order-flow and regime-detection signals, benchmarked generation over generation on held-out data',
-  '1st runner-up at the AMD AI Hackathon and Top 3 in India at Google Gen AI Exchange',
-  'Teaching quant finance on YouTube — The Algorithmic Forge',
-];
-
-const HACKATHONS = {
-  won: [
-    ['1st Runner-Up', 'AMD AI Hackathon @ IIT · 2025'],
-    ['Top 3 India', 'Google Gen AI Exchange · 2024'],
-  ],
-  cleared: [
-    ['Round 1', 'NASA Space Apps Challenge · 2022'],
-    ['Top 100', 'Samsung Solve for Tomorrow'],
-  ],
-};
-
-const FOCUS = [
-  'Order-book microstructure & order-flow signals',
-  'Regime detection: trend vs. chop, adaptive thresholds',
-  'Options structuring, volatility & Greeks-based risk',
-  'Low-latency C++ systems & lock-free data structures',
-];
-
-const EDUCATION = [
-  ['B.Eng. Computer Engineering — University of Mumbai', 'CGPA 8.43 / 10 · 2021 – 2025'],
-  ['HSC / SSC Mathematics', '92% · 95%'],
-];
-
-/*
-  Experience cases: "did" is always visible (what I built, technical but plain).
-  "challenge" and "thinking" open on click. No internal strategy names or parameters.
-*/
-const ROLES = [
-  {
-    company: 'Vikabh Securities', title: 'Quantitative Associate', period: 'Dec 2025 — Present',
-    summary: 'I research strategies and own the systems beneath them, from rule-based option structures to microstructure- and statistics-based readings of the order book, and the low-latency C++ that runs it all live.',
-    cases: [
-      {
-        area: 'Order-book engine in C++',
-        did: 'Wrote a C++17 engine that rebuilds the full exchange order book straight from the raw UDP multicast feed. Each feed runs on its own CPU core, threads pass data through lock-free queues so no thread waits on a lock, and each price update takes constant time. Missing packets are caught by sequence number and repaired from exchange snapshots.',
-        challenge: 'Third-party feeds added latency and hid missing data, so research ran on a picture of the market we could not fully trust.',
-        thinking: 'Go to the source, and treat every missed packet as a bug to detect and repair, not ignore.',
-      },
-      {
-        area: 'Order-flow and micro-price signal',
-        did: 'Designed a signal that measures who is actively pushing the price, not who is just waiting in the book. It combines a volume-weighted micro-price, order-flow imbalance, and a drift-to-volatility ratio. Flow only counts when price direction agrees with it, and the whole thing updates in O(1) time on every tick.',
-        challenge: 'A signal that counted large resting orders was indistinguishable from noise, because a passive or spoofed order looks the same as real buying.',
-        thinking: 'What matters is what\'s actively moving the price, not what\'s just sitting in the book.',
-      },
-      {
-        area: 'Regime filters: when not to trade',
-        did: 'Built filters that tell a real trend from choppy noise, using realized-variance and trend-efficiency features (a Kaufman-style efficiency ratio), plus wavelet decomposition of volatility into slow-moving and fast-moving components. Thresholds adapt to recent conditions using only past data (no look-ahead), and several bars must confirm before a regime switches.',
-        challenge: 'Good signals lost money in choppy markets, where large movement looked like trend but had no direction.',
-        thinking: 'Measure whether a move has real direction or is just noise, and let thresholds adapt instead of fixing them by hand.',
-      },
-      {
-        area: 'Mean-reversion model around VWAP',
-        did: 'Built a mean-reversion model that treats intraday price as reverting to VWAP: distance from VWAP (scaled by implied volatility) and volume-weighted momentum are combined into a single turning-point score. Trades fire when that score signals the move is exhausted, with a stop anchored to a VWAP started at entry.',
-        challenge: 'Mean-reversion entries came either too early, while price was still running, or too late.',
-        thinking: 'Most of a move is already priced in by the time momentum starts fading — that fade is the signal to look for.',
-      },
-      {
-        area: 'Option structures with comparable risk',
-        did: 'Built rule-based option-selling and volatility-breakout systems. Strikes are chosen by the premium they cost rather than a fixed distance, so risk stays comparable in calm and volatile markets. Stops scale with ATR and tighten as expiry approaches.',
-        challenge: 'A fixed strike distance means very different risk in quiet and volatile markets, and pure premium selling has no view on direction.',
-        thinking: 'Normalise risk first, then add direction only where the evidence supports it.',
-      },
-      {
-        area: 'Low-latency data platform',
-        did: 'Put an in-memory Redis cache between the QuestDB time-series database and every consumer, with automatic failover to a second database node. Data streams out as NDJSON so screens fill as it arrives, and heavy historical queries are blocked during market hours.',
-        challenge: 'Live trading and research read from the same database; on heavy days it stalled and local workarounds broke.',
-        thinking: 'Separate reads from writes, and never let research traffic slow the live path.',
-      },
-      {
-        area: 'Backtests I can defend',
-        did: 'Built walk-forward backtesters with slippage measured from the next few bars, full transaction costs and tax drag. They report Sharpe, Sortino, Calmar and drawdown, and produce interactive HTML reports for auditing every trade.',
-        challenge: 'Backtests that look excellent often fail live because of look-ahead, idealised fills or tuning to one period.',
-        thinking: 'Make the backtest causal by construction, charge realistic costs, and tune one component at a time.',
-      },
-      {
-        area: 'Production safety',
-        did: 'Added schedulers that restart failed processes up to a limit, position recovery from the database after a crash, order slicing, and a portfolio-wide kill switch that can flatten everything independently of strategy code.',
-        challenge: 'Crashes, reboots or network drops during market hours can leave duplicate orders or positions nobody is watching.',
-        thinking: 'Assume every process will fail, and make recovery automatic and dull.',
-      },
-    ],
-    stack: ['C++17', 'Python', 'Lock-free', 'FastAPI', 'Redis', 'QuestDB', 'ZeroMQ'],
-  },
-  {
-    company: 'Bixware Technologies', title: 'AI/ML Engineer', period: 'Jun 2025 — Dec 2025',
-    stack: ['LangChain', 'VectorDB', 'Databricks', 'GCP', 'SQL'],
-    points: [
-      'Built a scalable RAG chatbot (retrieval-augmented generation: the model answers from your own documents) that cut retrieval latency 50% across 500+ document repositories.',
-      'Architected ELT/ETL data pipelines processing 100M+ daily retail transactions at 99.9% uptime.',
-      'Sped up GenAI NLP workflows 40% through model optimisation, request batching and prompt engineering.',
-      'Deployed containerised services on GCP for consistent low-latency inference across 10+ clients.',
-    ],
-  },
-  {
-    company: 'Engagely.ai · BCG Consulting Partnership', title: 'Implementation Engineer', period: 'Jan 2025 — Mar 2025',
-    stack: ['Flask', 'REST', 'NLP', 'Databricks', 'CI/CD'],
-    points: [
-      'Deployed a production WhatsApp bot serving 50,000+ daily messages through Flask REST APIs and webhooks.',
-      'Cut bot latency from 3.2s to 1.9s while keeping user satisfaction at 94%.',
-      'Drove a 35% engagement uplift with NLP intent classification and dynamic response routing.',
-    ],
-  },
-];
-
-const PROJECTS = [
-  {
-    name: 'QuantResearch', tagline: 'Published Python library · PyPI v2.5',
-    points: [
-      'Shipped QuantQL, a compiled DSL for strategy scripting with stop-loss/take-profit, commission and slippage modelling.',
-      'Multi-market engine (NSE, BSE, US, Crypto) with live WebSocket streaming and a 5-tab GUI dashboard.',
-      'Packed in 18+ indicators (RSI, MACD, Ichimoku, ADX…) and institutional metrics (Sharpe, Sortino, VaR, CVaR).',
-    ],
-    tags: ['Python', 'DSL', 'Backtesting'], href: 'https://pypi.org/project/QuantResearch/',
-  },
-  {
-    name: 'IV Surface Prediction', tagline: 'NK Securities HFT Competition · Rank 137 globally',
-    points: [
-      'Quadratic Huber regression across moneyness and tenor to predict the implied-volatility surface.',
-      'Finished 137th globally, tuned via hyperparameter optimisation and k-fold cross-validation.',
-      'Engineered 40+ derivative features — delta-adjusted ratios, vega exposures, gamma surfaces.',
-    ],
-    tags: ['scikit-learn', 'SciPy', 'Options'],
-    href: 'https://github.com/vinayak1729-web/Volatility-Curve-Prediction--NK-Securities-HFT-',
-  },
-  {
-    name: 'IMC Prosperity', tagline: 'Global algorithmic trading challenge · Rank 172 in India, 981 globally',
-    points: [
-      'Built an inventory-aware market maker around a volume-weighted fair price for a multi-product order book.',
-      'Built an options market maker pricing from a fitted volatility smile with delta hedging.',
-      'A post-mortem on a losing trend-fading position led directly to the regime-filtering work in my current role.',
-    ],
-    tags: ['Market Making', 'Options', 'Python'], href: 'https://prosperity.imc.com/',
-  },
-  {
-    name: 'Chikitsa Lite', tagline: 'Offline-first health AI · Gemma 3n',
-    points: [
-      'Runs Gemma 3n on-device for private clinical guidance in low-connectivity areas.',
-      'Its first version placed Top 3 in India at Google Gen AI Exchange 2024.',
-      'Published write-up and demo for the Google Gemma 3n Hackathon.',
-    ],
-    tags: ['Gemma 3n', 'GenAI', 'On-device'],
-    href: 'https://www.kaggle.com/competitions/google-gemma-3n-hackathon/writeups/the-chikitsa-lite',
-  },
-  {
-    name: 'The Algorithmic Forge', tagline: 'YouTube series · MIT 18.06 → live quant',
-    points: [
-      'Maps every major idea in MIT linear algebra to a real, tradable strategy.',
-      'Part 1: turning the null space of a returns matrix into a market-neutral portfolio (Ax = 0).',
-      'Full Colab code, live backtests on S&P 500 / Nifty 50 / Nikkei, and the honest out-of-sample truth.',
-    ],
-    tags: ['Linear Algebra', 'Python', 'Teaching'], href: 'https://www.youtube.com/@thealgorithmicforge',
-  },
-];
-
-const AWARDS = [
-  {
-    badge: '1st Runner-Up', event: 'AMD AI Hackathon · IIT', year: '2025',
-    project: 'Synapse — autonomous meeting scheduler',
-    problem: 'Corporate teams lose hours every month to back-and-forth emails just to find a meeting slot.',
-    points: [
-      'Agentic pipeline that reads a plain-English meeting request, extracts attendees, duration and preferred time, and books the event end to end.',
-      'Self-hosted DeepSeek 7B served with vLLM on an AMD GPU (ROCm/HIP), parsing each request in about a quarter of a second.',
-      'Checks every attendee\'s free/busy calendar via the Google Calendar API and moves to the next free slot or day on a clash.',
-      'Returns a structured response with conflicts resolved, API calls used and latency for each request.',
-    ],
-    tags: ['Agentic AI', 'DeepSeek LLM', 'vLLM · ROCm', 'Flask', 'Google Calendar API'],
-    links: [
-      ['GitHub', 'https://github.com/vinayak1729-web/synapse'],
-      ['LinkedIn post', 'https://www.linkedin.com/posts/vinayak-shinde-1aa968223_amd-amdindia-amdaihackathon-activity-7351114003923795968-VFbY'],
-    ],
-  },
-  {
-    badge: 'Top 3 · India', event: 'Google Gen AI Exchange', year: '2024',
-    project: 'Chikitsa — AI health assistant',
-    problem: 'Chikitsa was built around a problem affecting a billion people: primary healthcare guidance for people far from a doctor.',
-    points: [
-      'Generative-AI assistant that turns everyday descriptions of symptoms into clear, structured guidance and next steps.',
-      'Ranked in the top 3 nationally in a programme run with Indian government technology bodies.',
-      'Laid the groundwork for the offline-first version that runs the model on the device itself.',
-    ],
-    tags: ['Generative AI', 'Healthcare', 'NLP', 'Python'],
-    links: [['LinkedIn post', 'https://lnkd.in/p/dW-AXP9d']],
-  },
-  {
-    badge: 'Selected', event: 'Google Agentic AI Day · Bengaluru', year: '2025',
-    project: 'Cash Snap — AI receipt & spending manager',
-    problem: 'Most everyday cash spending in India is never recorded, and lost receipts mean missed GST claims.',
-    points: [
-      'Snap a receipt and Gemini extracts the merchant, line items, GST, category and payment mode as structured JSON, including regional-language and handwritten receipts.',
-      'Each receipt is saved as a Google Wallet pass and stored in Firebase behind strict per-user security rules.',
-      'An AI advisor analyses spending patterns, flags impulse spending and suggests budget and tax-saving actions.',
-      'Deployed on Google Cloud Run with a live public demo.',
-    ],
-    tags: ['Gemini', 'Agentic AI', 'Firebase', 'Google Wallet API', 'Cloud Run'],
-    links: [
-      ['GitHub', 'https://github.com/vinayak1729-web/Cash_Snap'],
-      ['Live demo', 'https://cash-snap-service-534892414821.us-central1.run.app/'],
-      ['LinkedIn post', 'https://www.linkedin.com/posts/vinayak-shinde-1aa968223_hackathon-agenticai-aiforgood-activity-7358534029043712001-5fi3'],
-    ],
-  },
-  {
-    badge: 'Top 100', event: 'Samsung Solve for Tomorrow', year: '',
-    project: 'Chikitsa, improved — offline-first edition',
-    problem: 'The first version needed a steady internet connection, which the communities it was built for often don\'t have.',
-    points: [
-      'Re-engineered Chikitsa to run an on-device model, so guidance works with little or no connectivity.',
-      'Keeps health data on the device by design, which also protects privacy.',
-      'Presented the improved system after selection into the national top 100.',
-    ],
-    tags: ['On-device AI', 'Gemma', 'Offline-first', 'Privacy'],
-    links: [['Project write-up', 'https://www.kaggle.com/competitions/google-gemma-3n-hackathon/writeups/the-chikitsa-lite']],
-  },
-  {
-    badge: 'Round 1 cleared', event: 'NASA International Space Apps Challenge', year: '2022',
-    project: '3D ISS Tracker → AstroScope VR',
-    problem: 'The challenge: track the International Space Station in real time and make space missions easy to understand for students.',
-    points: [
-      'Round 1: a real-time 3D ISS tracker on NASA Web WorldWind that computes the station\'s position from TLE orbital data.',
-      'Shows past and predicted ground tracks, ground stations and the ISS\'s line-of-sight footprint, and lets you time-travel to any moment.',
-      'Plots tracked space debris and highlights the piece closest to the ISS; the station model turns to follow the Sun.',
-      'Round 2: AstroScope, a VR experience of the Crew Dragon launch, Hubble and the ISS interior, built from Blender animations with AI-narrated 360° video.',
-    ],
-    tags: ['Web WorldWind.js', 'TLE orbit data', 'JavaScript', 'Blender', '360° VR'],
-    links: [
-      ['ISS Tracker', 'https://vinayak1729-web.github.io/3D_ISS_Tracker-main/'],
-      ['GitHub', 'https://github.com/vinayak1729-web/3D_ISS_Tracker-main'],
-      ['AstroScope', 'https://vinayak1729-web.github.io/AstroScope/'],
-    ],
-  },
-  {
-    badge: 'Competitor', event: 'IMC Prosperity · Global algorithmic trading challenge', year: '',
-    project: 'Market making, options pricing & portfolio risk',
-    problem: 'The results were modest, but every idea was tested against live counterparties round by round, a fast and honest lab.',
-    points: [
-      'Market makers that quote around an imbalance-weighted fair value, skew quotes to shed inventory and step back from toxic one-sided flow.',
-      'Options priced from a fitted implied-volatility smile with Black–Scholes, sold out of the money and delta-hedged.',
-      'Portfolio built with cross-sectional ranking, per-product and portfolio Value-at-Risk caps, and pair awareness for anti-correlated products.',
-      'Key lesson: fading moves that had become real trends caused one heavy loss, so I added trend filters — the seed of my regime-filter work.',
-    ],
-    tags: ['Python', 'Market making', 'Options', 'VaR'],
-    links: [],
-  },
-];
-
-const GROUPS = [
-  ['Languages', ['C++17', 'Python', 'SQL', 'JavaScript', 'Bash']],
-  ['Quant & Math', ['Order-flow microstructure', 'Regime detection', 'IV surfaces & smiles', 'Wavelets (SWT/CWT)', 'Spectral (Welch/STFT)', 'Greeks Δ Γ Θ ν']],
-  ['Systems', ['Lock-free (SPSC)', 'Memory pools', 'UDP multicast', 'ZeroMQ', 'WebSocket', 'Binary serialization']],
-  ['ML & Data', ['PyTorch', 'TensorFlow', 'scikit-learn', 'NumPy / Pandas', 'DuckDB / QuestDB', 'LangChain / RAG']],
-  ['Infra', ['Docker', 'GCP (Vertex, BigQuery)', 'Databricks', 'FastAPI', 'Redis', 'CI/CD']],
-  ['Risk & Derivatives', ['Iron Condor / BWB', 'Delta hedging', 'ATR / Garman-Klass', 'Mean reversion', 'VaR / CVaR', 'Walk-forward testing']],
-];
-
-const CHAPTERS = [
-  'Why arbitrage lives in the null space of a returns matrix',
-  'Extracting it with scipy.linalg.null_space and proving Ax = 0',
-  'A 3-year rolling out-of-sample backtester vs equal-weight',
-  'The honest lesson: raw null space overfits noise → SVD next',
-];
-
-// [tex, top, left, size, dur, delay, dx, dy, rot, tone]
-const EQUATIONS = [
-  ['v = u + at', '8%', '6%', '1.5rem', '24s', '0s', '24px', '-30px', '-6deg', 'copper'],
-  ['s = ut + \\tfrac{1}{2}at^2', '18%', '72%', '1.7rem', '28s', '-4s', '-30px', '26px', '5deg', 'cyan'],
-  ['A\\mathbf{x} = \\lambda \\mathbf{x}', '32%', '12%', '1.9rem', '26s', '-2s', '20px', '28px', '4deg', 'copper'],
-  ['v^2 = u^2 + 2as', '46%', '80%', '1.4rem', '30s', '-6s', '-24px', '-22px', '-4deg', 'muted'],
-  ['\\Sigma = \\mathbb{E}\\!\\left[(X-\\mu)(X-\\mu)^\\top\\right]', '60%', '8%', '1.35rem', '32s', '-3s', '26px', '-26px', '3deg', 'cyan'],
-  ['\\mathbf{F} = m\\mathbf{a}', '72%', '68%', '2rem', '25s', '-8s', '-22px', '24px', '-5deg', 'copper'],
-  ['\\det(A - \\lambda I) = 0', '84%', '20%', '1.5rem', '29s', '-5s', '24px', '-20px', '6deg', 'muted'],
-  ['dS_t = \\mu S_t\\,dt + \\sigma S_t\\,dW_t', '12%', '38%', '1.4rem', '34s', '-7s', '-20px', '26px', '-3deg', 'cyan'],
-  ['a(t) = \\dfrac{d^2 x}{dt^2}', '40%', '46%', '1.6rem', '27s', '-1s', '22px', '24px', '4deg', 'copper'],
-  ['\\|A\\mathbf{x}\\| \\le \\|A\\|\\,\\|\\mathbf{x}\\|', '66%', '42%', '1.35rem', '31s', '-9s', '-24px', '-24px', '-4deg', 'muted'],
-  ['S = \\dfrac{\\mathbb{E}[R_p - R_f]}{\\sigma_p}', '26%', '88%', '1.4rem', '33s', '-2.5s', '-18px', '22px', '5deg', 'cyan'],
-  ['A = Q\\Lambda Q^{\\top}', '90%', '78%', '1.6rem', '26s', '-6.5s', '20px', '-24px', '-6deg', 'copper'],
-  ['\\mathbf{v} = \\dfrac{d\\mathbf{x}}{dt}', '5%', '54%', '1.5rem', '28s', '-3.5s', '-22px', '24px', '4deg', 'cyan'],
-  ['\\mathbf{a} = \\dfrac{d\\mathbf{v}}{dt}', '52%', '60%', '1.5rem', '30s', '-7.5s', '24px', '22px', '-5deg', 'copper'],
-  ['\\Delta V = -\\!\\int_a^b \\mathbf{E}\\cdot d\\mathbf{l}', '22%', '24%', '1.4rem', '33s', '-4.5s', '20px', '-24px', '3deg', 'muted'],
-  ['\\Delta V = \\dfrac{\\Delta U}{q}', '78%', '52%', '1.5rem', '27s', '-1.5s', '-20px', '-22px', '-4deg', 'cyan'],
-  ['\\Delta K = \\tfrac{1}{2}mv^2 - \\tfrac{1}{2}mu^2', '36%', '28%', '1.35rem', '31s', '-8.5s', '24px', '26px', '5deg', 'copper'],
-  ['W_{\\text{net}} = \\Delta K', '92%', '40%', '1.6rem', '25s', '-2.8s', '-22px', '-20px', '-3deg', 'muted'],
-  ['\\textstyle\\sum_i c_i \\mathbf{v}_i = \\mathbf{0} \\Rightarrow c_i = 0', '14%', '10%', '1.3rem', '34s', '-5.5s', '22px', '24px', '4deg', 'cyan'],
-  ['V = \\operatorname{span}\\{\\mathbf{e}_1,\\dots,\\mathbf{e}_n\\}', '58%', '72%', '1.3rem', '32s', '-6.8s', '-24px', '22px', '-5deg', 'copper'],
-  ['\\mathbf{e}_i\\cdot\\mathbf{e}_j = \\delta_{ij}', '70%', '14%', '1.5rem', '29s', '-3.2s', '20px', '-24px', '6deg', 'muted'],
-  ['\\dim V = \\operatorname{rank}(A) + \\dim\\ker(A)', '30%', '62%', '1.25rem', '35s', '-9.5s', '-20px', '-22px', '3deg', 'cyan'],
-];
-const TONE = {
-  copper: 'text-copper/25 dark:text-copper/30',
-  cyan: 'text-cyan-accent/25 dark:text-cyan-accent/30',
-  muted: 'text-foreground/10 dark:text-foreground/15',
-};
-
-/* ================= RENDER ================= */
-const $ = (s) => document.querySelector(s);
-const $$ = (s) => document.querySelectorAll(s);
-const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-const ext = (href) => href.startsWith('mailto') ? '' : 'target="_blank" rel="noopener noreferrer"';
-const dot = (color, mt = 'mt-1.5') => `<span class="${mt} h-1.5 w-1.5 shrink-0 rounded-full ${color}"></span>`;
-const chip = (s) => `<span class="rounded-md bg-foreground/5 px-2.5 py-1 font-mono text-xs text-muted-foreground">${esc(s)}</span>`;
-
-/* --- Show-more helpers: first 2 visible, rest behind a toggle --- */
-let _uid = 0;
-const nextId = () => 'more-' + (++_uid);
-const toggleBtn = (id, more, less) => `
-  <button type="button" data-toggle="${id}" data-more="${esc(more)}" data-less="${esc(less)}"
-          aria-expanded="false" aria-controls="${id}"
-          class="mt-3 inline-flex items-center gap-1.5 rounded-full px-1 text-xs font-medium text-copper hover:underline">
-    <span data-label>${esc(more)}</span>${ICON.chevron('h-3.5 w-3.5 transition-transform')}
-  </button>`;
-const collapse = (items, render, { n = 2, wrap = (x) => x, restWrap = wrap, noun = 'more' } = {}) => {
-  const shown = wrap(items.slice(0, n).map(render).join(''));
-  const rest = items.slice(n);
-  if (!rest.length) return shown;
-  const id = nextId();
-  return `${shown}<div id="${id}" hidden>${restWrap(rest.map(render).join(''))}</div>${toggleBtn(id, `Show ${rest.length} ${noun}`, 'Show less')}`;
-};
-const bulletList = (items, color = 'bg-copper', textCls = 'text-foreground/90') => collapse(
-  items,
-  (p) => `<li class="flex items-start gap-3 text-sm ${textCls}">${dot(color)}${esc(p)}</li>`,
-  { wrap: (x) => `<ul class="space-y-2">${x}</ul>`, restWrap: (x) => `<ul class="mt-2 space-y-2">${x}</ul>` },
-);
-
-/* --- Site text, links, icons --- */
-$$('[data-site]').forEach((el) => (el.textContent = SITE[el.dataset.site]));
-const HREFS = { resume: SITE.resume, youtubeLatest: SITE.youtube.latestUrl, youtubeChannel: SITE.youtube.channelUrl };
-$$('[data-href]').forEach((el) => (el.href = HREFS[el.dataset.href]));
-$$('[data-icon]').forEach((el) => {
-  el.outerHTML = ICON[el.dataset.icon]((el.dataset.icon === 'play' ? 'h-6 w-6 ' : 'h-4 w-4 ') + el.className);
-});
-$('#yt-thumb').src = `https://img.youtube.com/vi/${SITE.youtube.latestId}/maxresdefault.jpg`;
-$('#year').textContent = new Date().getFullYear();
-
-$$('[data-heading]').forEach((el) => {
-  const [index, title, kicker] = el.dataset.heading.split('|');
-  el.outerHTML = `
-    <div class="mb-10">
-      <div class="mb-3 flex items-center gap-3">
-        <span class="font-mono text-xs text-copper">${index}</span>
-        <span class="h-px flex-1 max-w-24 bg-gradient-to-r from-copper/60 to-transparent"></span>
-      </div>
-      <h2 class="font-serif text-3xl font-semibold tracking-tight sm:text-4xl">${esc(title)}</h2>
-      ${kicker ? `<p class="mt-3 max-w-2xl text-muted-foreground">${esc(kicker)}</p>` : ''}
-    </div>`;
-});
-
-$('#equations').innerHTML = EQUATIONS.map(([tex, top, left, size, dur, delay, dx, dy, rot, tone]) =>
-  `<div class="floating-eq absolute select-none ${TONE[tone]}"
-     style="top:${top};left:${left};font-size:${size};--dur:${dur};--delay:${delay};--dx:${dx};--dy:${dy};--r:${rot};--r2:calc(${rot} * -1)">
-     ${katex.renderToString(tex, { throwOnError: false, displayMode: false })}
-   </div>`).join('');
-
-$('#nav-links').innerHTML = LINKS.map(([h, l]) =>
-  `<a href="${h}" class="rounded-lg px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-foreground/5 hover:text-foreground">${l}</a>`).join('');
-$('#mobile-menu').innerHTML = LINKS.map(([h, l]) =>
-  `<a href="${h}" class="block rounded-xl px-4 py-3 text-sm text-foreground transition-colors hover:bg-foreground/5">${l}</a>`).join('');
-
-/* --- Hero --- */
-$('#highlights').innerHTML = HIGHLIGHTS.map((h) =>
-  `<li class="glass flex items-start gap-3 rounded-xl px-4 py-3 text-sm text-foreground/90">${dot('bg-copper', 'mt-1')}${esc(h)}</li>`).join('');
-$('#hero-socials').innerHTML = [
-  ['github', SITE.github, 'GitHub'],
-  ['linkedin', SITE.linkedin, 'LinkedIn'],
-  ['codeforces', SITE.codeforces, 'Codeforces'],
-  ['youtube', SITE.youtube.channelUrl, 'YouTube'],
-  ['mail', `mailto:${SITE.email}`, 'Email'],
-].map(([icon, href, label]) =>
-  `<a href="${href}" ${ext(href)} aria-label="${label}" class="glass glass-hover flex h-11 w-11 items-center justify-center rounded-full text-foreground">${ICON[icon]('h-[18px] w-[18px]')}</a>`).join('');
-
-/* --- Stat cards: hackathons (expandable), CGPA, YouTube, QuantResearch --- */
-const statShell = (inner, extra = '') => `<div class="glass glass-hover flex h-full flex-col rounded-2xl p-4 sm:p-5 ${extra}">${inner}</div>`;
-const statTop = (v, l, tag) => `
-  <div class="font-serif text-2xl font-semibold text-gradient sm:text-3xl">${esc(v)}</div>
-  <div class="mt-1 text-xs leading-snug text-foreground/85">${esc(l)}</div>
-  ${tag ? `<div class="mt-2 font-mono text-[10.5px] leading-snug text-muted-foreground">${esc(tag)}</div>` : ''}`;
-const hackId = nextId();
-const hackRow = ([badge, name]) => `<li class="flex items-baseline justify-between gap-2"><span class="text-foreground/85">${esc(name)}</span><span class="shrink-0 font-mono text-[10.5px] text-copper">${esc(badge)}</span></li>`;
-$('#stats').innerHTML = [
-  statShell(`
-    ${statTop('2 + 2', 'Hackathon wins + rounds cleared', 'Agentic AI · GenAI · space tech')}
-    <div id="${hackId}" hidden class="mt-3 space-y-3 border-t border-border pt-3 text-xs">
-      <div><div class="mb-1 font-mono text-[10.5px] uppercase tracking-widest text-muted-foreground">Won</div><ul class="space-y-1.5">${HACKATHONS.won.map(hackRow).join('')}</ul></div>
-      <div><div class="mb-1 font-mono text-[10.5px] uppercase tracking-widest text-muted-foreground">Cleared</div><ul class="space-y-1.5">${HACKATHONS.cleared.map(hackRow).join('')}</ul></div>
-      <a href="#awards" class="inline-block text-copper hover:underline">All competitions →</a>
-    </div>
-    <div class="mt-auto">${toggleBtn(hackId, 'See which', 'Hide')}</div>`),
-  statShell(statTop('8.43', 'CGPA · B.Eng Computer Engineering', 'University of Mumbai · 2021–2025')),
-  `<a href="${SITE.youtube.channelUrl}" target="_blank" rel="noopener noreferrer" class="block h-full">${statShell(statTop('YouTube', 'The Algorithmic Forge', 'Linear algebra → tradable strategies'))}</a>`,
-  `<a href="https://pypi.org/project/QuantResearch/" target="_blank" rel="noopener noreferrer" class="block h-full">${statShell(statTop('v2.5', 'QuantResearch library on PyPI', 'Python · DSL · backtesting engine'))}</a>`,
-  `<a href="${SITE.codeforces}" target="_blank" rel="noopener noreferrer" class="block h-full">${statShell(statTop('1116', 'Codeforces rating', 'Actively training toward 1800+'))}</a>`,
-].join('');
-
-/* --- About --- */
-$('#focus').innerHTML = FOCUS.map((f) =>
-  `<li class="flex items-start gap-3 text-sm">${dot('bg-cyan-accent')}<span class="text-foreground/90">${esc(f)}</span></li>`).join('');
-$('#education').innerHTML = EDUCATION.map(([line, sub]) =>
-  `<li><p class="text-sm font-medium text-foreground/90">${esc(line)}</p><p class="mt-0.5 text-xs text-muted-foreground">${esc(sub)}</p></li>`).join('');
-
-/* --- Experience --- */
-const caseRow = (label, text, color) => `
-  <div>
-    <dt class="font-mono text-[11px] uppercase tracking-widest ${color}">${label}</dt>
-    <dd class="mt-1 leading-relaxed text-foreground/85">${esc(text)}</dd>
-  </div>`;
-const caseCard = (c) => {
-  const id = nextId();
-  return `
-  <div class="case-card rounded-2xl p-5">
-    <h4 class="font-serif text-lg font-semibold leading-snug">${esc(c.area)}</h4>
-    <p class="mt-2 text-sm leading-relaxed text-foreground/85">${esc(c.did)}</p>
-    <dl id="${id}" hidden class="mt-4 space-y-3 border-t border-border pt-4 text-sm">
-      ${caseRow('The challenge', c.challenge, 'text-copper')}
-      ${caseRow('How I thought about it', c.thinking, 'text-cyan-accent')}
-    </dl>
-    ${toggleBtn(id, 'The challenge & my approach', 'Hide details')}
-  </div>`;
-};
-$('#roles').innerHTML = ROLES.map((r) => `
-  <article class="glass rounded-3xl p-6 sm:p-8">
-    <div class="flex flex-col justify-between gap-2 sm:flex-row sm:items-start">
-      <div>
-        <h3 class="font-serif text-xl font-semibold sm:text-2xl">${esc(r.title)}</h3>
-        <p class="text-copper">${esc(r.company)}</p>
-      </div>
-      <span class="shrink-0 self-start rounded-full glass px-3 py-1 font-mono text-xs text-muted-foreground">${r.period}</span>
-    </div>
-    ${r.summary ? `<p class="mt-4 max-w-3xl leading-relaxed text-muted-foreground">${esc(r.summary)}</p>` : ''}
-    ${r.cases ? collapse(r.cases, caseCard, {
-      wrap: (x) => `<div class="mt-6 grid items-start gap-3 md:grid-cols-2">${x}</div>`,
-      restWrap: (x) => `<div class="mt-3 grid items-start gap-3 md:grid-cols-2">${x}</div>`,
-      noun: 'more areas of work',
-    }) : ''}
-    ${r.points ? `<div class="mt-5">${bulletList(r.points)}</div>` : ''}
-    <div class="mt-5 flex flex-wrap gap-2">${r.stack.map(chip).join('')}</div>
-  </article>`).join('');
-
-/* --- Selected work --- */
-$('#project-grid').innerHTML = PROJECTS.map((p) => `
-  <article class="glass glass-hover relative flex flex-col rounded-3xl p-6 sm:p-7">
-    <a href="${p.href}" target="_blank" rel="noopener noreferrer" class="group block pr-8">
-      <span class="absolute right-5 top-5 text-muted-foreground transition-colors group-hover:text-copper">
-        ${ICON.arrow('h-5 w-5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5')}
-      </span>
-      <h3 class="font-serif text-xl font-semibold group-hover:text-copper">${esc(p.name)}</h3>
-      <p class="mt-1 text-sm text-copper">${esc(p.tagline)}</p>
-    </a>
-    <div class="mt-4 flex-1">${bulletList(p.points, 'bg-cyan-accent', 'text-foreground/85')}</div>
-    <div class="mt-5 flex flex-wrap gap-2">${p.tags.map(chip).join('')}</div>
-  </article>`).join('');
-
-/* --- Competitions & recognition --- */
-$('#award-grid').innerHTML = AWARDS.map((a) => `
-  <article class="glass glass-hover flex flex-col rounded-3xl p-6 sm:p-7">
-    <div class="flex flex-wrap items-center gap-2">
-      <span class="rounded-full bg-gradient-to-r from-copper to-cyan-accent px-3 py-1 text-xs font-semibold text-primary-foreground">${esc(a.badge)}</span>
-      <span class="text-sm text-muted-foreground">${esc(a.event)}${a.year ? ' · ' + esc(a.year) : ''}</span>
-    </div>
-    <h3 class="mt-4 font-serif text-xl font-semibold leading-snug">${esc(a.project)}</h3>
-    <p class="mt-2 text-sm leading-relaxed text-muted-foreground">${esc(a.problem)}</p>
-    <div class="mt-4 flex-1">${bulletList(a.points, 'bg-copper', 'text-foreground/85')}</div>
-    <div class="mt-5 flex flex-wrap gap-2">${a.tags.map(chip).join('')}</div>
-    ${a.links.length ? `<div class="mt-5 flex flex-wrap gap-2 border-t border-border pt-4">
-      ${a.links.map(([label, href]) => `
-        <a href="${href}" target="_blank" rel="noopener noreferrer"
-           class="group inline-flex items-center gap-1.5 rounded-full glass px-3.5 py-1.5 text-xs font-medium transition-colors hover:text-copper">
-          ${esc(label)}${ICON.arrow('h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5')}
-        </a>`).join('')}
-    </div>` : ''}
-  </article>`).join('');
-
-/* --- Toolkit --- */
-$('#skill-grid').innerHTML = GROUPS.map(([title, items]) => `
-  <div class="glass glass-hover rounded-3xl p-6">
-    <h3 class="mb-4 font-mono text-xs uppercase tracking-widest text-copper">${esc(title)}</h3>
-    <ul class="space-y-2.5">
-      ${items.map((i) => `<li class="flex items-center gap-2.5 text-sm text-foreground/90">${dot('bg-cyan-accent', '')}${esc(i)}</li>`).join('')}
-    </ul>
-  </div>`).join('');
-
-/* --- YouTube --- */
-$('#chapters').outerHTML = `<div class="mt-5">${bulletList(CHAPTERS)}</div>`;
-
-/* --- Contact --- */
-$('#channels').innerHTML = [
-  ['mail', 'Email', SITE.email, `mailto:${SITE.email}`],
-  ['linkedin', 'LinkedIn', SITE.linkedinHandle, SITE.linkedin],
-  ['github', 'GitHub', SITE.githubHandle, SITE.github],
-  ['codeforces', 'Codeforces', SITE.codeforcesHandle, SITE.codeforces],
-  ['youtube', 'YouTube', SITE.youtube.handle, SITE.youtube.channelUrl],
-].map(([icon, label, value, href]) => `
-  <a href="${href}" ${ext(href)} class="glass glass-hover group flex min-w-0 flex-col gap-2 rounded-2xl p-5">
-    ${ICON[icon]('h-5 w-5 text-copper')}
-    <span class="text-xs uppercase tracking-widest text-muted-foreground">${label}</span>
-    <span class="flex items-center gap-1 break-all text-sm font-medium">
-      ${esc(value)}
-      ${ICON.arrow('h-3.5 w-3.5 shrink-0 opacity-0 transition-opacity group-hover:opacity-100')}
-    </span>
-  </a>`).join('');
-
-/* --- Toggle behaviour for every "show more" button --- */
-document.addEventListener('click', (e) => {
-  const btn = e.target.closest('[data-toggle]');
-  if (!btn) return;
-  const panel = document.getElementById(btn.dataset.toggle);
-  if (!panel) return;
-  const open = panel.hidden;
-  panel.hidden = !open;
-  btn.setAttribute('aria-expanded', String(open));
-  btn.querySelector('[data-label]').textContent = open ? btn.dataset.less : btn.dataset.more;
-  btn.querySelector('svg').classList.toggle('rotate-180', open);
-});
-
-/* ================= BEHAVIOUR ================= */
-const nav = $('#nav');
-const onScroll = () => nav.classList.toggle('shadow-2xl', window.scrollY > 24);
-onScroll();
-window.addEventListener('scroll', onScroll, { passive: true });
-
-const menuBtn = $('#menu-btn');
-const menu = $('#mobile-menu');
-const setMenu = (open) => {
-  menu.classList.toggle('hidden', !open);
-  menuBtn.setAttribute('aria-expanded', open);
-  menuBtn.innerHTML = open ? ICON.x('h-[18px] w-[18px]') : ICON.menu('h-[18px] w-[18px]');
-};
-setMenu(false);
-menuBtn.addEventListener('click', () => setMenu(menu.classList.contains('hidden')));
-menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setMenu(false)));
-
-const root = document.documentElement;
-const themeBtn = $('#theme-toggle');
-const paintToggle = () => {
-  themeBtn.innerHTML = root.classList.contains('dark')
-    ? ICON.sun('h-[18px] w-[18px] text-copper')
-    : ICON.moon('h-[18px] w-[18px] text-copper');
-};
-paintToggle();
-themeBtn.addEventListener('click', () => {
-  const dark = root.classList.toggle('dark');
-  try { localStorage.setItem('theme', dark ? 'dark' : 'light'); } catch (e) {}
-  paintToggle();
-});
+  // open first tech card by default (already has .open class in markup)
 </script>
+
 </body>
 </html>
